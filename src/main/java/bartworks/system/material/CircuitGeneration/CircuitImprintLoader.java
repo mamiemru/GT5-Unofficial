@@ -14,6 +14,7 @@
 package bartworks.system.material.CircuitGeneration;
 
 import static gregtech.api.enums.GTValues.VP;
+import static gregtech.api.recipe.RecipeMaps.advCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.cutterRecipes;
 
 import java.util.Arrays;
@@ -70,6 +71,7 @@ public class CircuitImprintLoader {
         rebuildCircuitAssemblerMap(toRem, toAdd);
         exchangeRecipesInList(toRem, toAdd);
         makeCircuitImprintRecipes();
+        makeAdvancedCircuitRecipes();
     }
 
     private static void reAddOriginalRecipes() {
@@ -331,5 +333,24 @@ public class CircuitImprintLoader {
         BartWorksRecipeMaps.circuitAssemblyLineRecipes.getBackend()
             .clearRecipes();
         recipeTagMap.clear();
+    }
+
+    /**
+     * TODO: this is ugly and should be terminated
+     * Add bartworks circuits in the Advanced circuit assembly line recipes
+     * We need to load it last after every declaration of barthworks circuits and components because we also
+     * include lower circuit tier recipes and wrap components.
+     */
+    private static void makeAdvancedCircuitRecipes() {
+        BartWorksRecipeMaps.circuitAssemblyLineRecipes.getAllRecipes()
+            .forEach(
+                gtRecipe -> GTValues.RA.stdBuilder()
+                    .itemInputs(gtRecipe.mInputs)
+                    .fluidInputs(gtRecipe.mFluidInputs)
+                    .itemOutputs(gtRecipe.mOutputs)
+                    .duration(gtRecipe.mDuration)
+                    .eut(gtRecipe.mEUt)
+                    .addTo(advCircuitAssemblylineRecipes));
+
     }
 }

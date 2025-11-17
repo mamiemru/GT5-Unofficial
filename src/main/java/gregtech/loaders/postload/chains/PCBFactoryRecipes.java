@@ -10,6 +10,7 @@ import static gregtech.api.util.GTRecipeConstants.PCB_NANITE_MATERIAL;
 import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
 import static gregtech.api.util.GTRecipeConstants.SCANNING;
 import static gtPlusPlus.core.material.MaterialsAlloy.QUANTUM;
+import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.ADVANCED_NITINOL;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.CHRONOMATIC_GLASS;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.HYPOGEN;
 
@@ -669,6 +670,67 @@ public class PCBFactoryRecipes {
                     Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
                     Materials.IronIIIChloride.getFluid((long) (12_500 * (Math.sqrt(tier - 6)))),
                     Materials.MysteriousCrystal.getMolten((long) (20 * INGOTS * (Math.sqrt(tier - 6)))))
+                .itemOutputs(aBoards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(400 / Math.sqrt(Math.pow(1.5, tier - 6.5))))
+                .eut((int) GTValues.VP[tier + 1] * 3 / 4)
+                .metadata(TIER, 3)
+                .metadata(PCB_NANITE_MATERIAL, Materials.Gold)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+
+        for (int tier = 8; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 6.5))));
+            List<ItemStack> aBoards = new ArrayList<>();
+            for (int i = amountOfBoards; i > 64; i -= 64) {
+                aBoards.add(ItemList.Circuit_Board_Exotic.get(i));
+                amountOfBoards -= 64;
+            }
+            aBoards.add(ItemList.Circuit_Board_Exotic.get(amountOfBoards));
+            GTValues.RA.stdBuilder()
+                .itemInputs(
+                    GTUtility.getIntegratedCircuit(2),
+                    PCBFactoryManager.getPlasticMaterialFromTier(tier)
+                        .getPlates(1),
+                    new ItemStack(
+                        WerkstoffLoader.items.get(OrePrefixes.foil),
+                        (int) (16 * (Math.sqrt(tier - 6))),
+                        10106),
+                    HYPOGEN.getFoil((int) (16 * (Math.sqrt(tier - 6)))),
+                    ADVANCED_NITINOL.getFoil((int) (16 * (Math.sqrt(tier - 6)))))
+                .fluidInputs(
+                    Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
+                    Materials.IronIIIChloride.getFluid((long) (12_500 * (Math.sqrt(tier - 6)))),
+                    Materials.CosmicNeutronium.getMolten((long) (30 * INGOTS * (Math.sqrt(tier - 6)))))
+                .itemOutputs(aBoards.toArray(new ItemStack[0]))
+                .duration((int) Math.ceil(500 / Math.sqrt(Math.pow(1.5, tier - 6.5))))
+                .eut((int) GTValues.VP[tier + 1] * 3 / 4)
+                .metadata(TIER, 2)
+                .metadata(PCB_NANITE_MATERIAL, Materials.Silver)
+                .addTo(RecipeMaps.pcbFactoryRecipes);
+        }
+        for (int tier = 8; tier <= PCBFactoryManager.mTiersOfPlastics; tier++) {
+            int amountOfBoards = (int) Math.ceil(8 * (Math.sqrt(Math.pow(2, tier - 6))));
+            List<ItemStack> aBoards = new ArrayList<>();
+            for (int i = amountOfBoards; i > 64; i -= 64) {
+                aBoards.add(ItemList.Circuit_Board_Exotic.get(i));
+                amountOfBoards -= 64;
+            }
+            aBoards.add(ItemList.Circuit_Board_Exotic.get(amountOfBoards));
+            GTValues.RA.stdBuilder()
+                .itemInputs(
+                    GTUtility.getIntegratedCircuit(3),
+                    PCBFactoryManager.getPlasticMaterialFromTier(tier)
+                        .getPlates(1),
+                    new ItemStack(
+                        WerkstoffLoader.items.get(OrePrefixes.foil),
+                        (int) (16 * (Math.sqrt(tier - 6))),
+                        10106),
+                    HYPOGEN.getFoil((int) (16 * (Math.sqrt(tier - 6)))),
+                    ADVANCED_NITINOL.getFoil((int) (16 * (Math.sqrt(tier - 6)))))
+                .fluidInputs(
+                    Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
+                    Materials.IronIIIChloride.getFluid((long) (12_500 * (Math.sqrt(tier - 6)))),
+                    Materials.CosmicNeutronium.getMolten((long) (30 * INGOTS * (Math.sqrt(tier - 6)))))
                 .itemOutputs(aBoards.toArray(new ItemStack[0]))
                 .duration((int) Math.ceil(400 / Math.sqrt(Math.pow(1.5, tier - 6.5))))
                 .eut((int) GTValues.VP[tier + 1] * 3 / 4)

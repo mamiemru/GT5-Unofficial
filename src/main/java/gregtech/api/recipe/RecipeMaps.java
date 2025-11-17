@@ -1041,6 +1041,20 @@ public final class RecipeMaps {
             return ret;
         })
         .build();
+    public static final RecipeMap<RecipeMapBackend> slicerRecipes = RecipeMapBuilder.of("gt.recipe.slicer")
+        .maxIO(2, 1, 0, 0)
+        .minInputs(2, 0)
+        .slotOverlays((index, isFluid, isOutput, isSpecial) -> {
+            if (isOutput) {
+                return GTUITextures.OVERLAY_SLOT_SLICER_SLICED;
+            }
+            if (index == 0) {
+                return GTUITextures.OVERLAY_SLOT_SQUARE;
+            }
+            return GTUITextures.OVERLAY_SLOT_SLICE_SHAPE;
+        })
+        .progressBar(GTUITextures.PROGRESSBAR_SLICE)
+        .build();
     public static final RecipeMap<RecipeMapBackend> extruderRecipes = RecipeMapBuilder.of("gt.recipe.extruder")
         .maxIO(2, 1, 0, 0)
         .minInputs(2, 0)
@@ -1323,6 +1337,15 @@ public final class RecipeMaps {
             builder.setShowOverlayButton(false);
             return builder;
         })
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> advCircuitAssemblylineRecipes = RecipeMapBuilder
+        .of("gt.recipe.advcircuitassemblyline")
+        .maxIO(7, 1, 1, 0)
+        .minInputs(1, 0)
+        .useSpecialSlot()
+        .specialSlotSensitive()
+        .progressBar(GTUITextures.PROGRESSBAR_CIRCUIT_ASSEMBLER)
         .build();
 
     public static final RecipeMap<RecipeMapBackend> foundryFakeModuleCostRecipes = RecipeMapBuilder
