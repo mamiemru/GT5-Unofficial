@@ -2181,7 +2181,6 @@ public enum ItemList implements IItemContainer {
     PCBFactory,
     PCBBioChamber,
     PCBCoolingTower,
-    PCBTFS,
     BasicPhotolithographicFrameworkCasing,
     ReinforcedPhotolithographicFrameworkCasing,
     RadiationProofPhotolithographicFrameworkCasing,

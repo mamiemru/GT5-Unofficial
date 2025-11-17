@@ -506,6 +506,12 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         ItemList.PCBCoolingTower.set(
             new MTEPCBCoolingTower(PCB_COOLING_TOWER_CONTROLLER.ID, "multimachine.pcbcoolingtower", "Cooling Tower")
                 .getStackForm(1));
+        ItemList.AdvCircuitAssemblyLine.set(
+            new MTEAdvCircuitAssemblyLine(
+                AdvCircuitAssemblyLine.ID,
+                "multimachine.adv-circuit-assemblyline",
+                "Advanced Circuit Assembly line").getStackForm(1));
+
         ItemList.NanoForge
             .set(new MTENanoForge(NANO_FORGE_CONTROLLER.ID, "multimachine.nanoforge", "Nano Forge").getStackForm(1));
         ItemList.Machine_Multi_DroneCentre
