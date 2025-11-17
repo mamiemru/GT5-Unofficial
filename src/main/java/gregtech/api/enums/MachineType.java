@@ -17,6 +17,7 @@ public enum MachineType {
     CHEMICAL_BATH(FunnyTexts.CHEMICAL_BATH, "gt.recipe.chemicalbath"),
     CHEMICAL_REACTOR(FunnyTexts.CHEMICAL_REACTOR, "gt.recipe.chemicalreactor"),
     CIRCUIT_ASSEMBLER(FunnyTexts.CIRCUIT_ASSEMBLER, "gt.recipe.circuitassembler"),
+    ADV_CIRCUIT_ASSEMBLER(FunnyTexts.ADV_CIRCUIT_ASSEMBLY_LINE, "gt.recipe.advcircuitassemblyline"),
     COMPRESSOR(FunnyTexts.COMPRESSOR, "gt.recipe.compressor"),
     CUTTING_MACHINE(FunnyTexts.CUTTING_MACHINE, "gt.recipe.cuttingsaw"),
     DISTILLERY(FunnyTexts.DISTILLERY, "gt.recipe.distillery"),
@@ -69,6 +70,7 @@ public enum MachineType {
         static final String CHEMICAL_BATH = "gt.recipe.chemicalbath.description";
         static final String CHEMICAL_REACTOR = "gt.recipe.chemicalreactor.description";
         static final String CIRCUIT_ASSEMBLER = "gt.recipe.circuitassembler.description";
+        static final String ADV_CIRCUIT_ASSEMBLY_LINE = "gt.recipe.advcircuitassemblyline.description";
         static final String COMPRESSOR = "gt.recipe.compressor.description";
         static final String CUTTING_MACHINE = "gt.recipe.cuttingsaw.description";
         static final String DISTILLERY = "gt.recipe.distillery.description";
