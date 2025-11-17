@@ -247,7 +247,11 @@ public enum IDMetaItem03 {
     Thermal_Superconductor(759),
     Relativistic_Heat_Capacitor(760),
     Phononic_Seed_Crystal(761),
-    Harmonic_Compound(762);
+    Harmonic_Compound(762),
+    Circuit_Board_Exotic(763),
+    Circuit_Board_Cosmic(764),
+    Circuit_Board_Transcendent(765),
+    Exotic_Super_CPU(767);
 
     public final int ID;
 

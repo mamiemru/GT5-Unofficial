@@ -122,6 +122,7 @@ import gregtech.loaders.postload.MissingMappingsHandler;
 import gregtech.loaders.postload.PosteaTransformers;
 import gregtech.loaders.postload.RecyclerBlacklistLoader;
 import gregtech.loaders.postload.ScrapboxDropLoader;
+import gregtech.loaders.postload.recipes.AdvCircuitAssemblyLineRecipes;
 import gregtech.loaders.preload.GTPreLoad;
 import gregtech.loaders.preload.LoaderCircuitBehaviors;
 import gregtech.loaders.preload.LoaderGTBlockFluid;
@@ -564,6 +565,7 @@ public class GTMod {
         GTPostLoad.identifyAnySteam();
 
         VoidMinerLoader.init();
+        new AdvCircuitAssemblyLineRecipes().run();
 
         achievements = new GTAchievements();
 

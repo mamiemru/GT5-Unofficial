@@ -1953,6 +1953,11 @@ public enum ItemList implements IItemContainer {
     Circuit_Board_Bio_Ultra,
     Circuit_Board_Optical,
 
+    Exotic_Super_CPU,
+    Circuit_Board_Exotic,
+    Circuit_Board_Cosmic,
+    Circuit_Board_Transcendent,
+
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,
     Circuit_Parts_Glass_Tube,
@@ -2215,6 +2220,7 @@ public enum ItemList implements IItemContainer {
     EntropicProcessor,
     DecayWarehouse,
     LATEX,
+    AdvCircuitAssemblyLine,
     AcceleratorLV,
     AcceleratorMV,
     AcceleratorHV,
