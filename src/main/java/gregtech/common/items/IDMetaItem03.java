@@ -206,6 +206,13 @@ public enum IDMetaItem03 {
     Alumina_Support_Ring(253),
     Alumina_Support_Ring_Raw(254),
     Beryllium_Shielding_Plate(255),
+
+    Circuit_Board_Exotic(256),
+    Circuit_Board_Cosmic(257),
+    Circuit_Board_Transcendent(258),
+    Exotic_Super_CPU(259),
+    Cosmic_Super_RAM(260),
+
     Circuit_Silicon_Ingot6(721),
     Circuit_Silicon_Wafer6(722),
     Circuit_Silicon_Wafer7(723),
@@ -247,11 +254,7 @@ public enum IDMetaItem03 {
     Thermal_Superconductor(759),
     Relativistic_Heat_Capacitor(760),
     Phononic_Seed_Crystal(761),
-    Harmonic_Compound(762),
-    Circuit_Board_Exotic(763),
-    Circuit_Board_Cosmic(764),
-    Circuit_Board_Transcendent(765),
-    Exotic_Super_CPU(767);
+    Harmonic_Compound(762);
 
     public final int ID;
 
