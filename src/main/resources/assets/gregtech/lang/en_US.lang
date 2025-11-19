@@ -1043,6 +1043,8 @@ gt.recipe.unpackager=Unpackager
 gt.recipe.unpackager.description=Grabs things out of Boxes
 gt.recipe.wiremill=Wiremill
 gt.recipe.wiremill.description=Produces Wires more efficiently
+gt.recipe.advcircuitassemblylline=Advanced Circuit Assembly Line
+gt.recipe.advcircuitassemblylline.description=Faster circuit assembler
 
 # RecipeMaps that are not listed on MachineType enum
 gt.recipe.fakeAssemblylineProcess=Assemblyline Process
