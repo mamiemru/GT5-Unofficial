@@ -827,6 +827,7 @@ GT5U.MBTT.Tiers.Turbine=Sum of Turbine
 GT5U.MBTT.Tiers.Glass=Glass
 GT5U.MBTT.Steam.Speed=%s faster than using single block steam machines of the same pressure
 GT5U.MBTT.Steam.Eff=Only consumes steam at %s of the steam flowrate normally required
+GT5U.MBTT.Structure.Complex=Structure is too complex!
 GT5U.MBTT.Structure.SeeStructure1=To see the structure, use a
 GT5U.MBTT.Structure.SeeStructure2=Hologram Projector on the Controller!
 GT5U.MBTT.Structure.MinGlassForLaser=-tier §fGlass§7 required for §9Tec§1Tech§7 Laser Hatches
@@ -866,7 +867,6 @@ GT5U.MBTT.PCB.Tooltip.3=Allows for overclocking. Requires 10 L/s of distilled wa
 GT5U.MBTT.PCB.Tooltip.4=Enables perfect overclocking by allowing nanites to work with extreme speed and efficiency. Uses 10 L/s of Super Coolant.
 GT5U.MBTT.PCB.Tooltip.5=Set the trace size. Smaller traces allow material savings but take longer to fabricate. Larger traces waste material but are fast. 50-200 μm.
 GT5U.MBTT.PCB.Tooltip.6=Can't change configuration when running!
-GT5U.MBTT.PCB.UPGRADE.BIO.UpgradeRequired=Upgrade Required: Bio
 
 GT5U.MBTT.AlchemyCasingAny=Alchemically Resistant/Inert/Immune Casing
 GT5U.MBTT.AlchemicalConstructAny=Alchemical Construct
