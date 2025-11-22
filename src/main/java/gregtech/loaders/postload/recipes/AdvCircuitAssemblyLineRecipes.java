@@ -12,6 +12,7 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import tectech.thing.CustomItemList;
 
@@ -35,6 +36,16 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .duration(150 * SECONDS)
             .eut(TierEU.UEV)
             .addTo(spaceAssemblerRecipes);
+
+        RecipeMaps.circuitAssemblerRecipes.getAllRecipes()
+            .forEach(
+                e -> GTValues.RA.stdBuilder()
+                    .itemInputs(e.mInputs)
+                    .fluidInputs(e.mFluidInputs)
+                    .itemOutputs(e.mOutputs)
+                    .duration(e.mDuration)
+                    .eut(e.mEUt)
+                    .addTo(advCircuitAssemblylineRecipes));
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -60,7 +71,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 CustomItemList.DATApipe.get(16L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 16L))
             .fluidInputs(
-                GGMaterial.metastableOganesson.getMolten(14 * INGOTS),
+                GGMaterial.metastableOganesson.getMolten(6 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(8000L))
             .itemOutputs(ItemList.Circuit_ExoticProcessor.get(1L))
             .duration(20 * SECONDS)
