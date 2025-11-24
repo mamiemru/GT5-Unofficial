@@ -6,6 +6,11 @@ import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gtnhintergalactic.recipe.IGRecipeMaps.MODULE_TIER;
 import static gtnhintergalactic.recipe.IGRecipeMaps.spaceAssemblerRecipes;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
+import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -13,7 +18,10 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
+import gtPlusPlus.core.material.MaterialMisc;
+import gtPlusPlus.core.material.MaterialsAlloy;
 import tectech.thing.CustomItemList;
 
 public class AdvCircuitAssemblyLineRecipes implements Runnable {
@@ -60,6 +68,139 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(spaceAssemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Tritanium, 2),
+                ItemList.Circuit_Wetwaresupercomputer.get(2L),
+                ItemList.Circuit_Parts_InductorXSMD.get(4L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(4L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(4L),
+                ItemList.Circuit_Parts_TransistorXSMD.get(4L),
+                ItemList.Circuit_Parts_DiodeXSMD.get(4L),
+                ItemList.Circuit_Chip_Ram.get(48L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 32L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64))
+            .itemOutputs(ItemList.Circuit_Wetwaremainframe.get(1L))
+            .fluidInputs(
+                MaterialsAlloy.INDALLOY_140.getFluidStack(20 * INGOTS),
+                GTModHandler.getIC2Coolant(10_000),
+                Materials.Radon.getGas(2_500))
+            .duration(10 * SECONDS)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(advCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Bio_Ultra.get(2L),
+                ItemList.Circuit_Biowarecomputer.get(2L),
+                ItemList.Circuit_Parts_TransistorXSMD.get(4L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(4L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(4L),
+                ItemList.Circuit_Parts_DiodeXSMD.get(4L),
+                ItemList.Circuit_Chip_NOR.get(32L),
+                ItemList.Circuit_Chip_Ram.get(64L),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 32L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64))
+            .itemOutputs(ItemList.Circuit_Biowaresupercomputer.get(1L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(10 * INGOTS),
+                Materials.BioMediumSterilized.getFluid(10 * INGOTS),
+                Materials.SuperCoolant.getFluid(10_000))
+            .duration(15 * SECONDS)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(advCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Tritanium, 4L),
+                ItemList.Circuit_Biowaresupercomputer.get(2L),
+                ItemList.Circuit_Parts_InductorXSMD.get(6L),
+                ItemList.Circuit_Parts_TransistorXSMD.get(6L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(6L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(6L),
+                ItemList.Circuit_Parts_DiodeXSMD.get(6L),
+                ItemList.Circuit_Chip_Ram.get(64L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUEV, 32L),
+                GTOreDictUnificator.get(OrePrefixes.foil.get(Materials.AnySyntheticRubber), 64L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64))
+            .itemOutputs(ItemList.Circuit_Biomainframe.get(1L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(20 * INGOTS),
+                Materials.BioMediumSterilized.getFluid(20 * INGOTS),
+                Materials.SuperCoolant.getFluid(20_000L))
+            .duration(15 * SECONDS)
+            .eut(TierEU.RECIPE_UHV)
+            .addTo(advCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Optical.get(1L),
+                ItemList.Circuit_OpticalProcessor.get(2L),
+                ItemList.Circuit_Parts_InductorXSMD.get(16L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(20L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(20L),
+                ItemList.Circuit_Chip_NOR.get(32L),
+                ItemList.Circuit_Chip_Ram.get(64L),
+                new ItemStack(WerkstoffLoader.items.get(OrePrefixes.wireFine), 24, 10101),
+                GTOreDictUnificator.get(OrePrefixes.foil.get(Materials.AnySyntheticRubber), 64L))
+            .itemOutputs(ItemList.Circuit_OpticalAssembly.get(1L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(10 * INGOTS),
+                Materials.Radon.getPlasma(10 * INGOTS),
+                Materials.SuperCoolant.getFluid(10_000L),
+                new FluidStack(FluidRegistry.getFluid("oganesson"), 500))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_UHV)
+            .addTo(advCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Optical.get(2L),
+                ItemList.Circuit_OpticalAssembly.get(2L),
+                ItemList.Circuit_Parts_TransistorXSMD.get(24L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(24L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(24L),
+                ItemList.Circuit_Parts_DiodeXSMD.get(24L),
+                ItemList.Circuit_Chip_NOR.get(64L),
+                ItemList.Circuit_Chip_SoC2.get(32L),
+                new ItemStack(WerkstoffLoader.items.get(OrePrefixes.wireFine), 32, 10101),
+                GTOreDictUnificator.get(OrePrefixes.foil.get(Materials.AnySyntheticRubber), 64L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64))
+            .itemOutputs(ItemList.Circuit_OpticalComputer.get(1L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(20 * INGOTS),
+                Materials.Radon.getPlasma(20 * INGOTS),
+                Materials.SuperCoolant.getFluid(20_000),
+                new FluidStack(FluidRegistry.getFluid("oganesson"), 1_000))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_UHV)
+            .addTo(advCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Tritanium, 8),
+                ItemList.Circuit_OpticalComputer.get(2L),
+                ItemList.Circuit_Parts_InductorXSMD.get(32L),
+                ItemList.Circuit_Parts_TransistorXSMD.get(32L),
+                ItemList.Circuit_Parts_ResistorXSMD.get(32L),
+                ItemList.Circuit_Parts_CapacitorXSMD.get(32L),
+                ItemList.Circuit_Parts_DiodeXSMD.get(32L),
+                ItemList.Circuit_Chip_SoC2.get(64L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUIV, 32L),
+                GTOreDictUnificator.get(OrePrefixes.foil.get(Materials.AnySyntheticRubber), 64L),
+                GTOreDictUnificator.get(OrePrefixes.foil.get(Materials.AnySyntheticRubber), 64L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64))
+            .itemOutputs(ItemList.Circuit_OpticalMainframe.get(1L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(40 * INGOTS),
+                Materials.Radon.getPlasma(40 * INGOTS),
+                Materials.SuperCoolant.getFluid(40_000),
+                new FluidStack(FluidRegistry.getFluid("oganesson"), 2_000))
+            .duration(25 * SECONDS)
+            .eut(TierEU.RECIPE_UEV)
+            .addTo(advCircuitAssemblylineRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
