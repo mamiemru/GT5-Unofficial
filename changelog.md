@@ -26,3 +26,23 @@ the gate of exotic line
 I think after spacetime and 16 pico is a good place to unlock this multi.
 My thoughts after testing is, the Space elevator may be a bottleneck for optical components. lets see
 
+## 2025 November 26:
+
+We added duration checkbox on the acal gui, to play a bit with the overclocking algorithm.
+its fun but is it useful ?
+
+## 2025 November 27:
+
+The second batch of test found in the same situation of all endgame recipe, its time consuming
+we need a lot of resources. Some adjustments have been made:
+
+- Exotic super cpu spacetime wire and transcendent screw has been divided by 2
+- Exotic processor, assembly and computer super cpu has been replaced by exotic circuit board x1
+- OpticalCPUContainmentHousing has a craft using exotic circuit board and give x4 3sec.
+
+## 2025 November 29:
+
+Changed all circuit craft, now outputting Any circuit until UV, in my opinion
+at this state of the progression, any circuits lower than optical should be free
+terms of resources and time.
+I introduce a cheapest cheapest recipe to cut these crafts using innovative circuit board.

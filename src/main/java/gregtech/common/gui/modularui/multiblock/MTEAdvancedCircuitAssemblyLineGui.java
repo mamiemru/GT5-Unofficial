@@ -27,49 +27,43 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
     protected void registerSyncValues(PanelSyncManager syncManager) {
         super.registerSyncValues(syncManager);
         IntSyncValue parallelSyncer = new IntSyncValue(multiblock::getSetParallel, multiblock::setSetParallel);
+        IntSyncValue durationSyncer = new IntSyncValue(multiblock::getSetDuration, multiblock::setSetDuration);
         syncManager.syncValue("maximumParallels", parallelSyncer);
+        syncManager.syncValue("maximumDuration", durationSyncer);
     }
 
     @Override
     protected Flow createButtonColumn(ModularPanel panel, PanelSyncManager syncManager) {
-        return super.createButtonColumn(panel, syncManager).child(createParallelButton(syncManager, panel));
+        return super.createButtonColumn(panel, syncManager).child(createAcalConfigButton(syncManager, panel));
     }
 
-    protected IWidget createParallelButton(PanelSyncManager syncManager, ModularPanel parent) {
-        IPanelHandler parallelSelectPanel = syncManager.panel(
-            "parallelSelectPanel",
-            (p_syncManager, syncHandler) -> openParallelSelectPanel(syncManager, parent),
-            true);
+    protected IWidget createAcalConfigButton(PanelSyncManager syncManager, ModularPanel parent) {
+        IPanelHandler acalSelectPanel = syncManager
+            .panel("acalSelectPanel", (p_syncManager, syncHandler) -> openAcalConfigPanel(syncManager, parent), true);
 
         return new ButtonWidget<>().size(18)
             .overlay(GTGuiTextures.OVERLAY_BUTTON_BATCH_MODE_ON)
             .tooltip(t -> t.addLine(translateToLocal("GT5U.tpm.parallelwindow")))
             .onMousePressed(mouseButton -> {
-                if (!parallelSelectPanel.isPanelOpen()) {
-                    parallelSelectPanel.openPanel();
+                if (!acalSelectPanel.isPanelOpen()) {
+                    acalSelectPanel.openPanel();
                 } else {
-                    parallelSelectPanel.closePanel();
+                    acalSelectPanel.closePanel();
                 }
                 return true;
             });
     }
 
     private static final int WIDTH = 120;
-    private static final int HEIGHT = 50;
+    private static final int HEIGHT = 100;
     private static final int PADDING_SIDES = 4;
 
-    private ModularPanel openParallelSelectPanel(PanelSyncManager syncManager, ModularPanel parent) {
-        ModularPanel returnPanel = new ModularPanel("parallelSelectPanel").size(WIDTH, HEIGHT)
-            .relative(parent)
-            .leftRel(1)
-            .topRel(0.8f);
-
-        IntSyncValue parallelSyncer = syncManager.findSyncHandler("maximumParallels", IntSyncValue.class);
+    private Flow buildSelect(String fieldName, IntSyncValue syncer, int paddingTop) {
         Flow holdingColumn = Flow.column()
-            .sizeRel(1)
-            .paddingTop(12);
+            .size(WIDTH, HEIGHT / 2)
+            .paddingTop(paddingTop);
         holdingColumn.child(
-            IKey.lang("GTPP.CC.parallel")
+            IKey.lang(fieldName)
                 .asWidget()
                 .marginBottom(4));
         holdingColumn.child(
@@ -77,11 +71,26 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
                 .setNumbers(1, Integer.MAX_VALUE)
                 .setTextAlignment(Alignment.CENTER)
                 .setDefaultNumber(1)
-                .value(parallelSyncer)
+                .value(syncer)
                 .size(WIDTH - PADDING_SIDES * 2, 18)
                 .align(Alignment.Center));
+        return holdingColumn;
 
-        returnPanel.child(holdingColumn);
+    }
+
+    private ModularPanel openAcalConfigPanel(PanelSyncManager syncManager, ModularPanel parent) {
+        ModularPanel returnPanel = new ModularPanel("AcalConfigSelectPanel").size(WIDTH, HEIGHT)
+            .relative(parent)
+            .leftRel(1)
+            .topRel(0.8f);
+
+        IntSyncValue parallelSyncer = syncManager.findSyncHandler("maximumParallels", IntSyncValue.class);
+        Flow parallelSelect = buildSelect("GTPP.CC.parallel", parallelSyncer, 6);
+        returnPanel.child(parallelSelect);
+
+        IntSyncValue durationSyncer = syncManager.findSyncHandler("maximumDuration", IntSyncValue.class);
+        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer, 62);
+        returnPanel.child(durationSelect);
 
         return returnPanel;
     }
