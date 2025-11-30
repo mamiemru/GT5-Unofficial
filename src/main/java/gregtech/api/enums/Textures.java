@@ -1952,6 +1952,10 @@ public class Textures {
         COKE_OVEN_OVERLAY_INACTIVE,
         COKE_OVEN_OVERLAY_ACTIVE,
 
+        OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE_ACTIVE,
+        OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE_ACTIVE_GLOW,
+        OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE,
+        OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE_GLOW,
         // semicolon after the comment to reduce merge conflicts
         ;
 
