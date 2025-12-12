@@ -1756,6 +1756,7 @@ public enum MetaTileEntityIDs {
     DECAY_WAREHOUSE(15751),
     LATEX(15752),
     AdvCircuitAssemblyLine(15753),
+    PCB_TFS_CONTROLLER(15754),
     BasicTeslaTransceiver1by1(16000),
     AdvancedTeslaTransceiver1by1(16001),
     EpycTeslaTransceiver1by1(16002),

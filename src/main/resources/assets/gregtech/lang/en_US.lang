@@ -1452,6 +1452,7 @@ GT5U.gui.text.data_stick.loaded=Loaded Config from Data Stick
 GT5U.gui.text.data_stick.invalid=Invalid Data Stick configuration
 GT5U.gui.text.no_data_sticks=§7No Data Sticks found
 GT5U.gui.text.bio_upgrade_missing=§7Recipe needs Bio Upgrade to start
+GT5U.gui.text.tfs_upgrade_missing=§7Recipe needs TFS Upgrade to start
 GT5U.gui.text.nanites_missing=§7Missing nanites
 GT5U.gui.text.electromagnet_missing=§7Needs an Electromagnet to run
 GT5U.gui.text.electromagnet_insufficient=§7Electromagnet too weak to handle multi-amp energy hatches
