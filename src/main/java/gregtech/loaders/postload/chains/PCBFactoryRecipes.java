@@ -2,6 +2,7 @@ package gregtech.loaders.postload.chains;
 
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.metadata.PCBFactoryUpgrade.BIO;
+import static gregtech.api.recipe.metadata.PCBFactoryUpgrade.TFS;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -702,7 +703,7 @@ public class PCBFactoryRecipes {
                     Materials.IronIIIChloride.getFluid((long) (12_500 * (Math.sqrt(tier - 6)))),
                     Materials.CosmicNeutronium.getMolten((long) (30 * INGOTS * (Math.sqrt(tier - 6)))))
                 .itemOutputs(aBoards.toArray(new ItemStack[0]))
-                .duration((int) Math.ceil(500 / Math.sqrt(Math.pow(1.5, tier - 6.5))))
+                .duration((int) Math.ceil(400 / Math.sqrt(Math.pow(1.5, tier - 6.5))))
                 .eut((int) GTValues.VP[tier + 1] * 3 / 4)
                 .metadata(TIER, 2)
                 .metadata(PCB_NANITE_MATERIAL, Materials.Silver)
@@ -738,5 +739,25 @@ public class PCBFactoryRecipes {
                 .metadata(PCB_NANITE_MATERIAL, Materials.Gold)
                 .addTo(RecipeMaps.pcbFactoryRecipes);
         }
+
+        int cosmic_tier = 9;
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(3),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Ichorium, 1),
+                new ItemStack(WerkstoffLoader.items.get(OrePrefixes.foil), 27, 10106),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Void, 27),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.TranscendentMetal, 27))
+            .fluidInputs(
+                Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(cosmic_tier - 6)))),
+                Materials.IronIIIChloride.getFluid((long) (12_500 * (Math.sqrt(cosmic_tier - 6)))),
+                Materials.CosmicNeutronium.getMolten((long) (30 * INGOTS * (Math.sqrt(cosmic_tier - 6)))))
+            .itemOutputs(ItemList.Circuit_Board_Cosmic.get(12))
+            .duration((int) Math.ceil(400 / Math.sqrt(Math.pow(1.5, cosmic_tier - 6.5))))
+            .eut((int) GTValues.VP[cosmic_tier + 1] * 3 / 4)
+            .metadata(TIER, 3)
+            .metadata(PCB_NANITE_MATERIAL, Materials.TranscendentMetal)
+            .metadata(UPGRADE, TFS)
+            .addTo(RecipeMaps.pcbFactoryRecipes);
     }
 }
