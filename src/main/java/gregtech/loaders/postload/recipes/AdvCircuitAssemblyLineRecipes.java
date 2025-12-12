@@ -385,7 +385,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 CustomItemList.DATApipe.get(16L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 16L))
             .fluidInputs(
-                GGMaterial.metastableOganesson.getMolten(6 * INGOTS),
+                GGMaterial.metastableOganesson.getMolten(2 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
             .itemOutputs(ItemList.Circuit_ExoticProcessor.get(1L))
             .duration(20 * SECONDS)
@@ -404,7 +404,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Wafer_QPIC.get(32L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TranscendentMetal, 16L))
             .fluidInputs(
-                GGMaterial.metastableOganesson.getMolten(14 * INGOTS),
+                GGMaterial.metastableOganesson.getMolten(4 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
             .itemOutputs(ItemList.Circuit_ExoticAssembly.get(1L))
             .duration(25 * SECONDS)
@@ -423,7 +423,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Wafer_QPIC.get(48L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 16L))
             .fluidInputs(
-                GGMaterial.metastableOganesson.getMolten(32 * INGOTS),
+                GGMaterial.metastableOganesson.getMolten(8 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 GGMaterial.shirabon.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_ExoticComputer.get(1L))
@@ -441,7 +441,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Wafer_QPIC.get(64L),
                 GGMaterial.shirabon.get(OrePrefixes.bolt, 8 * INGOTS))
             .fluidInputs(
-                GGMaterial.metastableOganesson.getMolten(32 * INGOTS),
+                GGMaterial.metastableOganesson.getMolten(16 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
                 Materials.SixPhasedCopper.getMolten(64 * INGOTS),
                 Materials.QuarkGluonPlasma.getFluid(4 * INGOTS))
