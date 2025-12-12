@@ -2,6 +2,7 @@ package gregtech.loaders.postload.chains;
 
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.metadata.PCBFactoryUpgrade.BIO;
+import static gregtech.api.recipe.metadata.PCBFactoryUpgrade.TFS;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -738,6 +739,5 @@ public class PCBFactoryRecipes {
                 .metadata(PCB_NANITE_MATERIAL, Materials.Gold)
                 .addTo(RecipeMaps.pcbFactoryRecipes);
         }
-
     }
 }

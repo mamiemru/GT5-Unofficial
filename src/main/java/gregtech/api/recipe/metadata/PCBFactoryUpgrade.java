@@ -3,5 +3,6 @@ package gregtech.api.recipe.metadata;
 public enum PCBFactoryUpgrade {
 
     NONE,
-    BIO
+    BIO,
+    TFS // Transcendent Frontier System
 }
