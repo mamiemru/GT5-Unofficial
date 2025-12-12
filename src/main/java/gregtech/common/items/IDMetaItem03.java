@@ -212,6 +212,12 @@ public enum IDMetaItem03 {
     Circuit_Board_Transcendent(258),
     Exotic_Super_CPU(259),
     Cosmic_Super_RAM(260),
+    Circuit_Parts_ResistorISMD(261),
+    Circuit_Parts_DiodeISMD(262),
+    Circuit_Parts_TransistorISMD(263),
+    Circuit_Parts_CapacitorISMD(264),
+    Circuit_Parts_InductorISMD(265),
+    Circuit_Parts_UniversalISMD(266),
 
     Circuit_Silicon_Ingot6(721),
     Circuit_Silicon_Wafer6(722),

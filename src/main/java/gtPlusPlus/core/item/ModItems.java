@@ -4,11 +4,6 @@ import static gregtech.api.enums.Mods.GTPlusPlus;
 import static gregtech.api.enums.Mods.GregTech;
 import static gregtech.client.GTTooltipHandler.registerTieredTooltip;
 import static gtPlusPlus.core.creative.AddToCreativeTab.tabMisc;
-import static gtPlusPlus.core.item.base.BaseItemComponent.ComponentTypes.FINEWIRE;
-import static gtPlusPlus.core.item.base.BaseItemComponent.ComponentTypes.FOIL;
-import static gtPlusPlus.core.item.base.BaseItemComponent.ComponentTypes.GEAR;
-import static gtPlusPlus.core.item.base.BaseItemComponent.ComponentTypes.SMALLSPRING;
-import static gtPlusPlus.core.item.base.BaseItemComponent.ComponentTypes.SPRING;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;

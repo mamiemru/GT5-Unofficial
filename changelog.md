@@ -46,3 +46,10 @@ Changed all circuit craft, now outputting Any circuit until UV, in my opinion
 at this state of the progression, any circuits lower than optical should be free
 terms of resources and time.
 I introduce a cheapest cheapest recipe to cut these crafts using innovative circuit board.
+
+## 2025 December 8:
+
+I decided to add a new module to the PCB factory to craft cosmic and transcendent line
+for now the multi does notting but is required to craft the board.
+I recalculated the Any circuits recipe to be a better match than the current optimized recipe.
+yeah its a buff.

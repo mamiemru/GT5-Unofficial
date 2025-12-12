@@ -1970,6 +1970,13 @@ public enum ItemList implements IItemContainer {
     Exotic_Super_CPU,
     Cosmic_Super_Ram,
 
+    Circuit_Parts_ResistorISMD,
+    Circuit_Parts_DiodeISMD,
+    Circuit_Parts_TransistorISMD,
+    Circuit_Parts_CapacitorISMD,
+    Circuit_Parts_InductorISMD,
+    Circuit_Parts_UniversalISMD,
+
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,
     Circuit_Parts_Glass_Tube,
@@ -2177,6 +2184,7 @@ public enum ItemList implements IItemContainer {
     PCBFactory,
     PCBBioChamber,
     PCBCoolingTower,
+    PCBTFS,
     BasicPhotolithographicFrameworkCasing,
     ReinforcedPhotolithographicFrameworkCasing,
     RadiationProofPhotolithographicFrameworkCasing,

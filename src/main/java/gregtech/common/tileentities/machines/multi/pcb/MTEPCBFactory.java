@@ -114,6 +114,10 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
     private int mCoolingTowerX;
     private int mCoolingTowerY;
     private int mCoolingTowerZ;
+    private MTEPCBTranscendentFrontierSystem mTfs;
+    private int mTfsX;
+    private int mTfsY;
+    private int mTfsZ;
     private final ArrayList<MTEHatchNanite> naniteBuses = new ArrayList<>();
     private static final byte mTextureBitmap = 0b1;
     private static final IStructureDefinition<MTEPCBFactory> STRUCTURE_DEFINITION = StructureDefinition
@@ -418,9 +422,14 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
                     if (requiredUpgrade == PCBFactoryUpgrade.BIO && mBioChamber == null
                         || requiredUpgrade == PCBFactoryUpgrade.BIO && !mBioChamber.isAllowedToWork())
                         return SimpleCheckRecipeResult.ofFailure("bio_upgrade_missing");
+                    if (requiredUpgrade == PCBFactoryUpgrade.TFS && mTfs == null
+                        || requiredUpgrade == PCBFactoryUpgrade.TFS && !mTfs.isAllowedToWork())
+                        return SimpleCheckRecipeResult.ofFailure("tfs_upgrade_missing");
                 } else {
                     if (requiredUpgrade == PCBFactoryUpgrade.BIO && !compatMode.bioUpgrade) {
                         return SimpleCheckRecipeResult.ofFailure("bio_upgrade_missing");
+                    } else if (requiredUpgrade == PCBFactoryUpgrade.TFS) {
+                        return SimpleCheckRecipeResult.ofFailure("tfs_upgrade_missing");
                     }
                 }
                 int requiredPCBTier = recipe.getMetadataOrDefault(PCBFactoryTierKey.INSTANCE, 1);
@@ -437,6 +446,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
                     structures++;
                 }
                 if (mCoolingTower != null) {
+                    structures++;
+                }
+                if (mTfs != null) {
                     structures++;
                 }
                 if (compatMode.isSet) {
@@ -469,6 +481,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
                     structures++;
                 }
                 if (mCoolingTower != null) {
+                    structures++;
+                }
+                if (mTfs != null) {
                     structures++;
                 }
                 return super.createParallelHelper(recipe).setEUtModifier((float) Math.sqrt(structures))
@@ -535,6 +550,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
         }
         if (mBioChamber != null) {
             mBioChamber.cancelRecipe(this);
+        }
+        if (mTfs != null) {
+            mTfs.cancelRecipe(this);
         }
         super.stopMachine(reason);
     }
@@ -729,6 +747,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
                 + (mBioChamber == null ? "" : "Bio Chamber ")
                 + (mBioChamber != null && mCoolingTower != null ? ", " : "")
                 + EnumChatFormatting.GREEN
+                + (mTfs == null ? "" : "Transcendent Frontier System ")
+                + (mTfs != null && mCoolingTower != null ? ", " : "")
+                + EnumChatFormatting.GREEN
                 + (mCoolingTower == null ? ""
                     : " Cooling Tower Tier " + EnumChatFormatting.GOLD + (mCoolingTower.isTier1 ? "1" : "2"))
                 + (mBioChamber == null && mCoolingTower == null ? EnumChatFormatting.RED + "None" : "")
@@ -886,6 +907,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
         if (mCoolingTower != null) {
             mCoolingTower.removeController(this);
         }
+        if (mTfs != null) {
+            mTfs.removeController(this);
+        }
 
         super.onBlockDestroyed();
     }
@@ -899,6 +923,13 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
             bioChamber.setInteger("y", mBioChamberY);
             bioChamber.setInteger("z", mBioChamberZ);
             aNBT.setTag("mBioChamber", bioChamber);
+        }
+        if (mTfs != null) {
+            NBTTagCompound bioChamber = new NBTTagCompound();
+            bioChamber.setInteger("x", mTfsX);
+            bioChamber.setInteger("y", mTfsY);
+            bioChamber.setInteger("z", mTfsZ);
+            aNBT.setTag("mTfs", bioChamber);
         }
         if (mCoolingTower != null) {
             NBTTagCompound coolingTower = new NBTTagCompound();
@@ -953,6 +984,12 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
             mBioChamberY = bioChamber.getInteger("y");
             mBioChamberZ = bioChamber.getInteger("z");
         }
+        if (aNBT.hasKey("mTfs")) {
+            NBTTagCompound bioChamber = aNBT.getCompoundTag("mTfs");
+            mTfsX = bioChamber.getInteger("x");
+            mTfsY = bioChamber.getInteger("y");
+            mTfsZ = bioChamber.getInteger("z");
+        }
         if (aNBT.hasKey("mCoolingTower")) {
             NBTTagCompound coolingTower = aNBT.getCompoundTag("mCoolingTower");
             mCoolingTowerX = coolingTower.getInteger("x");
@@ -996,7 +1033,18 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
     }
 
     public void registerLinkedUnit(MTEPCBUpgradeBase<?> unit) {
-        if (unit instanceof MTEPCBBioChamber) {
+        if (unit instanceof MTEPCBTranscendentFrontierSystem) {
+            if (mTfs != null && mTfs != unit) {
+                mTfs.unlinkController(this);
+            }
+            mTfs = (MTEPCBTranscendentFrontierSystem) unit;
+            mTfsX = unit.getBaseMetaTileEntity()
+                .getXCoord();
+            mTfsY = unit.getBaseMetaTileEntity()
+                .getYCoord();
+            mTfsZ = unit.getBaseMetaTileEntity()
+                .getZCoord();
+        } else if (unit instanceof MTEPCBBioChamber) {
             if (mBioChamber != null && mBioChamber != unit) {
                 mBioChamber.unlinkController(this);
             }
@@ -1024,7 +1072,11 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
     public void unregisterLinkedUnit(MTEPCBUpgradeBase<?> unit) {
         if (unit instanceof MTEPCBBioChamber) {
             mBioChamber = null;
-        } else if (unit instanceof MTEPCBCoolingTower) mCoolingTower = null;
+        } else if (unit instanceof MTEPCBCoolingTower) {
+            mCoolingTower = null;
+        } else if (unit instanceof MTEPCBTranscendentFrontierSystem) {
+            mTfs = null;
+        }
     }
 
     @Override
@@ -1036,6 +1088,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
             }
             if (mCoolingTower != null && mCoolingTower.isAllowedToWork()) {
                 mCoolingTower.addRecipe(this);
+            }
+            if (mTfs != null && mTfs.isAllowedToWork()) {
+                mTfs.addRecipe(this);
             }
         }
         return result;
@@ -1100,6 +1155,18 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
                     + coolingTower.getInteger("z")
                     + EnumChatFormatting.RESET);
         }
+        if (tag.hasKey("mTfs")) {
+            NBTTagCompound transcendentFrontierSystem = tag.getCompoundTag("mTfs");
+            currenttip.add(
+                EnumChatFormatting.AQUA + "Linked to Transcendent Frontier System at: "
+                    + EnumChatFormatting.WHITE
+                    + transcendentFrontierSystem.getInteger("x")
+                    + ", "
+                    + transcendentFrontierSystem.getInteger("y")
+                    + ", "
+                    + transcendentFrontierSystem.getInteger("z")
+                    + EnumChatFormatting.RESET);
+        }
         if (tag.hasKey("compatMode")) {
             CompatMode compat = new CompatMode(tag);
             if (compat.isSet) {
@@ -1119,6 +1186,12 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
             bioChamber.setInteger("y", mBioChamberY);
             bioChamber.setInteger("z", mBioChamberZ);
             tag.setTag("mBioChamber", bioChamber);
+        }
+        if (mTfs != null) {
+            NBTTagCompound tfs = new NBTTagCompound();
+            tfs.setInteger("x", mTfsX);
+            tfs.setInteger("y", mTfsY);
+            tfs.setInteger("z", mTfsZ);
         }
         if (mCoolingTower != null) {
             NBTTagCompound coolingTower = new NBTTagCompound();
