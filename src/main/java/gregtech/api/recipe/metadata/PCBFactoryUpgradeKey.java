@@ -19,7 +19,7 @@ public class PCBFactoryUpgradeKey extends RecipeMetadataKey<PCBFactoryUpgrade> {
     public static final PCBFactoryUpgradeKey INSTANCE = new PCBFactoryUpgradeKey();
 
     private PCBFactoryUpgradeKey() {
-        super(PCBFactoryUpgrade.class, "pcb_factory_bio_upgrade");
+        super(PCBFactoryUpgrade.class, "pcb_factory_bio_upgrade"); // TODO: hmmm
     }
 
     @Override
@@ -27,6 +27,8 @@ public class PCBFactoryUpgradeKey extends RecipeMetadataKey<PCBFactoryUpgrade> {
         PCBFactoryUpgrade upgrade = cast(value);
         if (upgrade == PCBFactoryUpgrade.BIO) {
             recipeInfo.drawText(trans("337", "Upgrade Required: ") + trans("338", "Bio"));
+        } else if (upgrade == PCBFactoryUpgrade.TFS) {
+            recipeInfo.drawText(trans("337", "Upgrade Required: ") + trans("338", "TFS"));
         }
     }
 }

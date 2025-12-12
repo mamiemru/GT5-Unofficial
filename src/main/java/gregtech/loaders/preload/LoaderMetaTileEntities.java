@@ -209,6 +209,7 @@ import gregtech.common.tileentities.machines.multi.drone.MTEHatchDroneDownLink;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBBioChamber;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBCoolingTower;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBFactory;
+import gregtech.common.tileentities.machines.multi.pcb.MTEPCBTranscendentFrontierSystem;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchDegasifierControl;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchLensHousing;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchLensIndicator;
@@ -508,11 +509,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         ItemList.PCBCoolingTower.set(
             new MTEPCBCoolingTower(PCB_COOLING_TOWER_CONTROLLER.ID, "multimachine.pcbcoolingtower", "Cooling Tower")
                 .getStackForm(1));
-        ItemList.AdvCircuitAssemblyLine.set(
-            new MTEAdvCircuitAssemblyLine(
-                AdvCircuitAssemblyLine.ID,
-                "multimachine.adv-circuit-assemblyline",
-                "Advanced Circuit Assembly line").getStackForm(1));
 
         ItemList.NanoForge
             .set(new MTENanoForge(NANO_FORGE_CONTROLLER.ID, "multimachine.nanoforge", "Nano Forge").getStackForm(1));
@@ -610,6 +606,18 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
 
         ItemList.LATEX.set(new MTELatex(LATEX.ID, "multimachine.latex", "L.A.T.E.X.").getStackForm(1));
         addItemTooltip(ItemList.LATEX.get(1), chain(() -> "Author: ", GTValues.AuthorThree));
+
+        ItemList.PCBTFS.set(
+            new MTEPCBTranscendentFrontierSystem(
+                PCB_TFS_CONTROLLER.ID,
+                "multimachine.pcbtfs",
+                "Transcendent Frontier System").getStackForm(1));
+
+        ItemList.AdvCircuitAssemblyLine.set(
+            new MTEAdvCircuitAssemblyLine(
+                AdvCircuitAssemblyLine.ID,
+                "multimachine.adv-circuit-assemblyline",
+                "Advanced Circuit Assembly line").getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(
