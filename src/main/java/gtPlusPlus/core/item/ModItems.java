@@ -1101,7 +1101,9 @@ public final class ModItems {
             .generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsElements.STANDALONE.WHITE_METAL);
         MaterialUtils
             .generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsElements.STANDALONE.ADVANCED_NITINOL);
+        MaterialUtils.generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsAlloy.ABYSSAL);
         MaterialUtils.generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsAlloy.PIKYONIUM);
+        MaterialUtils.generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsAlloy.OCTIRON);
         MaterialUtils.generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsAlloy.CINOBITE);
         MaterialUtils.generateComponentAndAssignToAMaterial(ComponentTypes.FOIL, MaterialsAlloy.LAFIUM);
         MaterialUtils

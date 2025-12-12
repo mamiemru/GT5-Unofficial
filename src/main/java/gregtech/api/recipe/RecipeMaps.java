@@ -1322,10 +1322,7 @@ public final class RecipeMaps {
 
     public static final RecipeMap<RecipeMapBackend> advCircuitAssemblylineRecipes = RecipeMapBuilder
         .of("gt.recipe.advcircuitassemblyline")
-        .maxIO(7, 1, 1, 0)
-        .minInputs(1, 0)
-        .useSpecialSlot()
-        .specialSlotSensitive()
-        .progressBar(GTUITextures.PROGRESSBAR_CIRCUIT_ASSEMBLER)
+        .maxIO(9, 8, 4, 0)
+        .minInputs(1, 1)
         .build();
 }
