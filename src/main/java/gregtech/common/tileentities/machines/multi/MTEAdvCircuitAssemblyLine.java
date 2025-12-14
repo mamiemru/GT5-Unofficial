@@ -60,8 +60,8 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     implements ISurvivalConstructable {
 
     private UUID ownerUUID;
-    private int eParallel = 64;
-    private int eDuration = 70;
+    private int setParallel = 1;
+    private int setDuration = 1;
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
@@ -133,16 +133,17 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement('H', ofBlock(GregTechAPI.sBlockGem2, 11))
         .addElement(
             'I',
-            buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
-                .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                .hint(2)
-                .build())
+            ofChain(
+                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
+                    .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
+                    .dot(2)
+                    .build()))
         .addElement(
             'J',
             ofChain(
                 buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(ImmutableMap.of(InputHatch, 1, InputBus, 1))
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .hint(1)
+                    .dot(1)
                     .buildAndChain(GregTechAPI.sBlockCasings8, 12)))
         .build();
 
@@ -162,11 +163,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, ACAL")
+        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, AdvCAL")
             .beginStructureBlock(7, 7, 13, false)
             .addInfo("Do you remember that bottleneck?")
             .addInfo("Set the parallel and the expected craft duration")
-            .addInfo("All EU is deducted from wireless EU networks when the recipe start.")
             .addInfo("You should be careful to override default settings on the gui panel.")
             .addInfo("This machine will consume your wireless energy network as easily as you eat a donut.")
             .addStructureInfo("Require no energy hatch and no maintenance hatch")
@@ -200,25 +200,25 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         return new ITexture[] { casingTexturePages[0][16] };
     }
 
-    public int geteParallel() {
-        return eParallel;
+    public int getSetParallel() {
+        return setParallel;
     }
 
-    public void seteParallel(int eParallel) {
-        this.eParallel = eParallel;
+    public void setSetParallel(int setParallel) {
+        this.setParallel = setParallel;
     }
 
-    public int geteDuration() {
-        return eDuration;
+    public int getSetDuration() {
+        return setDuration;
     }
 
-    public void seteDuration(int eDuration) {
-        this.eDuration = eDuration;
+    public void setSetDuration(int setDuration) {
+        this.setDuration = setDuration;
     }
 
     @Override
     public int getMaxParallelRecipes() {
-        return eParallel;
+        return setParallel;
     }
 
     @Override
@@ -226,7 +226,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         // The voltage is only used for recipe finding
         logic.setAvailableVoltage(Long.MAX_VALUE);
         logic.setAvailableAmperage(1);
-        logic.setAmperageOC(false);
+        logic.setAmperageOC(true);
         logic.setUnlimitedTierSkips();
     }
 
@@ -284,10 +284,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                // x2 to match the input value and computed value
-                // x10 to shift decimal point into seconds
-                // =x20, with theses 2 adjustment when you enter 378 it will run the recipe for 378 seconds
-                return new OverclockCalculator().setDuration(geteDuration() * 20);
+                return new OverclockCalculator().setDuration(getSetDuration());
             }
         }.setMaxParallelSupplier(this::getTrueParallel);
     }
@@ -324,20 +321,14 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
-        aNBT.setInteger("eParallel", eParallel);
-        aNBT.setInteger("eDuration", eDuration);
+        aNBT.setInteger("eSetParallel", setParallel);
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
-        eParallel = aNBT.getInteger("eParallel");
-        eDuration = aNBT.getInteger("eDuration");
+        setParallel = aNBT.getInteger("eSetParallel");
         super.loadNBTData(aNBT);
-    }
-
-    public BigInteger getFinalConsumption() {
-        return finalConsumption;
     }
 
     @Override
@@ -357,7 +348,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                 + (mMaxProgresstime == 0 ? "0"
                     : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))))
                 + EnumChatFormatting.RESET
-                + " EU" };
+                + " EU/t" };
     }
 
     @Override
@@ -367,31 +358,21 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public boolean supportsBatchMode() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsInputSeparation() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsSingleRecipeLocking() {
-        return false;
-    }
-
-    @Override
-    public boolean getDefaultHasMaintenanceChecks() {
-        return false;
-    }
-
-    @Override
-    protected boolean useMui2() {
         return true;
     }
 
     @Override
-    public boolean supportsPowerPanel() {
+    public boolean supportsInputSeparation() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsSingleRecipeLocking() {
+        return true;
+    }
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
         return false;
     }
 
