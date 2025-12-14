@@ -14,7 +14,6 @@
 package bartworks.system.material.CircuitGeneration;
 
 import static gregtech.api.enums.GTValues.VP;
-import static gregtech.api.recipe.RecipeMaps.advCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.cutterRecipes;
 
 import java.util.Arrays;

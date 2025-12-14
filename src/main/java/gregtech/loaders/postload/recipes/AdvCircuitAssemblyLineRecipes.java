@@ -194,7 +194,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.screw, Materials.TranscendentMetal, 1L))
             .fluidInputs(Materials.Kevlar.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Exotic_Super_CPU.get(1L))
-            .duration(15 * SECONDS)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(spaceAssemblerRecipes);
 
@@ -212,7 +212,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.DimensionallyShiftedSuperfluid.getFluid(250L),
                 Materials.Kevlar.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Cosmic_Super_Ram.get(1L))
-            .duration(15 * SECONDS)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .metadata(MODULE_TIER, 2)
             .addTo(spaceAssemblerRecipes);
@@ -380,7 +380,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Exotic.get(1L),
                 ItemList.Exotic_Super_CPU.get(1L),
                 ItemList.Optically_Compatible_Memory.get(2L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(64L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
                 ItemList.Circuit_Wafer_QPIC.get(16L),
                 CustomItemList.DATApipe.get(16L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 16L))
@@ -397,10 +397,10 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Exotic.get(1L),
                 ItemList.Circuit_ExoticProcessor.get(1L),
                 ItemList.Optically_Compatible_Memory.get(4L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(64L),
-                ItemList.Circuit_Parts_InductorISMD.get(64L),
-                ItemList.Circuit_Parts_ResistorISMD.get(64L),
-                ItemList.Circuit_Parts_TransistorISMD.get(64L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
+                ItemList.Circuit_Parts_InductorISMD.get(12L),
+                ItemList.Circuit_Parts_ResistorISMD.get(12L),
+                ItemList.Circuit_Parts_TransistorISMD.get(12L),
                 ItemList.Circuit_Wafer_QPIC.get(32L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TranscendentMetal, 16L))
             .fluidInputs(
@@ -416,10 +416,10 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Exotic.get(1L),
                 ItemList.Circuit_ExoticAssembly.get(2L),
                 ItemList.Optically_Compatible_Memory.get(8L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(64L),
-                ItemList.Circuit_Parts_DiodeISMD.get(64L),
-                ItemList.Circuit_Parts_ResistorISMD.get(64L),
-                ItemList.Circuit_Parts_TransistorISMD.get(64L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
+                ItemList.Circuit_Parts_DiodeISMD.get(12L),
+                ItemList.Circuit_Parts_ResistorISMD.get(12L),
+                ItemList.Circuit_Parts_TransistorISMD.get(12L),
                 ItemList.Circuit_Wafer_QPIC.get(48L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 16L))
             .fluidInputs(
@@ -437,7 +437,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_ExoticComputer.get(2L),
                 ItemList.Exotic_Super_CPU.get(2L),
                 ItemList.Optically_Compatible_Memory.get(16L),
-                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(32L),
                 ItemList.Circuit_Wafer_QPIC.get(64L),
                 GGMaterial.shirabon.get(OrePrefixes.bolt, 8 * INGOTS))
             .fluidInputs(
@@ -459,7 +459,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Cosmic.get(1L),
                 ItemList.Exotic_Super_CPU.get(1L),
                 ItemList.Cosmic_Super_Ram.get(2L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(64L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
                 ItemList.Circuit_Wafer_QPIC.get(16L),
                 CustomItemList.DATApipe.get(16L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 16L))
@@ -476,10 +476,10 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Cosmic.get(1L),
                 ItemList.Circuit_CosmicProcessor.get(1L),
                 ItemList.Cosmic_Super_Ram.get(4L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(64L),
-                ItemList.Circuit_Parts_InductorISMD.get(64L),
-                ItemList.Circuit_Parts_ResistorISMD.get(64L),
-                ItemList.Circuit_Parts_TransistorISMD.get(64L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
+                ItemList.Circuit_Parts_InductorISMD.get(12L),
+                ItemList.Circuit_Parts_ResistorISMD.get(12L),
+                ItemList.Circuit_Parts_TransistorISMD.get(12L),
                 ItemList.Circuit_Wafer_QPIC.get(32L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Ichorium, 16L))
             .fluidInputs(
@@ -495,7 +495,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Board_Cosmic.get(1L),
                 ItemList.Circuit_CosmicAssembly.get(2L),
                 ItemList.Cosmic_Super_Ram.get(8L),
-                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(32L),
                 ItemList.Circuit_Wafer_QPIC.get(48L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TengamPurified, 8L))
             .fluidInputs(
@@ -513,7 +513,6 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_CosmicComputer.get(2L),
                 ItemList.Exotic_Super_CPU.get(2L),
                 ItemList.Cosmic_Super_Ram.get(16L),
-                ItemList.Circuit_Parts_UniversalISMD.get(64L),
                 ItemList.Circuit_Parts_UniversalISMD.get(64L),
                 ItemList.Circuit_Wafer_QPIC.get(64L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Flerovium, 8L))
