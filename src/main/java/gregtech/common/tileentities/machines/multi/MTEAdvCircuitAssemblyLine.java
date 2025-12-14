@@ -31,6 +31,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.google.common.collect.ImmutableMap;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -64,23 +65,60 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
-    private static final int HORIZONTAL_OFFSET = 3;
-    private static final int VERTICAL_OFFSET = 3;
+    // Struct lib debug writer: Offsets: 0 16 -2
+    private static final int HORIZONTAL_OFFSET = 7;
+    private static final int VERTICAL_OFFSET = 7;
     private static final int DEPTH_OFFSET = 1;
     private static final String[][] structure = new String[][] {
-        { "BBBBBBB", "B     B", "B     B", "B     B", "B     B", "B     B", "BBBBBBB" },
-        { "BBBBBBB", "BGGGGGB", "BGGGGGB", "BGG~GGB", "BGGGGGB", "BGGGGGB", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A CCC A", "AECFCEA", "A CCC A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BBBBBBB", "BECECEB", "BEFFFEB", "BEFFFEB", "BEFFFEB", "BECECEB", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A CCC A", "AECFCEA", "A CCC A", "A CEC A", "BBBBBBB" },
-        { "BAAAAAB", "A CEC A", "A     A", "AE F EA", "A     A", "A CEC A", "BBBBBBB" },
-        { "BBBBBBB", "BBBBBBB", "BBDDDBB", "BBDODBB", "BBDDDBB", "BBCECBB", "BBBBBBB" },
-        { "       ", " BBBBB ", " B   B ", " B   B ", " B   B ", " BBBBB ", " BBBBB " } };
+        // spotless:off
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB   B   BBB ", "BBB    B    BBB", "BB   BBBBB   BB", "BB  BB   BB  BB", "BB  B     B  BB", "BBBBB     BBBBB", "BB  B     B  BB", "BB  BB   BB  BB", "BB   BBBBB   BB", "BBB    B    BBB", " BBB   B   BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BEE       EEB ", "BBE         EBB", "BE  BBBBBBB  EB", "BE  BFJJJFB  EB", "BE  BJJJJJB  EB", "BE  BJJ~JJB  EB", "BE  BJJJJJB  EB", "BE  BFJJJFB  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BEE       EEB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BEE       EEB ", "BBE         EBB", "BE  BAAAAAB  EB", "BE  A CGC A  EB", "BE  A     A  EB", "BE  AG D GA  EB", "BE  A     A  EB", "BE  A CGC A  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BEE       EEB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BEE       EEB ", "BBE         EBB", "BE  BAAAAAB  EB", "BE  A CGC A  EB", "BE  A CCC A  EB", "BE  AGCDCGA  EB", "BE  A CCC A  EB", "BE  A CGC A  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BEE       EEB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BAAAAAB  BB", "BB  A CGC A  BB", "BB  A     A  BB", "BB  AG D GA  BB", "BB  A     A  BB", "BB  A CGC A  BB", "BB  BBBBBBB  BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BBBBBBB    ", "    BGCGCGB    ", "    BGDDDGB    ", "    BGDDDGB    ", "    BGDDDGB    ", "    BGCGCGB    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A CCC A    ", "    AGCDCGA    ", "    A CCC A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BAAAAAB  BB", "BB  AFFFFFA  BB", "BB  AFFFFFA  BB", "BB  AFFCFFA  BB", "BB  A FC  A  BB", "BB  A CGC A  BB", "BB  BBBBBBB  BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG       GBB ", "BBG         GBB", "BG           GB", "BG           GB", "BG           GB", "BG           GB", "BG   FFCFF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG   C   GBB ", "BBG    C    GBB", "BG    CCC    GB", "BG   C   C   GB", "BCCCCC   CCCCCB", "BG   C   C   GB", "BG   FCCCF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG       GBB ", "BBG         GBB", "BG           GB", "BG           GB", "BG           GB", "BG           GB", "BG   FFCFF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BBBBBBB  BB", "BB  BFFFFFB  BB", "BB  BFFFFFB  BB", "BB  BFFCFFB  BB", "BB  BBFCFBB  BB", "BB  BBBBBBB  BB", "BB   BBBBB   BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A CCC A    ", "    AGCDCGA    ", "    A CCC A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BBBBBBB    ", "    BAAAAAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB           BB", "BB           BB", "BB           BB", "BB           BB", "BB     C     BB", "BB           BB", "BB   BBBBB   BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE       EBB ", "BBE         EBB", "BE           EB", "BE           EB", "BE           EB", "BE           EB", "BE     C     EB", "BE           EB", "BE           EB", "BBE         EBB", " BBE       EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE   C   EBB ", "BBE    C    EBB", "BE   CCCCC   EB", "BE   C C C   EB", "BE   C H C   EB", "BE           EB", "BE           EB", "BE   C H C   EB", "BE   C C C   EB", "BBE  CCCCC  EBB", " BBE   C   EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE       EBB ", "BBE         EBB", "BE           EB", "BE           EB", "BE           EB", "BE           EB", "BE     C     EB", "BE           EB", "BE           EB", "BBE         EBB", " BBE       EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB           BB", "BB           BB", "BB           BB", "BB           BB", "BB     C     BB", "BB           BB", "BB   BBBBB   BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "    BBBBBBB    ", "    BAAAAAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BAFFFAB    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    AGCGC A    ", "    AGDDD A    ", "    AGDDDGA    ", "    A  DD A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A CCC A    ", "    AGCDCGA    ", "    A CCC A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BAAAAAB  BB", "BB  AFFFFFA  BB", "BB  AFFFFFA  BB", "BB  AFFCFFA  BB", "BB  A FC  A  BB", "BB  A CGC A  BB", "BB  BBBBBBB  BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG       GBB ", "BBG         GBB", "BG           GB", "BG           GB", "BG           GB", "BG           GB", "BG   FFCFF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG   C   GBB ", "BBG    C    GBB", "BG    CCC    GB", "BG   C   C   GB", "BCCCCC   CCCCCB", "BG   C   C   GB", "BG   FCCCF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBGGGGGGGBB  ", " BBG       GBB ", "BBG         GBB", "BG           GB", "BG           GB", "BG           GB", "BG           GB", "BG   FFCFF   GB", "BG           GB", "BG           GB", "BBG         GBB", " BBG       GBB ", "  BBGGGGGGGBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BBBBBBB  BB", "BB  BFFFFFB  BB", "BB  BFFFFFB  BB", "BB  BFFCFFB  BB", "BB  BBFCFBB  BB", "BB  BBBBBBB  BB", "BB   BBBBB   BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A CCC A    ", "    AGCDCGA    ", "    A CCC A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BAAAAAB    ", "    A CGC A    ", "    A     A    ", "    AG D GA    ", "    A     A    ", "    A CGC A    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "               ", "               ", "               ", "               ", "    BBBBBBB    ", "    BGCGCGB    ", "    BGDDDGB    ", "    BGDDDGB    ", "    BGDDDGB    ", "    BGCGCGB    ", "    BBBBBBB    ", "               ", "               ", "               ", "               " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB       BBB ", "BBB         BBB", "BB  BAAAAAB  BB", "BB  A CGC A  BB", "BB  A     A  BB", "BB  AG D GA  BB", "BB  A     A  BB", "BB  A CGC A  BB", "BB  BBBBBBB  BB", "BBB         BBB", " BBB       BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE       EBB ", "BBE         EBB", "BE  BAAAAAB  EB", "BE  A CGC A  EB", "BE  A     A  EB", "BE  AG D GA  EB", "BE  A     A  EB", "BE  A CGC A  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BBE       EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE       EBB ", "BBE         EBB", "BE  BAAAAAB  EB", "BE  A CGC A  EB", "BE  A CCC A  EB", "BE  AGCDCGA  EB", "BE  A CCC A  EB", "BE  A CGC A  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BBE       EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBEEEEEEEBB  ", " BBE       EBB ", "BBE         EBB", "BE  BAAAAAB  EB", "BE  A CGC A  EB", "BE  A     A  EB", "BE  AG D GA  EB", "BE  A     A  EB", "BE  A CGC A  EB", "BE  BBBBBBB  EB", "BBE         EBB", " BBE       EBB ", "  BBEEEEEEEBB  ", "   BBBBBBBBB   " },
+        { "   BBBBBBBBB   ", "  BBBBBBBBBBB  ", " BBB   B   BBB ", "BBB    B    BBB", "BB  BBBBBBB  BB", "BB  BBBBBBB  BB", "BB  BBFFFBB  BB", "BBBBBBFIFBBBBBB", "BB  BBFFFBB  BB", "BB  BBCGCBB  BB", "BB  BBBBBBB  BB", "BBB    B    BBB", " BBB   B   BBB ", "  BBBBBBBBBBB  ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "               ", "     BBBBB     ", "     B   B     ", "     B   B     ", "     B   B     ", "     BBBBB     ", "               ", "               ", "               ", "               ", "               " }
+        // spotless:on
+    };
 
     private static final IStructureDefinition<MTEAdvCircuitAssemblyLine> STRUCTURE_DEFINITION = StructureDefinition
         .<MTEAdvCircuitAssemblyLine>builder()
@@ -88,24 +126,25 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement('A', chainAllGlasses())
         .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 0))
         .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 5))
-        .addElement('D', ofBlock(GregTechAPI.sBlockCasings8, 12))
-        .addElement('E', ofBlock(GregTechAPI.sBlockCasings8, 14))
-        .addElement('F', ofBlock(GregTechAPI.sBlockCasings2, 9))
+        .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 9))
+        .addElement('E', ofBlock(GregTechAPI.sBlockCasings5, 13))
+        .addElement('F', ofBlock(GregTechAPI.sBlockCasings8, 12))
+        .addElement('G', ofBlock(GregTechAPI.sBlockCasings8, 14))
+        .addElement('H', ofBlock(GregTechAPI.sBlockGem2, 11))
         .addElement(
-            'O',
+            'I',
             ofChain(
                 buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
                     .dot(2)
                     .build()))
         .addElement(
-            'G',
+            'J',
             ofChain(
-                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(InputBus, InputHatch)
+                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(ImmutableMap.of(InputHatch, 1, InputBus, 1))
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
                     .dot(1)
-                    .build(),
-                ofBlock(GregTechAPI.sBlockCasings8, 12)))
+                    .buildAndChain(GregTechAPI.sBlockCasings8, 12)))
         .build();
 
     public MTEAdvCircuitAssemblyLine(int aID, String aName, String aNameRegional) {
@@ -126,7 +165,15 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, AdvCAL")
             .beginStructureBlock(7, 7, 13, false)
+            .addInfo("Do you remember that bottleneck?")
+            .addInfo("Set the parallel and the expected craft duration")
+            .addInfo("You should be careful to override default settings on the gui panel.")
+            .addInfo("This machine will consume your wireless energy network as easily as you eat a donut.")
+            .addStructureInfo("Require no energy hatch and no maintenance hatch")
             .addSubChannelUsage(GTStructureChannels.BOROGLASS)
+            .addInputBus("Any Reinforced Photolithographic Framework Casing", 1)
+            .addInputHatch("Any Reinforced Photolithographic Framework Casing", 1)
+            .addOutputHatch("Middle Back Reinforced Photolithographic Framework Casing", 2)
             .toolTipFinisher();
         return tt;
     }
@@ -260,7 +307,6 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
-        if (mMachine) return -1;
         return survivalBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
@@ -323,6 +369,11 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     @Override
     public boolean supportsSingleRecipeLocking() {
         return true;
+    }
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
     }
 
 }
