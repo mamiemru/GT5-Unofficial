@@ -70,6 +70,9 @@ import gregtech.common.blocks.BlockCasings13;
 import gregtech.common.blocks.BlockCasings8;
 import gregtech.common.gui.modularui.multiblock.MTENanoForgeGui;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
+import gregtech.common.tileentities.render.TileEntityNanoForgeRenderer;
+import gregtech.common.tileentities.render.RenderingTileEntityNanoForge;
+import tectech.thing.gui.TecTechUITextures;
 import gregtech.common.tileentities.render.RenderingTileEntityNanoForge;
 
 public class MTENanoForge extends MTEExtendedPowerMultiBlockBase<MTENanoForge>
