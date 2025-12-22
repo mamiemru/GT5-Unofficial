@@ -191,7 +191,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()
+            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()git
                 .addIcon(OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE)
                 .extFacing()
                 .build() };
