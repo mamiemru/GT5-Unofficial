@@ -1,6 +1,14 @@
 package gregtech.common.render;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.google.common.io.ByteArrayDataInput;
+import gregtech.api.enums.GTValues;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.net.GTPacketClientMTERendererData;
+import io.netty.buffer.ByteBuf;
 
 public interface IMTERenderer {
 
@@ -9,4 +17,29 @@ public interface IMTERenderer {
     default AxisAlignedBB getRenderBoundingBox(int x, int y, int z) {
         return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
     }
+
+    default double getMaxRenderDistanceSquared(){
+        return 4096.0D;
+    }
+
+    void encodeRenderData(ByteBuf buffer);
+
+    void decodeRenderData(ByteArrayDataInput buffer);
+
+    default void sendRenderDataToClient(IMetaTileEntity mte){
+        IGregTechTileEntity tile = mte.getBaseMetaTileEntity();
+        if (tile.isClientSide()) return;
+
+        double maxDistSq = getMaxRenderDistanceSquared();
+        int x = tile.getXCoord();
+        int y = tile.getYCoord();
+        int z = tile.getZCoord();
+
+        tile.getWorld().playerEntities.stream()
+            .filter(player -> player.getDistanceSq(x + 0.5, y + 0.5, z + 0.5) <= maxDistSq)
+            .forEach(player -> GTValues.NW.sendToPlayer(
+                new GTPacketClientMTERendererData(x, y, z, this), (EntityPlayerMP) player)
+            );
+    }
+
 }

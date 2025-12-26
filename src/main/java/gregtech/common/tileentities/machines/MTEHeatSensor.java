@@ -1,4 +1,8 @@
-package gregtech.common.tileentities.machines.multi.compressor;
+package gregtech.common.tileentities.machines;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,12 +15,14 @@ import com.cleanroommc.modularui.screen.UISettings;
 import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 
 import gregtech.api.enums.Textures;
+import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.IGTHatchAdder;
 import gregtech.common.gui.modularui.hatch.MTEHeatSensorGui;
 
 public class MTEHeatSensor extends MTEHatch {
@@ -77,7 +83,7 @@ public class MTEHeatSensor extends MTEHatch {
 
     @Override
     public String[] getDescription() {
-        return new String[] { "Reads heat of Hot Isostatic Pressurization Unit.",
+        return new String[] { "Reads heat of a machine and output redstone signal.",
             "Right click to open the GUI and change settings." };
     }
 
@@ -96,7 +102,7 @@ public class MTEHeatSensor extends MTEHatch {
     }
 
     /**
-     * Updates redstone output strength based on the heat of the HIP unit.
+     * Updates redstone output strength based on the heat of the machine.
      */
     public void updateRedstoneOutput(float heat) {
         isOn = (heat > threshold) ^ inverted;
@@ -158,6 +164,34 @@ public class MTEHeatSensor extends MTEHatch {
     @Override
     public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings uiSettings) {
         return new MTEHeatSensorGui(this).build(data, syncManager, uiSettings);
+    }
+
+    public enum HeatSensorHatchElement implements IHatchElement<IHeatProducer> {
+
+        HEAT_SENSOR(IHeatProducer::addHeatSensorHatchToMachineList, MTEHeatSensor.class);
+
+        private final List<Class<? extends IMetaTileEntity>> mteClasses;
+        private final IGTHatchAdder<IHeatProducer> adder;
+
+        @Override
+        public long count(IHeatProducer heatProducer) {
+            return heatProducer.getHeatSensorHatchNum();
+        }
+
+        @SafeVarargs
+        HeatSensorHatchElement(IGTHatchAdder<IHeatProducer> adder, Class<? extends IMetaTileEntity>... mteClasses) {
+            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
+            this.adder = adder;
+        }
+
+        @Override
+        public List<? extends Class<? extends IMetaTileEntity>> mteClasses() {
+            return mteClasses;
+        }
+
+        public IGTHatchAdder<? super IHeatProducer> adder() {
+            return adder;
+        }
     }
 
 }
