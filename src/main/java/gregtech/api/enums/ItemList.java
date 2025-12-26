@@ -2924,6 +2924,14 @@ public enum ItemList implements IItemContainer {
     Wrap_LivingCrystalChips,
     Wrap_LivingBioChips
 
+    CausalityResistantCasing,
+    CausalityResistantGlass,
+    RealityAttunedCasing,
+    CausalityAttractionEngine,
+    RealityShifterCasing,
+    RealityFabricSiphonController,
+    RealityPhaseTunerModule
+
     // semicolon after the comment to reduce merge conflicts
     ;
 

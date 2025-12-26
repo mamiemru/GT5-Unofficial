@@ -1595,6 +1595,14 @@ GT5U.gui.text.invalidfluidsup=Invalid Fluid Supplied
 GT5U.gui.text.amperage=Amperage
 GT5U.gui.text.voltagetier=Voltage Tier
 GT5U.gui.text.ticks_between_refill=Ticks Between Refills
+GT5U.gui.text.heat_value=Heat: %d
+GT5U.gui.text.no_target_siphon=No Target Reality Siphon
+GT5U.gui.text.attached_modules=Attached Module(s): %d
+GT5U.gui.text.current_reality_phase=Current Reality Phase: %d
+GT5U.gui.text.accumulated_causality=Accumulated Causality: %d
+GT5U.gui.text.generated_causality=Generated Causality: %d
+GT5U.gui.text.consumed_causality=Consumed Causality: %d
+GT5U.gui.text.remaining_generated_causality=Remaining Causality Generated: %d
 
 
 GT5U.gui.hoverable.runningfine=Running Fine.
@@ -2843,6 +2851,8 @@ achievement.gt.blockmachines.multimachine.em.infuser=Energy Infuser
 achievement.gt.blockmachines.multimachine.em.infuser.desc=Pickup this item to see the recipe in NEI
 achievement.gt.blockmachines.hatch.holder.tier.09=Object Holder
 achievement.gt.blockmachines.hatch.holder.tier.09.desc=Pickup this item to see the recipe in NEI
+achievement.gt.blockmachines.multimachine.reality_siphon=Causality Breach
+achievement.gt.blockmachines.multimachine.reality_siphon.desc=Craft a Reality Fabric Siphon to... do some stuff with reality... hoppîng it's fine...
 
 achievement.item.StargateShieldingFoil=Stargate-Radiation-Containment-Plate
 achievement.item.StargateShieldingFoil.desc=Pickup this item to see the recipe in NEI

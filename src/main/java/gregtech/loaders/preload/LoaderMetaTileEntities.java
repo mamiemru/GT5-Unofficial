@@ -197,10 +197,11 @@ import gregtech.common.tileentities.machines.multi.MTETranscendentPlasmaMixer;
 import gregtech.common.tileentities.machines.multi.MTEVacuumFreezer;
 import gregtech.common.tileentities.machines.multi.MTEWormholeGenerator;
 import gregtech.common.tileentities.machines.multi.acal.MTEAdvancedCircuitAssemblyLine;
+import gregtech.common.tileentities.machines.multi.*;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleUtility;
 import gregtech.common.tileentities.machines.multi.compressor.MTEHIPCompressor;
-import gregtech.common.tileentities.machines.multi.compressor.MTEHeatSensor;
+import gregtech.common.tileentities.machines.MTEHeatSensor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEIndustrialCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTENeutroniumCompressor;
 import gregtech.common.tileentities.machines.multi.drone.MTEDroneCentre;
@@ -224,6 +225,8 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterSteel;
 import gregtech.common.tileentities.machines.steam.MTESteamCompressorBronze;
@@ -619,6 +622,17 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 AdvancedCircuitAssemblyLine.ID,
                 "multimachine.adv-circuit-assemblyline",
                 "Advanced Circuit Assembly line").getStackForm(1));
+
+        ItemList.RealityFabricSiphonController.set(
+            new MTERealityFabricSiphon(
+                REALITY_FABRIC_SIPHON_CONTROLLER.ID,
+                "multimachine.reality_siphon",
+                "Reality Fabric Siphon").getStackForm(1));
+        ItemList.RealityPhaseTunerModule.set(
+            new MTERealityPhaseTunerModule(
+                REALITY_PHASE_TUNER_MODULE.ID,
+                "multimachine.reality_phase_tuner_module",
+                "Reality Phase Tuner").getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(
