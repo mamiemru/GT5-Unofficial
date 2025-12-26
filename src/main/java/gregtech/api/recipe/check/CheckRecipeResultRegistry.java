@@ -123,6 +123,12 @@ public final class CheckRecipeResultRegistry {
     public static final CheckRecipeResult CYCLE_IDLE = SimpleCheckRecipeResult.ofSuccess("cycle_idle");
 
     /**
+     * Machine has overheated and can not proceed.
+     */
+    @Nonnull
+    public static final CheckRecipeResult OVERHEAT = SimpleCheckRecipeResult.ofFailure("overheat");
+
+    /**
      * Cannot process recipe because the machine cannot handle required EUt.
      */
     @Nonnull
