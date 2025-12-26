@@ -105,7 +105,7 @@ public class MTEHeatSensor extends MTEHatch {
     }
 
     /**
-     * Updates redstone output based on the heat of the machine.
+     * Updates redstone output strength based on the heat of the machine.
      */
     public void updateRedstoneOutput(float heat) {
         this.heat = heat;

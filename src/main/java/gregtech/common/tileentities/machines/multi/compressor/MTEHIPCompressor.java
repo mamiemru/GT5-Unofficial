@@ -34,12 +34,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
 
+import bartworks.util.MathUtils;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-
-import bartworks.util.MathUtils;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Textures;
@@ -109,8 +108,6 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
                 .buildAndChain(onElementPass(MTEHIPCompressor::onCasingAdded, ofBlock(GregTechAPI.sBlockCasings10, 5))))
         .addElement('H', ofBlock(GregTechAPI.sBlockCasings10, 5))
         .build();
-
-    private final ArrayList<MTEHeatSensor> sensorHatches = new ArrayList<>();
 
     private HeatingCoilLevel heatLevel;
     private int coilTier = 0;
