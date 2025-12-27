@@ -36,6 +36,9 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
+import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.ITexture;
@@ -61,7 +64,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     private UUID ownerUUID;
     private int setParallel = 1;
-    private int setDuration = 1;
+    private int setDuration = 50;
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
@@ -136,14 +139,14 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
             ofChain(
                 buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .dot(2)
+                    .hint(2)
                     .build()))
         .addElement(
             'J',
             ofChain(
                 buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(ImmutableMap.of(InputHatch, 1, InputBus, 1))
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .dot(1)
+                    .hint(1)
                     .buildAndChain(GregTechAPI.sBlockCasings8, 12)))
         .build();
 
@@ -191,7 +194,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()git
+            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE)
                 .extFacing()
                 .build() };
@@ -322,12 +325,14 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         aNBT.setInteger("eSetParallel", setParallel);
+        aNBT.setInteger("eSetDuration", setDuration);
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
         setParallel = aNBT.getInteger("eSetParallel");
+        setDuration = aNBT.getInteger("eSetDuration");
         super.loadNBTData(aNBT);
     }
 
@@ -349,6 +354,21 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                     : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))))
                 + EnumChatFormatting.RESET
                 + " EU/t" };
+    }
+
+    @Override
+    protected void drawTexts(DynamicPositionedColumn screenElements, SlotWidget inventorySlot) {
+        super.drawTexts(screenElements, inventorySlot);
+
+        screenElements.widget(
+            TextWidget
+                .dynamicString(
+                    () -> StatCollector.translateToLocalFormatted(
+                        "gt.tileentity.eup_in",
+                        mMaxProgresstime == 0 ? "0"
+                            : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))),
+                        COLOR_TEXT_WHITE.get()))
+                .setEnabled(widget -> getErrorDisplayID() == 0));
     }
 
     @Override
@@ -375,5 +395,8 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     public boolean getDefaultHasMaintenanceChecks() {
         return false;
     }
+
+    @Override
+    protected boolean useMui2() {return true;}
 
 }
