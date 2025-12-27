@@ -38,7 +38,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
         registerEndgameCircuitParts();
         registerAnyCircuitRecipes();
         registerExoticLineRecipe();
-        registerCosmicLineRecipe();
+        // registerCosmicLineRecipe();
     }
 
     private void registerAcal() {
@@ -248,7 +248,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.RedAlloy, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitULV", 64 * 8))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(50 * SECONDS)
+            .duration(200 * SECONDS)
             .eut(TierEU.RECIPE_ULV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -260,7 +260,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Copper, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitLV", 64 * 6))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(50 * SECONDS)
+            .duration(250 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -272,7 +272,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.AnnealedCopper, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitMV", 64 * 4))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(55 * SECONDS)
+            .duration(300 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -284,7 +284,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Platinum, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitHV", 182))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(60 * SECONDS)
+            .duration(350 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -296,7 +296,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.NiobiumTitanium, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitEV", 128))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(65 * SECONDS)
+            .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -308,7 +308,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Yttrium, 2L))
             .itemOutputs(computeOutputForAnyCircuits("item.CircuitIV", 92))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(70 * SECONDS)
+            .duration(450 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -320,7 +320,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.CosmicNeutronium, 2L))
             .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitLuV", 64, 0))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
-            .duration(80 * SECONDS)
+            .duration(500 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -332,7 +332,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 2L))
             .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitZPM", 46, 0))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
-            .duration(90 * SECONDS)
+            .duration(600 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -344,7 +344,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.EnrichedHolmium, 2L))
             .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUV", 32, 0))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
-            .duration(120 * SECONDS)
+            .duration(700 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -356,7 +356,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 2L))
             .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUHV", 28, 0))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
-            .duration(150 * SECONDS)
+            .duration(900 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -368,7 +368,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SuperconductorUMVBase, 2L))
             .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUEV", 20, 0))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(8 * INGOTS))
-            .duration(200 * SECONDS)
+            .duration(1200 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -388,7 +388,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.metastableOganesson.getMolten(2 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
             .itemOutputs(ItemList.Circuit_ExoticProcessor.get(1L))
-            .duration(50 * SECONDS)
+            .duration(150 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -407,7 +407,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.metastableOganesson.getMolten(4 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
             .itemOutputs(ItemList.Circuit_ExoticAssembly.get(1L))
-            .duration(55 * SECONDS)
+            .duration(200 * SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -427,7 +427,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 GGMaterial.shirabon.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_ExoticComputer.get(1L))
-            .duration(60 * SECONDS)
+            .duration(300 * SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
@@ -446,7 +446,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.SixPhasedCopper.getMolten(8 * INGOTS),
                 Materials.QuarkGluonPlasma.getFluid(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_ExoticMainframe.get(1L))
-            .duration(65 * SECONDS)
+            .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
@@ -467,7 +467,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.Samarium.getPlasma(2 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
             .itemOutputs(ItemList.Circuit_CosmicProcessor.get(1L))
-            .duration(60 * SECONDS)
+            .duration(500 * SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -486,7 +486,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.Samarium.getPlasma(4 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
             .itemOutputs(ItemList.Circuit_CosmicAssembly.get(1L))
-            .duration(65 * SECONDS)
+            .duration(7500 * SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -503,7 +503,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicComputer.get(1L))
-            .duration(70 * SECONDS)
+            .duration(1100 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
@@ -522,7 +522,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
                 Materials.MagMatter.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicMainframe.get(1L))
-            .duration(75 * SECONDS)
+            .duration(1500 * SECONDS)
             .eut(TierEU.RECIPE_UXV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
