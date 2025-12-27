@@ -70,7 +70,7 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
             new TextFieldWidget().setFormatAsInteger(true)
                 .setNumbers(1, Integer.MAX_VALUE)
                 .setTextAlignment(Alignment.CENTER)
-                .setDefaultNumber(1)
+                .setDefaultNumber(50)
                 .value(syncer)
                 .size(WIDTH - PADDING_SIDES * 2, 18)
                 .align(Alignment.Center));
