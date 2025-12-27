@@ -1,23 +1,15 @@
 package gregtech.common.gui.modularui.multiblock;
 
-import static kekztech.util.Util.toStandardForm;
 import static net.minecraft.util.StatCollector.translateToLocal;
-
-import java.math.BigInteger;
-
-import net.minecraft.util.EnumChatFormatting;
 
 import com.cleanroommc.modularui.api.IPanelHandler;
 import com.cleanroommc.modularui.api.drawable.IKey;
 import com.cleanroommc.modularui.api.widget.IWidget;
 import com.cleanroommc.modularui.screen.ModularPanel;
 import com.cleanroommc.modularui.utils.Alignment;
-import com.cleanroommc.modularui.value.sync.BigIntSyncValue;
 import com.cleanroommc.modularui.value.sync.IntSyncValue;
 import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import com.cleanroommc.modularui.widgets.ButtonWidget;
-import com.cleanroommc.modularui.widgets.ListWidget;
-import com.cleanroommc.modularui.widgets.layout.Column;
 import com.cleanroommc.modularui.widgets.layout.Flow;
 import com.cleanroommc.modularui.widgets.textfield.TextFieldWidget;
 
@@ -27,15 +19,6 @@ import gregtech.common.tileentities.machines.multi.MTEAdvCircuitAssemblyLine;
 
 public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEAdvCircuitAssemblyLine> {
 
-    private final IntSyncValue parallelSyncer = new IntSyncValue(
-        multiblock::geteParallel,
-        multiblock::seteParallel);
-    private final IntSyncValue durationSyncer = new IntSyncValue(
-        multiblock::geteDuration,
-        multiblock::seteDuration);
-    private final BigIntSyncValue finalConsumptionSync = new BigIntSyncValue(multiblock::getFinalConsumption, null);
-    private final IntSyncValue mMaxProgresstimeSync = new IntSyncValue(multiblock::getMaxProgresstime);
-
     public MTEAdvancedCircuitAssemblyLineGui(MTEAdvCircuitAssemblyLine multiblock) {
         super(multiblock);
     }
@@ -43,8 +26,8 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
     @Override
     protected void registerSyncValues(PanelSyncManager syncManager) {
         super.registerSyncValues(syncManager);
-        syncManager.syncValue("mMaxProgresstime", mMaxProgresstimeSync);
-        syncManager.syncValue("finalConsumption", finalConsumptionSync);
+        IntSyncValue parallelSyncer = new IntSyncValue(multiblock::getSetParallel, multiblock::setSetParallel);
+        IntSyncValue durationSyncer = new IntSyncValue(multiblock::getSetDuration, multiblock::setSetDuration);
         syncManager.syncValue("maximumParallels", parallelSyncer);
         syncManager.syncValue("maximumDuration", durationSyncer);
     }
@@ -75,10 +58,10 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
     private static final int HEIGHT = 100;
     private static final int PADDING_SIDES = 4;
 
-    private Flow buildSelect(String fieldName, IntSyncValue syncer, int defaultValue) {
+    private Flow buildSelect(String fieldName, IntSyncValue syncer, int paddingTop) {
         Flow holdingColumn = Flow.column()
             .size(WIDTH, HEIGHT / 2)
-            .paddingTop(6);
+            .paddingTop(paddingTop);
         holdingColumn.child(
             IKey.lang(fieldName)
                 .asWidget()
@@ -87,7 +70,7 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
             new TextFieldWidget().setFormatAsInteger(true)
                 .setNumbers(1, Integer.MAX_VALUE)
                 .setTextAlignment(Alignment.CENTER)
-                .setDefaultNumber(defaultValue)
+                .setDefaultNumber(50)
                 .value(syncer)
                 .size(WIDTH - PADDING_SIDES * 2, 18)
                 .align(Alignment.Center));
@@ -96,40 +79,19 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
     }
 
     private ModularPanel openAcalConfigPanel(PanelSyncManager syncManager, ModularPanel parent) {
-        ModularPanel panel = new ModularPanel("AcalConfigSelectPanel").size(WIDTH, HEIGHT)
+        ModularPanel returnPanel = new ModularPanel("AcalConfigSelectPanel").size(WIDTH, HEIGHT)
             .relative(parent)
             .leftRel(1)
             .topRel(0.8f);
 
-        Flow column = new Column().sizeRel(1);
-
         IntSyncValue parallelSyncer = syncManager.findSyncHandler("maximumParallels", IntSyncValue.class);
-        Flow parallelSelect = buildSelect("GTPP.CC.parallel", parallelSyncer, 64);
-        column.child(parallelSelect);
+        Flow parallelSelect = buildSelect("GTPP.CC.parallel", parallelSyncer, 6);
+        returnPanel.child(parallelSelect);
 
         IntSyncValue durationSyncer = syncManager.findSyncHandler("maximumDuration", IntSyncValue.class);
-        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer,70);
-        column.child(durationSelect);
+        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer, 62);
+        returnPanel.child(durationSelect);
 
-        panel.child(column);
-        return panel;
-    }
-
-    @Override
-    protected ListWidget<IWidget, ?> createTerminalTextWidget(PanelSyncManager syncManager, ModularPanel parent) {
-        return super.createTerminalTextWidget(syncManager, parent).child(
-            IKey.dynamic(
-                () -> EnumChatFormatting.WHITE + "Energy used: "
-                    + (mMaxProgresstimeSync.getValue() > 0 ? toStandardForm(
-                        finalConsumptionSync.getValue()
-                            .divide(BigInteger.valueOf(-mMaxProgresstimeSync.getValue())))
-                        : "0")
-                    + "EU"
-            // enabled if active
-            )
-                .asWidget()
-                .setEnabledIf(
-                    (w) -> multiblock.getBaseMetaTileEntity()
-                        .isActive()));
+        return returnPanel;
     }
 }
