@@ -388,7 +388,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.metastableOganesson.getMolten(2 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
             .itemOutputs(ItemList.Circuit_ExoticProcessor.get(1L))
-            .duration(150 * SECONDS)
+            .duration(300 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -407,7 +407,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.metastableOganesson.getMolten(4 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
             .itemOutputs(ItemList.Circuit_ExoticAssembly.get(1L))
-            .duration(200 * SECONDS)
+            .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .addTo(advCircuitAssemblylineRecipes);
 
@@ -427,7 +427,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 GGMaterial.shirabon.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_ExoticComputer.get(1L))
-            .duration(300 * SECONDS)
+            .duration(600 * SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
@@ -446,7 +446,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.SixPhasedCopper.getMolten(8 * INGOTS),
                 Materials.QuarkGluonPlasma.getFluid(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_ExoticMainframe.get(1L))
-            .duration(400 * SECONDS)
+            .duration(1000 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .metadata(MODULE_TIER, 2)
             .addTo(advCircuitAssemblylineRecipes);
