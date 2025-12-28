@@ -64,3 +64,14 @@ I have drastically reduced the amount of DimensionallyShiftedSuperfluid for circ
 at some point (close to QuarkGluonPlasma) the amount became too crazy. possible but a not needed bottleneck
 taking over (insanely clogging) 6 compact mk5 for MSO.
 MSO amount has also been reduced for Exotic circuits.
+
+## 2025 December 28:
+
+I disable cosmic circuit recipe, im waiting for another french dev to implement something
+i think useful rp speaking.
+For exotics and Any circuit, recipe nerf, base recipe time is longer, that require
+more eu to make circuits and its totally fair.
+We confirmed the migration to mui2
+we fix the gui issue for the side panel.
+now the controller terminal write the used eu for the current recipe.
+
