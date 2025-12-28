@@ -36,9 +36,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
-import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.gtnewhorizons.modularui.common.widget.TextWidget;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.ITexture;
@@ -64,7 +61,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     private UUID ownerUUID;
     private int setParallel = 1;
-    private int setDuration = 50;
+    private int setDuration = 10000;
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
@@ -171,6 +168,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
             .addInfo("Do you remember that bottleneck?")
             .addInfo("Set the parallel and the expected craft duration")
             .addInfo("You should be careful to override default settings on the gui panel.")
+            .addInfo("All EU is deducted from wireless EU networks only and per tick.")
             .addInfo("This machine will consume your wireless energy network as easily as you eat a donut.")
             .addStructureInfo("Require no energy hatch and no maintenance hatch")
             .addSubChannelUsage(GTStructureChannels.BOROGLASS)
@@ -229,7 +227,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         // The voltage is only used for recipe finding
         logic.setAvailableVoltage(Long.MAX_VALUE);
         logic.setAvailableAmperage(1);
-        logic.setAmperageOC(true);
+        logic.setAmperageOC(false);
         logic.setUnlimitedTierSkips();
     }
 
@@ -336,6 +334,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         super.loadNBTData(aNBT);
     }
 
+    public BigInteger getFinalConsumption() {
+        return finalConsumption;
+    }
+
     @Override
     public String[] getInfoData() {
         return new String[] {
@@ -353,22 +355,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                 + (mMaxProgresstime == 0 ? "0"
                     : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))))
                 + EnumChatFormatting.RESET
-                + " EU/t" };
-    }
-
-    @Override
-    protected void drawTexts(DynamicPositionedColumn screenElements, SlotWidget inventorySlot) {
-        super.drawTexts(screenElements, inventorySlot);
-
-        screenElements.widget(
-            TextWidget
-                .dynamicString(
-                    () -> StatCollector.translateToLocalFormatted(
-                        "gt.tileentity.eup_in",
-                        mMaxProgresstime == 0 ? "0"
-                            : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))),
-                        COLOR_TEXT_WHITE.get()))
-                .setEnabled(widget -> getErrorDisplayID() == 0));
+                + " EU" };
     }
 
     @Override
@@ -378,17 +365,17 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public boolean supportsBatchMode() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean supportsInputSeparation() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean supportsSingleRecipeLocking() {
-        return true;
+        return false;
     }
 
     @Override
@@ -397,6 +384,13 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     }
 
     @Override
-    protected boolean useMui2() {return true;}
+    protected boolean useMui2() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsPowerPanel() {
+        return false;
+    }
 
 }
