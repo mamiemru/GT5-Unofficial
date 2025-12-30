@@ -335,6 +335,8 @@ public class MTEAlgaePondBase extends GTPPMultiBlockBase<MTEAlgaePondBase> imple
             }
             return 0;
         } catch (Exception t) {
+            return -1;
+        } catch (Throwable t) {
             t.printStackTrace();
             return -1;
         }
