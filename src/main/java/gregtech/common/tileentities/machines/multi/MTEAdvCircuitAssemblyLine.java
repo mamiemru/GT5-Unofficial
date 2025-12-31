@@ -60,8 +60,8 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     implements ISurvivalConstructable {
 
     private UUID ownerUUID;
-    private int setParallel = 1;
-    private int setDuration = 10000;
+    private int eParallel = 64;
+    private int eDuration = 70;
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
@@ -133,11 +133,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement('H', ofBlock(GregTechAPI.sBlockGem2, 11))
         .addElement(
             'I',
-            ofChain(
                 buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
                     .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
                     .hint(2)
-                    .build()))
+                    .build())
         .addElement(
             'J',
             ofChain(
@@ -163,12 +162,12 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, AdvCAL")
+        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, ACAL")
             .beginStructureBlock(7, 7, 13, false)
             .addInfo("Do you remember that bottleneck?")
             .addInfo("Set the parallel and the expected craft duration")
+            .addInfo("All EU is deducted from wireless EU networks when the recipe start.")
             .addInfo("You should be careful to override default settings on the gui panel.")
-            .addInfo("All EU is deducted from wireless EU networks only and per tick.")
             .addInfo("This machine will consume your wireless energy network as easily as you eat a donut.")
             .addStructureInfo("Require no energy hatch and no maintenance hatch")
             .addSubChannelUsage(GTStructureChannels.BOROGLASS)
@@ -201,25 +200,25 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         return new ITexture[] { casingTexturePages[0][16] };
     }
 
-    public int getSetParallel() {
-        return setParallel;
+    public int geteParallel() {
+        return eParallel;
     }
 
-    public void setSetParallel(int setParallel) {
-        this.setParallel = setParallel;
+    public void seteParallel(int eParallel) {
+        this.eParallel = eParallel;
     }
 
-    public int getSetDuration() {
-        return setDuration;
+    public int geteDuration() {
+        return eDuration;
     }
 
-    public void setSetDuration(int setDuration) {
-        this.setDuration = setDuration;
+    public void seteDuration(int eDuration) {
+        this.eDuration = eDuration;
     }
 
     @Override
     public int getMaxParallelRecipes() {
-        return setParallel;
+        return eParallel;
     }
 
     @Override
@@ -285,7 +284,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return new OverclockCalculator().setDuration(getSetDuration());
+                // x2 to match the input value and computed value
+                // x10 to shift decimal point into seconds
+                // =x20, with theses 2 adjustment when you enter 378 it will run the recipe for 378 seconds
+                return new OverclockCalculator().setDuration(geteDuration() * 20);
             }
         }.setMaxParallelSupplier(this::getTrueParallel);
     }
@@ -322,15 +324,15 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
-        aNBT.setInteger("eSetParallel", setParallel);
-        aNBT.setInteger("eSetDuration", setDuration);
+        aNBT.setInteger("eParallel", eParallel);
+        aNBT.setInteger("eDuration", eDuration);
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
-        setParallel = aNBT.getInteger("eSetParallel");
-        setDuration = aNBT.getInteger("eSetDuration");
+        eParallel = aNBT.getInteger("eParallel");
+        eDuration = aNBT.getInteger("eDuration");
         super.loadNBTData(aNBT);
     }
 

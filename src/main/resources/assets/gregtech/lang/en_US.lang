@@ -868,7 +868,6 @@ GT5U.MBTT.PCB.Tooltip.4=Enables perfect overclocking by allowing nanites to work
 GT5U.MBTT.PCB.Tooltip.5=Set the trace size. Smaller traces allow material savings but take longer to fabricate. Larger traces waste material but are fast. 50-200 μm.
 GT5U.MBTT.PCB.Tooltip.6=Can't change configuration when running!
 GT5U.MBTT.PCB.UPGRADE.BIO.UpgradeRequired=Upgrade Required: Bio
-GT5U.MBTT.PCB.UPGRADE.TFS.UpgradeRequired=Upgrade Required: TFS
 
 GT5U.MBTT.AlchemyCasingAny=Alchemically Resistant/Inert/Immune Casing
 GT5U.MBTT.AlchemicalConstructAny=Alchemical Construct
@@ -1459,7 +1458,6 @@ GT5U.gui.text.data_stick.loaded=Loaded Config from Data Stick
 GT5U.gui.text.data_stick.invalid=Invalid Data Stick configuration
 GT5U.gui.text.no_data_sticks=§7No Data Sticks found
 GT5U.gui.text.bio_upgrade_missing=§7Recipe needs Bio Upgrade to start
-GT5U.gui.text.tfs_upgrade_missing=§7Recipe needs TFS Upgrade to start
 GT5U.gui.text.nanites_missing=§7Missing nanites
 GT5U.gui.text.electromagnet_missing=§7Needs an Electromagnet to run
 GT5U.gui.text.electromagnet_insufficient=§7Electromagnet too weak to handle multi-amp energy hatches

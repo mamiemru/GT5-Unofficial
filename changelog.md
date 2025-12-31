@@ -75,3 +75,12 @@ We confirmed the migration to mui2
 we fix the gui issue for the side panel.
 now the controller terminal write the used eu for the current recipe.
 
+## 2025 December 31:
+
+Any cosmic circuit and components has been deleted, the TFS also been deleted,
+meaning any uv uhv and uev circuit has also been deleted.
+We are at the end of the implementation and balance of the Exotic line and Any circuit from ULV to ZPM.
+I changed some text and set default values that was most accurate to early UIV.
+The inputted crafting duration now match with the recipe time.
+Translation has been done.
+Unused textures has been deleted.
