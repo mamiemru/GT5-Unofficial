@@ -866,7 +866,6 @@ GT5U.MBTT.PCB.Tooltip.3=Allows for overclocking. Requires 10 L/s of distilled wa
 GT5U.MBTT.PCB.Tooltip.4=Enables perfect overclocking by allowing nanites to work with extreme speed and efficiency. Uses 10 L/s of Super Coolant.
 GT5U.MBTT.PCB.Tooltip.5=Set the trace size. Smaller traces allow material savings but take longer to fabricate. Larger traces waste material but are fast. 50-200 μm.
 GT5U.MBTT.PCB.Tooltip.6=Can't change configuration when running!
-GT5U.MBTT.PCB.UPGRADE.BIO.UpgradeRequired=Upgrade Required: Bio
 
 GT5U.MBTT.AlchemyCasingAny=Alchemically Resistant/Inert/Immune Casing
 GT5U.MBTT.AlchemicalConstructAny=Alchemical Construct
@@ -1046,8 +1045,6 @@ gt.recipe.unpackager=Unpackager
 gt.recipe.unpackager.description=Grabs things out of Boxes
 gt.recipe.wiremill=Wiremill
 gt.recipe.wiremill.description=Produces Wires more efficiently
-gt.recipe.advcircuitassemblyline=Advanced Circuit Assembly Line
-gt.recipe.advcircuitassemblyline.description=Faster circuit assembler
 
 # RecipeMaps that are not listed on MachineType enum
 gt.recipe.fakeAssemblylineProcess=Assemblyline Process
