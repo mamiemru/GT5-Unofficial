@@ -208,10 +208,7 @@ public enum IDMetaItem03 {
     Beryllium_Shielding_Plate(255),
 
     Circuit_Board_Exotic(256),
-    Circuit_Board_Cosmic(257),
-    Circuit_Board_Transcendent(258),
     Exotic_Super_CPU(259),
-    Cosmic_Super_RAM(260),
     Circuit_Parts_ResistorISMD(261),
     Circuit_Parts_DiodeISMD(262),
     Circuit_Parts_TransistorISMD(263),
