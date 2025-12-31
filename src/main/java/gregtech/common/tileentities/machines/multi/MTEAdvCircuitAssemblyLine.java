@@ -36,9 +36,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
-import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.gtnewhorizons.modularui.common.widget.TextWidget;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.ITexture;
@@ -63,8 +60,8 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     implements ISurvivalConstructable {
 
     private UUID ownerUUID;
-    private int setParallel = 1;
-    private int setDuration = 50;
+    private int eParallel = 64;
+    private int eDuration = 70;
     BigInteger finalConsumption = BigInteger.ZERO;
     private static final String STRUCTURE_PIECE_MAIN = "main";
 
@@ -136,11 +133,11 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement('H', ofBlock(GregTechAPI.sBlockGem2, 11))
         .addElement(
             'I',
-            ofChain(
-                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
-                    .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .hint(2)
-                    .build()))
+
+            buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
+                .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
+                .hint(2)
+                .build())
         .addElement(
             'J',
             ofChain(
@@ -166,10 +163,11 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, AdvCAL")
+        tt.addMachineType("Advanced Circuit Assembly Line, Never Actually Coming, ACAL")
             .beginStructureBlock(7, 7, 13, false)
             .addInfo("Do you remember that bottleneck?")
             .addInfo("Set the parallel and the expected craft duration")
+            .addInfo("All EU is deducted from wireless EU networks when the recipe start.")
             .addInfo("You should be careful to override default settings on the gui panel.")
             .addInfo("This machine will consume your wireless energy network as easily as you eat a donut.")
             .addStructureInfo("Require no energy hatch and no maintenance hatch")
@@ -203,25 +201,25 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         return new ITexture[] { casingTexturePages[0][16] };
     }
 
-    public int getSetParallel() {
-        return setParallel;
+    public int geteParallel() {
+        return eParallel;
     }
 
-    public void setSetParallel(int setParallel) {
-        this.setParallel = setParallel;
+    public void seteParallel(int eParallel) {
+        this.eParallel = eParallel;
     }
 
-    public int getSetDuration() {
-        return setDuration;
+    public int geteDuration() {
+        return eDuration;
     }
 
-    public void setSetDuration(int setDuration) {
-        this.setDuration = setDuration;
+    public void seteDuration(int eDuration) {
+        this.eDuration = eDuration;
     }
 
     @Override
     public int getMaxParallelRecipes() {
-        return setParallel;
+        return eParallel;
     }
 
     @Override
@@ -229,7 +227,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         // The voltage is only used for recipe finding
         logic.setAvailableVoltage(Long.MAX_VALUE);
         logic.setAvailableAmperage(1);
-        logic.setAmperageOC(true);
+        logic.setAmperageOC(false);
         logic.setUnlimitedTierSkips();
     }
 
@@ -287,7 +285,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return new OverclockCalculator().setDuration(getSetDuration());
+                // x2 to match the input value and computed value
+                // x10 to shift decimal point into seconds
+                // =x20, with theses 2 adjustment when you enter 378 it will run the recipe for 378 seconds
+                return new OverclockCalculator().setDuration(geteDuration() * 20);
             }
         }.setMaxParallelSupplier(this::getTrueParallel);
     }
@@ -324,16 +325,20 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
-        aNBT.setInteger("eSetParallel", setParallel);
-        aNBT.setInteger("eSetDuration", setDuration);
+        aNBT.setInteger("eParallel", eParallel);
+        aNBT.setInteger("eDuration", eDuration);
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
-        setParallel = aNBT.getInteger("eSetParallel");
-        setDuration = aNBT.getInteger("eSetDuration");
+        eParallel = aNBT.getInteger("eParallel");
+        eDuration = aNBT.getInteger("eDuration");
         super.loadNBTData(aNBT);
+    }
+
+    public BigInteger getFinalConsumption() {
+        return finalConsumption;
     }
 
     @Override
@@ -353,22 +358,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                 + (mMaxProgresstime == 0 ? "0"
                     : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))))
                 + EnumChatFormatting.RESET
-                + " EU/t" };
-    }
-
-    @Override
-    protected void drawTexts(DynamicPositionedColumn screenElements, SlotWidget inventorySlot) {
-        super.drawTexts(screenElements, inventorySlot);
-
-        screenElements.widget(
-            TextWidget
-                .dynamicString(
-                    () -> StatCollector.translateToLocalFormatted(
-                        "gt.tileentity.eup_in",
-                        mMaxProgresstime == 0 ? "0"
-                            : toStandardForm(finalConsumption.divide(BigInteger.valueOf(-mMaxProgresstime))),
-                        COLOR_TEXT_WHITE.get()))
-                .setEnabled(widget -> getErrorDisplayID() == 0));
+                + " EU" };
     }
 
     @Override
@@ -378,17 +368,17 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
 
     @Override
     public boolean supportsBatchMode() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean supportsInputSeparation() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean supportsSingleRecipeLocking() {
-        return true;
+        return false;
     }
 
     @Override
@@ -397,6 +387,13 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
     }
 
     @Override
-    protected boolean useMui2() {return true;}
+    protected boolean useMui2() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsPowerPanel() {
+        return false;
+    }
 
 }
