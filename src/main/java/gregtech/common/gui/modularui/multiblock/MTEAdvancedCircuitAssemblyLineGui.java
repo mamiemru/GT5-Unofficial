@@ -27,12 +27,8 @@ import gregtech.common.tileentities.machines.multi.MTEAdvCircuitAssemblyLine;
 
 public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEAdvCircuitAssemblyLine> {
 
-    private final IntSyncValue parallelSyncer = new IntSyncValue(
-        multiblock::geteParallel,
-        multiblock::seteParallel);
-    private final IntSyncValue durationSyncer = new IntSyncValue(
-        multiblock::geteDuration,
-        multiblock::seteDuration);
+    private final IntSyncValue parallelSyncer = new IntSyncValue(multiblock::geteParallel, multiblock::seteParallel);
+    private final IntSyncValue durationSyncer = new IntSyncValue(multiblock::geteDuration, multiblock::seteDuration);
     private final BigIntSyncValue finalConsumptionSync = new BigIntSyncValue(multiblock::getFinalConsumption, null);
     private final IntSyncValue mMaxProgresstimeSync = new IntSyncValue(multiblock::getMaxProgresstime);
 
@@ -108,7 +104,7 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
         column.child(parallelSelect);
 
         IntSyncValue durationSyncer = syncManager.findSyncHandler("maximumDuration", IntSyncValue.class);
-        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer,70);
+        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer, 70);
         column.child(durationSelect);
 
         panel.child(column);
