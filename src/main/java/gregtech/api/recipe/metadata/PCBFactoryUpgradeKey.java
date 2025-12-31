@@ -27,8 +27,6 @@ public class PCBFactoryUpgradeKey extends RecipeMetadataKey<PCBFactoryUpgrade> {
         PCBFactoryUpgrade upgrade = cast(value);
         if (upgrade == PCBFactoryUpgrade.BIO) {
             recipeInfo.drawText(translateToLocal("GT5U.MBTT.PCB.UPGRADE.BIO.UpgradeRequired"));
-        } else if (upgrade == PCBFactoryUpgrade.TFS) {
-            recipeInfo.drawText(translateToLocal("GT5U.MBTT.PCB.UPGRADE.TFS.UpgradeRequired"));
         }
     }
 }

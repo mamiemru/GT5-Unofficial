@@ -1,16 +1,12 @@
 package gregtech.loaders.postload.recipes;
 
 import static gregtech.api.enums.Mods.ModIDs.NEW_HORIZONS_CORE_MOD;
-import static gregtech.api.enums.Mods.SuperSolarPanels;
-import static gregtech.api.enums.Mods.UniversalSingularities;
 import static gregtech.api.recipe.RecipeMaps.advCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
-import static gregtech.api.recipe.RecipeMaps.nanoForgeRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeConstants.NANO_FORGE_TIER;
 import static gtnhintergalactic.recipe.IGRecipeMaps.MODULE_TIER;
 import static gtnhintergalactic.recipe.IGRecipeMaps.spaceAssemblerRecipes;
 
@@ -33,12 +29,10 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
     @Override
     public void run() {
         registerAcal();
-        registerPCBTranscendentFrontierSystem();
         registerDiscountComponent();
         registerEndgameCircuitParts();
         registerAnyCircuitRecipes();
         registerExoticLineRecipe();
-        // registerCosmicLineRecipe();
     }
 
     private void registerAcal() {
@@ -57,23 +51,6 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .itemOutputs(ItemList.AdvCircuitAssemblyLine.get(1L))
             .duration(150 * SECONDS)
             .eut(TierEU.UEV)
-            .addTo(spaceAssemblerRecipes);
-    }
-
-    private void registerPCBTranscendentFrontierSystem() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.CircuitAssemblerUMV.get(8L),
-                ItemList.Circuit_ExoticMainframe.get(16L),
-                ItemList.Robot_Arm_UMV.get(8L),
-                ItemList.Field_Generator_UMV.get(64L))
-            .fluidInputs(
-                Materials.Copper.getPlasma(64 * INGOTS),
-                Materials.Space.getMolten(48 * INGOTS),
-                Materials.DimensionallyShiftedSuperfluid.getFluid(32 * INGOTS))
-            .itemOutputs(ItemList.PCBTFS.get(1L))
-            .duration(300 * SECONDS)
-            .eut(TierEU.UMV)
             .addTo(spaceAssemblerRecipes);
     }
 
@@ -169,18 +146,6 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.UIV)
             .addTo(formingPressRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(UniversalSingularities.ID, "universal.general.singularity", 0, 14))
-            .itemOutputs(getModItem(SuperSolarPanels.ID, "solarsplitter", 2048 / 32, 0))
-            .fluidInputs(
-                Materials.ReinforcedGlass.getMolten(18432 / 32 * INGOTS),
-                Materials.Sunnarium.getMolten(18432 / 32 * INGOTS),
-                Materials.Glowstone.getMolten(4608 / 32 * INGOTS))
-            .metadata(NANO_FORGE_TIER, 3)
-            .duration(100 * SECONDS)
-            .eut(2_000_000_000)
-            .addTo(nanoForgeRecipes);
-
     }
 
     private void registerEndgameCircuitParts() {
@@ -198,24 +163,6 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.RECIPE_UHV)
             .addTo(spaceAssemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Optically_Perfected_CPU.get(2L),
-                ItemList.Exotic_Super_CPU.get(1L),
-                ItemList.Optically_Compatible_Memory.get(8L),
-                ItemList.Circuit_Parts_CapacitorXSMD.get(64L),
-                ItemList.Circuit_Wafer_Bioware.get(16L),
-                CustomItemList.DATApipe.get(32L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt02, Materials.SpaceTime, 2L),
-                ItemList.StableAdhesive.get(48))
-            .fluidInputs(
-                Materials.DimensionallyShiftedSuperfluid.getFluid(250L),
-                Materials.Kevlar.getMolten(4 * INGOTS))
-            .itemOutputs(ItemList.Cosmic_Super_Ram.get(1L))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_UEV)
-            .metadata(MODULE_TIER, 2)
-            .addTo(spaceAssemblerRecipes);
     }
 
     private ItemStack[] computeOutputForAnyCircuits(String aItem, int amount) {
@@ -336,42 +283,6 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.RECIPE_ZPM)
             .addTo(advCircuitAssemblylineRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Optically_Perfected_CPU.get(1L),
-                ItemList.Optically_Compatible_Memory.get(2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.EnrichedHolmium, 2L))
-            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUV", 32, 0))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
-            .duration(700 * SECONDS)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(advCircuitAssemblylineRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Exotic_Super_CPU.get(1L),
-                ItemList.Cosmic_Super_Ram.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 2L))
-            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUHV", 28, 0))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
-            .duration(900 * SECONDS)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(advCircuitAssemblylineRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Exotic_Super_CPU.get(1L),
-                ItemList.Cosmic_Super_Ram.get(2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SuperconductorUMVBase, 2L))
-            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUEV", 20, 0))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(8 * INGOTS))
-            .duration(1200 * SECONDS)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(advCircuitAssemblylineRecipes);
-
     }
 
     private void registerExoticLineRecipe() {
@@ -453,79 +364,4 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
 
     }
 
-    private void registerCosmicLineRecipe() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Exotic_Super_CPU.get(1L),
-                ItemList.Cosmic_Super_Ram.get(2L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
-                ItemList.Circuit_Wafer_QPIC.get(16L),
-                CustomItemList.DATApipe.get(16L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 2L))
-            .fluidInputs(
-                Materials.Samarium.getPlasma(2 * INGOTS),
-                Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
-            .itemOutputs(ItemList.Circuit_CosmicProcessor.get(1L))
-            .duration(500 * SECONDS)
-            .eut(TierEU.RECIPE_UEV)
-            .addTo(advCircuitAssemblylineRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Circuit_CosmicProcessor.get(1L),
-                ItemList.Cosmic_Super_Ram.get(4L),
-                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
-                ItemList.Circuit_Parts_InductorISMD.get(12L),
-                ItemList.Circuit_Parts_ResistorISMD.get(12L),
-                ItemList.Circuit_Parts_TransistorISMD.get(12L),
-                ItemList.Circuit_Wafer_QPIC.get(32L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Ichorium, 16L))
-            .fluidInputs(
-                Materials.Samarium.getPlasma(4 * INGOTS),
-                Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
-            .itemOutputs(ItemList.Circuit_CosmicAssembly.get(1L))
-            .duration(7500 * SECONDS)
-            .eut(TierEU.RECIPE_UIV)
-            .addTo(advCircuitAssemblylineRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Cosmic.get(1L),
-                ItemList.Circuit_CosmicAssembly.get(2L),
-                ItemList.Cosmic_Super_Ram.get(8L),
-                ItemList.Circuit_Parts_UniversalISMD.get(32L),
-                ItemList.Circuit_Wafer_QPIC.get(48L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TengamPurified, 8L))
-            .fluidInputs(
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
-                Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
-                Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
-            .itemOutputs(ItemList.Circuit_CosmicComputer.get(1L))
-            .duration(1100 * SECONDS)
-            .eut(TierEU.RECIPE_UMV)
-            .metadata(MODULE_TIER, 2)
-            .addTo(advCircuitAssemblylineRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_CosmicComputer.get(2L),
-                ItemList.Exotic_Super_CPU.get(2L),
-                ItemList.Cosmic_Super_Ram.get(16L),
-                ItemList.Circuit_Parts_UniversalISMD.get(64L),
-                ItemList.Circuit_Wafer_QPIC.get(64L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Flerovium, 8L))
-            .fluidInputs(
-                Materials.Infinity.getPlasma(32 * INGOTS),
-                Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
-                Materials.MagMatter.getMolten(4 * INGOTS))
-            .itemOutputs(ItemList.Circuit_CosmicMainframe.get(1L))
-            .duration(1500 * SECONDS)
-            .eut(TierEU.RECIPE_UXV)
-            .metadata(MODULE_TIER, 2)
-            .addTo(advCircuitAssemblylineRecipes);
-
-    }
 }
