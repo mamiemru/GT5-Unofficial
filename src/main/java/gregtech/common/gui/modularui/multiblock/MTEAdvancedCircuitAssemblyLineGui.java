@@ -28,11 +28,11 @@ import gregtech.common.tileentities.machines.multi.MTEAdvCircuitAssemblyLine;
 public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEAdvCircuitAssemblyLine> {
 
     private final IntSyncValue parallelSyncer = new IntSyncValue(
-        multiblock::getSetParallel,
-        multiblock::setSetParallel);
+        multiblock::geteParallel,
+        multiblock::seteParallel);
     private final IntSyncValue durationSyncer = new IntSyncValue(
-        multiblock::getSetDuration,
-        multiblock::setSetDuration);
+        multiblock::geteDuration,
+        multiblock::seteDuration);
     private final BigIntSyncValue finalConsumptionSync = new BigIntSyncValue(multiblock::getFinalConsumption, null);
     private final IntSyncValue mMaxProgresstimeSync = new IntSyncValue(multiblock::getMaxProgresstime);
 
@@ -75,7 +75,7 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
     private static final int HEIGHT = 100;
     private static final int PADDING_SIDES = 4;
 
-    private Flow buildSelect(String fieldName, IntSyncValue syncer) {
+    private Flow buildSelect(String fieldName, IntSyncValue syncer, int defaultValue) {
         Flow holdingColumn = Flow.column()
             .size(WIDTH, HEIGHT / 2)
             .paddingTop(6);
@@ -87,7 +87,7 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
             new TextFieldWidget().setFormatAsInteger(true)
                 .setNumbers(1, Integer.MAX_VALUE)
                 .setTextAlignment(Alignment.CENTER)
-                .setDefaultNumber(1000)
+                .setDefaultNumber(defaultValue)
                 .value(syncer)
                 .size(WIDTH - PADDING_SIDES * 2, 18)
                 .align(Alignment.Center));
@@ -104,11 +104,11 @@ public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEA
         Flow column = new Column().sizeRel(1);
 
         IntSyncValue parallelSyncer = syncManager.findSyncHandler("maximumParallels", IntSyncValue.class);
-        Flow parallelSelect = buildSelect("GTPP.CC.parallel", parallelSyncer);
+        Flow parallelSelect = buildSelect("GTPP.CC.parallel", parallelSyncer, 64);
         column.child(parallelSelect);
 
         IntSyncValue durationSyncer = syncManager.findSyncHandler("maximumDuration", IntSyncValue.class);
-        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer);
+        Flow durationSelect = buildSelect("GTPP.CC.duration", durationSyncer,70);
         column.child(durationSelect);
 
         panel.child(column);

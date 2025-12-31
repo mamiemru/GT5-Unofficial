@@ -1954,10 +1954,7 @@ public enum ItemList implements IItemContainer {
     Circuit_Board_Optical,
 
     Circuit_Board_Exotic,
-    Circuit_Board_Cosmic,
-    Circuit_Board_Transcendent,
     Exotic_Super_CPU,
-    Cosmic_Super_Ram,
 
     Circuit_Parts_ResistorISMD,
     Circuit_Parts_DiodeISMD,
@@ -2173,7 +2170,6 @@ public enum ItemList implements IItemContainer {
     PCBFactory,
     PCBBioChamber,
     PCBCoolingTower,
-    PCBTFS,
     BasicPhotolithographicFrameworkCasing,
     ReinforcedPhotolithographicFrameworkCasing,
     RadiationProofPhotolithographicFrameworkCasing,

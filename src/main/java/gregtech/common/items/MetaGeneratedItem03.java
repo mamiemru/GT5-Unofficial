@@ -34,7 +34,6 @@ import static gregtech.common.items.IDMetaItem03.Circuit_Biowaresupercomputer;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Bio;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Bio_Ultra;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Coated_Basic;
-import static gregtech.common.items.IDMetaItem03.Circuit_Board_Cosmic;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Epoxy_Advanced;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Exotic;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Fiberglass_Advanced;
@@ -43,7 +42,6 @@ import static gregtech.common.items.IDMetaItem03.Circuit_Board_Optical;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Phenolic_Good;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Plastic;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Plastic_Advanced;
-import static gregtech.common.items.IDMetaItem03.Circuit_Board_Transcendent;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Wetware;
 import static gregtech.common.items.IDMetaItem03.Circuit_Board_Wetware_Extreme;
 import static gregtech.common.items.IDMetaItem03.Circuit_Chip_BioCPU;
@@ -167,7 +165,6 @@ import static gregtech.common.items.IDMetaItem03.Circuit_Wafer_ULPIC;
 import static gregtech.common.items.IDMetaItem03.Circuit_Wetwarecomputer;
 import static gregtech.common.items.IDMetaItem03.Circuit_Wetwaremainframe;
 import static gregtech.common.items.IDMetaItem03.Circuit_Wetwaresupercomputer;
-import static gregtech.common.items.IDMetaItem03.Cosmic_Super_RAM;
 import static gregtech.common.items.IDMetaItem03.Cover_Metrics_Transmitter;
 import static gregtech.common.items.IDMetaItem03.Cover_SolarPanel_UEV;
 import static gregtech.common.items.IDMetaItem03.Cover_SolarPanel_UHV;
@@ -816,12 +813,7 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
 
         ItemList.Circuit_Board_Exotic
             .set(addItem(Circuit_Board_Exotic.ID, "Innovative Circuit Board", "Innovative Purple Board", o));
-        ItemList.Circuit_Board_Cosmic
-            .set(addItem(Circuit_Board_Cosmic.ID, "Futuristic Circuit Board", "Galaxy Inside Board", o));
-        ItemList.Circuit_Board_Transcendent
-            .set(addItem(Circuit_Board_Transcendent.ID, "Cutting-edge Circuit Board", "Timeless Board", o));
         ItemList.Exotic_Super_CPU.set(addItem(Exotic_Super_CPU.ID, "Exotic Super CPU", "Exotic Super CPU", o));
-        ItemList.Cosmic_Super_Ram.set(addItem(Cosmic_Super_RAM.ID, "Cosmic Super RAM", "Cosmic Super RAM", o));
 
         // Optical circuits
         ItemList.Circuit_OpticalProcessor.set(

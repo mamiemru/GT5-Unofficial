@@ -209,7 +209,6 @@ import gregtech.common.tileentities.machines.multi.drone.MTEHatchDroneDownLink;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBBioChamber;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBCoolingTower;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBFactory;
-import gregtech.common.tileentities.machines.multi.pcb.MTEPCBTranscendentFrontierSystem;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchDegasifierControl;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchLensHousing;
 import gregtech.common.tileentities.machines.multi.purification.MTEHatchLensIndicator;
@@ -606,12 +605,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
 
         ItemList.LATEX.set(new MTELatex(LATEX.ID, "multimachine.latex", "L.A.T.E.X.").getStackForm(1));
         addItemTooltip(ItemList.LATEX.get(1), chain(() -> "Author: ", GTValues.AuthorThree));
-
-        ItemList.PCBTFS.set(
-            new MTEPCBTranscendentFrontierSystem(
-                PCB_TFS_CONTROLLER.ID,
-                "multimachine.pcbtfs",
-                "Transcendent Frontier System").getStackForm(1));
 
         ItemList.AdvCircuitAssemblyLine.set(
             new MTEAdvCircuitAssemblyLine(
