@@ -36,9 +36,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
-import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.gtnewhorizons.modularui.common.widget.TextWidget;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.ITexture;
@@ -137,10 +134,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement(
             'I',
 
-                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
-                    .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .hint(2)
-                    .build())
+            buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
+                .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
+                .hint(2)
+                .build())
         .addElement(
             'J',
             ofChain(
