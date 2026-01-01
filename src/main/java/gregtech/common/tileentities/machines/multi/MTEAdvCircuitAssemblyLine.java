@@ -133,10 +133,10 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
         .addElement('H', ofBlock(GregTechAPI.sBlockGem2, 11))
         .addElement(
             'I',
-                buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
-                    .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
-                    .hint(2)
-                    .build())
+            buildHatchAdder(MTEAdvCircuitAssemblyLine.class).atLeast(OutputBus)
+                .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings8, 12))
+                .hint(2)
+                .build())
         .addElement(
             'J',
             ofChain(
@@ -191,7 +191,7 @@ public class MTEAdvCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvC
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()git
+            return new ITexture[] { casingTexturePages[0][16], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_ADV_CIRCUIT_ASSEMBLY_LINE)
                 .extFacing()
                 .build() };
