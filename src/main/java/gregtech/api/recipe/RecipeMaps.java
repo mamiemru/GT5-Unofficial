@@ -1319,6 +1319,7 @@ public final class RecipeMaps {
         .minInputs(1, 1)
         .progressBar(GTUITextures.PROGRESSBAR_ARROW)
         .build();
+
     public static final RecipeMap<RecipeMapBackend> cauldronRecipe = RecipeMapBuilder
         .of("gt.recipe.cauldron", RecipeMapBackend::new)
         .maxIO(1, 1, 1, 0)

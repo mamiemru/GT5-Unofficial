@@ -1024,7 +1024,9 @@ public class MTEPCBFactory extends MTEExtendedPowerMultiBlockBase<MTEPCBFactory>
     public void unregisterLinkedUnit(MTEPCBUpgradeBase<?> unit) {
         if (unit instanceof MTEPCBBioChamber) {
             mBioChamber = null;
-        } else if (unit instanceof MTEPCBCoolingTower) mCoolingTower = null;
+        } else if (unit instanceof MTEPCBCoolingTower) {
+            mCoolingTower = null;
+        }
     }
 
     @Override
