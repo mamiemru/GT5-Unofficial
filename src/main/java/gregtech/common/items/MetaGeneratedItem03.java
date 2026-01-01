@@ -815,7 +815,6 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
         ItemList.Circuit_Board_Exotic
             .set(addItem(Circuit_Board_Exotic.ID, "Innovative Circuit Board", "Innovative Purple Board", o));
         ItemList.Exotic_Super_CPU.set(addItem(Exotic_Super_CPU.ID, "Exotic Super CPU", "Exotic Super CPU", o));
-        ItemList.Cosmic_Super_Ram.set(addItem(Cosmic_Super_RAM.ID, "Cosmic Super RAM", "Cosmic Super RAM", o));
 
         // Optical circuits
         ItemList.Circuit_OpticalProcessor.set(
