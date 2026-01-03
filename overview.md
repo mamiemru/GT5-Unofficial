@@ -20,9 +20,8 @@ The ACAL is a giant CAL, 15 blocks width x 15 blocks height x 47 blocks deep. St
 
 This machine comes with two settings:
 
-MaxParallel: Controls how much parallel processing is allowed (interacts with batch mode).
-
-Expected Duration: Sets the time required to craft a batch of circuits.
+- MaxParallel: Controls how much parallel processing is allowed (interacts with batch mode).
+- Expected Duration: Sets the time required to craft a batch of circuits.
 
 ![Acal inside 1](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/ACALinside1.png)
 
@@ -30,9 +29,8 @@ By default, MaxParallel (P) is set to 64 and Expected Duration (D) is set to 70 
 
 Behind the scenes, it uses the OverclockCalculator algorithm, with:
 
-The same settings as the TPM for parallel (DAH)
-
-A ×20 factor applied to the expected duration to match what is displayed in the ACAL terminal
+- The same settings as the TPM for parallel (DAH)
+- A ×20 factor applied to the expected duration to match what is displayed in the ACAL terminal
 
 These settings can be adjusted depending on how much energy you want to allocate.
 
@@ -57,15 +55,15 @@ The structure require 336 Eternal coils, 333 Infinit cooled casings, the rest is
 
 As you can see below, for now (2026-1-1), the only use of the ACAL is to craft:
 
-- Any circuits
+- Any circuits from ULV to ZPM
 - Exotic line circuits
 
-I'm working to add Cosmic line and Temporal line, but now for now.
-If you are interested about math comparisons, please see this:
+I'm working to add Cosmic line and Temporal line, but not for now.
 
+If you are interested about math comparisons, please see this:
 https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/maths.md
 
-Why did I choose these recipes?
+## Why did I choose these recipes?
 
 ![Any circuit recipe](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/ACALanycircuits.png)[]
 
