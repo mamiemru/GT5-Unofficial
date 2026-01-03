@@ -130,6 +130,10 @@ And last, but not least:
 
 - Tiers Annihilation Matrix: Uses Stargate items and allows treating high-tier recipes as low-tier recipes
 
+#### more Any ?
+
+Yes, with new machines, challenges, UV UHV UEV UIV Any circuit will be available.
+
 #### Cosmic circuit line and Temporal circuit line
 
 I have plans for these circuits, but before that, I want to explore new ideas on how to integrate them. There is a French developer named Yamikami_sama on Discord, and I’m very interested in his ideas for an out-of-bounds endgame multiblock. I would like to build on his work later. I don’t want to spoil anything — he’s the one leading that concept.
