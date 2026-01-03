@@ -89,9 +89,22 @@ The Exotic Mainframe (the PICO equivalent) requires Quark–Gluon Plasma, meanin
 
 You can also see new SMDs introduced here. There are five Innovative SMDs, all using late-game materials. In addition, the Innovative Universal SMD requires all Innovative SMDs along with Lossless Phonon Transfer Medium.
 
+For the new components, here is the recipe tree:
+
+![Compoennts](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/Components.png)
+
+All ISMD are assembler recipe gated to UIV energy.
+The last foil is Superconductor base UMV foil and the cable is UIV SU.
+The Universal ISMD (the first one) change color.
+
+The Exotic Super CPU is a space assembler recipe UHV.
+
+The 2 last recipe are PCB one.
+
 If you’re interested, here is the development history of the project:
 
 [link to changelog.md] **(Will come Soon)**
+
 
 ## My thoughts
 
