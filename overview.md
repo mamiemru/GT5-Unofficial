@@ -65,7 +65,7 @@ https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Ci
 
 ## Why did I choose these recipes?
 
-![Any circuit recipe](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/ACALanycircuits.png)[]
+![Any circuit recipe](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/ACALanycircuits.png)
 
 Above is the current mapping of Any Circuits. I chose to use Any Circuits to add a new layer to circuit crafting. At this stage of the game, all the circuits shown above should be easy to craft.
 
@@ -100,6 +100,11 @@ The Universal ISMD (the first one) change color.
 The Exotic Super CPU is a space assembler recipe UHV.
 
 The 2 last recipe are PCB one.
+
+A Better recipe for Optical CPU containment housing:
+
+![Compoennts](https://raw.githubusercontent.com/mamiemru/GT5-Unofficial/refs/heads/Advanced-Circuit-Assembly-Line/overview/occh.png)
+
 
 If you’re interested, here is the development history of the project:
 
