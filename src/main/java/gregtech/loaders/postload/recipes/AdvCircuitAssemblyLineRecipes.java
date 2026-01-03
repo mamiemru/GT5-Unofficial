@@ -395,7 +395,7 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_ExoticProcessor.get(1L),
+                ItemList.Circuit_ExoticProcessor.get(2L),
                 ItemList.Optically_Compatible_Memory.get(4L),
                 ItemList.Circuit_Parts_CapacitorISMD.get(12L),
                 ItemList.Circuit_Parts_InductorISMD.get(12L),
