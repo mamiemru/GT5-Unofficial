@@ -23,7 +23,7 @@ import com.cleanroommc.modularui.widgets.textfield.TextFieldWidget;
 
 import gregtech.api.modularui2.GTGuiTextures;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
-import gregtech.common.tileentities.machines.multi.MTEAdvCircuitAssemblyLine;
+import gregtech.common.tileentities.machines.multi.acal.MTEAdvCircuitAssemblyLine;
 
 public class MTEAdvancedCircuitAssemblyLineGui extends MTEMultiBlockBaseGui<MTEAdvCircuitAssemblyLine> {
 

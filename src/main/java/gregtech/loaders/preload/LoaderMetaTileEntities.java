@@ -131,7 +131,7 @@ import gregtech.common.tileentities.machines.basic.MTETurboCharger;
 import gregtech.common.tileentities.machines.basic.MTEWorldAccelerator;
 import gregtech.common.tileentities.machines.long_distance.MTELongDistancePipelineFluid;
 import gregtech.common.tileentities.machines.long_distance.MTELongDistancePipelineItem;
-import gregtech.common.tileentities.machines.multi.MTEAdvCircuitAssemblyLine;
+import gregtech.common.tileentities.machines.multi.acal.MTEAdvCircuitAssemblyLine;
 import gregtech.common.tileentities.machines.multi.MTEAirFilter1;
 import gregtech.common.tileentities.machines.multi.MTEAirFilter2;
 import gregtech.common.tileentities.machines.multi.MTEAirFilter3;

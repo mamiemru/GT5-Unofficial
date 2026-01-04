@@ -1,4 +1,4 @@
-package gregtech.common.tileentities.machines.multi;
+package gregtech.common.tileentities.machines.multi.acal;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
