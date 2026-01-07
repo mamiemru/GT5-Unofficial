@@ -2254,16 +2254,10 @@ public class BaseMetaTileEntity extends CommonBaseMetaTileEntity
             : super.getRenderBoundingBox();
     }
 
-    @Override
-    public double getMaxRenderDistanceSquared() {
-        return getMetaTileEntity() instanceof IMTERenderer mteRenderer ? mteRenderer.getMaxRenderDistanceSquared()
-            : super.getMaxRenderDistanceSquared();
-    }
 
     @Override
     public double getMaxRenderDistanceSquared() {
-        return getMetaTileEntity() instanceof IMTERenderer mteRenderer
-            ? mteRenderer.getMaxRenderDistanceSquared()
+        return getMetaTileEntity() instanceof IMTERenderer mteRenderer ? mteRenderer.getMaxRenderDistanceSquared()
             : super.getMaxRenderDistanceSquared();
     }
 }

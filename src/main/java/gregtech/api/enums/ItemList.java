@@ -2941,7 +2941,9 @@ public enum ItemList implements IItemContainer {
     CausalityAttractionEngine,
     RealityShifterCasing,
     RealityFabricSiphonController,
-    RealityPhaseTunerModule
+    RealityPhaseTunerModule,
+    CausalityAssemblingModule,
+    Hatch_RealityPhaseSensor
 
     // semicolon after the comment to reduce merge conflicts
     ;
