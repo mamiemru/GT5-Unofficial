@@ -16,8 +16,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.gtnewhorizon.gtnhlib.util.ItemRenderUtil;
 
-import com.gtnewhorizon.structurelib.alignment.IAlignment;
-import com.gtnewhorizon.structurelib.alignment.enumerable.Rotation;
 import gregtech.api.interfaces.IGT_ItemWithMaterialRenderer;
 
 public class GTRenderUtil {

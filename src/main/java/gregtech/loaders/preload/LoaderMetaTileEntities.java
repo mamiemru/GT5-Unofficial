@@ -110,6 +110,8 @@ import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchInputME;
 import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.MTEHatchOutputME;
+import gregtech.common.tileentities.machines.MTEHeatSensor;
+import gregtech.common.tileentities.machines.MTERealityPhaseSensor;
 import gregtech.common.tileentities.machines.basic.MTEAdvSeismicProspector;
 import gregtech.common.tileentities.machines.basic.MTEBetterJukebox;
 import gregtech.common.tileentities.machines.basic.MTEBoxinator;
@@ -198,7 +200,6 @@ import gregtech.common.tileentities.machines.multi.*;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleUtility;
 import gregtech.common.tileentities.machines.multi.compressor.MTEHIPCompressor;
-import gregtech.common.tileentities.machines.MTEHeatSensor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEIndustrialCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTENeutroniumCompressor;
 import gregtech.common.tileentities.machines.multi.drone.MTEDroneCentre;
@@ -220,6 +221,7 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPhAdjustment;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPlasmaHeater;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAssemblingModule;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -625,6 +627,11 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 REALITY_PHASE_TUNER_MODULE.ID,
                 "multimachine.reality_phase_tuner_module",
                 "Reality Phase Tuner").getStackForm(1));
+        ItemList.CausalityAssemblingModule.set(
+            new MTECausalityAssemblingModule(
+                CAUSALITY_ASSEMBLING_MODULE.ID,
+                "multimachine.causality_assembler_module",
+                "Causality Assembler").getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(
@@ -10819,6 +10826,12 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 "Bulk Catalyst Housing",
                 10,
                 Integer.MAX_VALUE).getStackForm(1));
+        ItemList.Hatch_RealityPhaseSensor.set(
+            new MTERealityPhaseSensor(
+                HATCH_REALITY_PHASE_SENSOR.ID,
+                "multimachine.reality_phase_sensor",
+                "Reality Phase Sensor",
+                12).getStackForm(1));
 
         ItemList.LargeMolecularAssembler.set(
             new MTELargeMolecularAssembler(
