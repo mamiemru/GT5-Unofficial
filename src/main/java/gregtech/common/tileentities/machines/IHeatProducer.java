@@ -1,7 +1,5 @@
 package gregtech.common.tileentities.machines;
 
-import java.util.ArrayList;
-
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 
 /*
@@ -9,18 +7,8 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
  */
 public interface IHeatProducer {
 
-    ArrayList<MTEHeatSensor> sensorHatches = new ArrayList<>();
+    int getHeatSensorHatchNum();
 
-    default int getHeatSensorHatchNum() {
-        return sensorHatches.size();
-    }
-
-    default boolean addHeatSensorHatchToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
-        if (aTileEntity != null && aTileEntity.getMetaTileEntity() instanceof MTEHeatSensor sensor) {
-            sensor.updateTexture(aBaseCasingIndex);
-            return sensorHatches.add(sensor);
-        }
-        return false;
-    }
+    boolean addHeatSensorHatchToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex);
 
 }
