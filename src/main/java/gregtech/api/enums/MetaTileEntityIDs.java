@@ -1687,6 +1687,8 @@ public enum MetaTileEntityIDs {
     LATEX(15752),
     REALITY_FABRIC_SIPHON_CONTROLLER(15753),
     REALITY_PHASE_TUNER_MODULE(15754),
+    CAUSALITY_ASSEMBLING_MODULE(15755),
+    HATCH_REALITY_PHASE_SENSOR(15756),
     BasicTeslaTransceiver1by1(16000),
     AdvancedTeslaTransceiver1by1(16001),
     EpycTeslaTransceiver1by1(16002),

@@ -20,6 +20,7 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.ofCoil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,11 +34,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
 
-import bartworks.util.MathUtils;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+
+import bartworks.util.MathUtils;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Textures;
@@ -55,7 +57,7 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.shutdown.SimpleShutDownReason;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings10;
 import gregtech.common.misc.GTStructureChannels;
 import gregtech.common.tileentities.machines.IHeatProducer;
@@ -88,7 +90,8 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
         .addElement('A', chainAllGlasses())
         .addElement(
             'B',
-            buildHatchAdder(MTEHIPCompressor.class).atLeast(Maintenance, Energy, MTEHeatSensor.HeatSensorHatchElement.HEAT_SENSOR)
+            buildHatchAdder(MTEHIPCompressor.class)
+                .atLeast(Maintenance, Energy, MTEHeatSensor.HeatSensorHatchElement.HeatSensor)
                 .casingIndex(((BlockCasings10) GregTechAPI.sBlockCasings10).getTextureIndex(4))
                 .hint(1)
                 .buildAndChain(onElementPass(MTEHIPCompressor::onCasingAdded, ofBlock(GregTechAPI.sBlockCasings10, 4))))
@@ -106,6 +109,8 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
                 .buildAndChain(onElementPass(MTEHIPCompressor::onCasingAdded, ofBlock(GregTechAPI.sBlockCasings10, 5))))
         .addElement('H', ofBlock(GregTechAPI.sBlockCasings10, 5))
         .build();
+
+    private final ArrayList<MTEHeatSensor> sensorHatches = new ArrayList<>();
 
     private HeatingCoilLevel heatLevel;
     private int coilTier = 0;
@@ -311,6 +316,7 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         setCoilLevel(HeatingCoilLevel.None);
         mCasingAmount = 0;
+        sensorHatches.clear();
         return checkPiece(STRUCTURE_PIECE_MAIN, 7, 9, 0) && mCasingAmount >= 95;
     }
 
@@ -388,7 +394,7 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
                 // If HIP required, check for overheat and potentially crash
                 if (recipe.getMetadataOrDefault(CompressionTierKey.INSTANCE, 0) == 1) {
                     if (overheated) {
-                        stopMachine(SimpleShutDownReason.ofCritical("overheated"));
+                        stopMachine(ShutDownReasonRegistry.OVERHEATED);
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
                 }
@@ -476,4 +482,17 @@ public class MTEHIPCompressor extends MTEExtendedPowerMultiBlockBase<MTEHIPCompr
         coilTier = aCoilLevel.getTier();
     }
 
+    @Override
+    public int getHeatSensorHatchNum() {
+        return sensorHatches.size();
+    }
+
+    @Override
+    public boolean addHeatSensorHatchToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity != null && aTileEntity.getMetaTileEntity() instanceof MTEHeatSensor sensor) {
+            sensor.updateTexture(aBaseCasingIndex);
+            return sensorHatches.add(sensor);
+        }
+        return false;
+    }
 }

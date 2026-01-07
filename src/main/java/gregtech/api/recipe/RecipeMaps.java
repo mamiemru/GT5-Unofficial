@@ -80,6 +80,7 @@ import gregtech.api.recipe.maps.ReplicatorBackend;
 import gregtech.api.recipe.maps.SpaceProjectFrontend;
 import gregtech.api.recipe.maps.TranscendentPlasmaMixerFrontend;
 import gregtech.api.recipe.maps.UnpackagerBackend;
+import gregtech.api.recipe.maps.*;
 import gregtech.api.recipe.metadata.CompressionTierKey;
 import gregtech.api.recipe.metadata.PCBFactoryTierKey;
 import gregtech.api.recipe.metadata.PurificationPlantBaseChanceKey;
@@ -1335,5 +1336,14 @@ public final class RecipeMaps {
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(ItemList.Machine_Multi_ExoFoundry.get(1))
                 .setHeight(100))
+        .build();
+    public static final RecipeMap<RecipeMapBackend> causalityRecipes = RecipeMapBuilder
+        .of("gt.recipe.causalityenricher")
+        .maxIO(12, 1, 4, 0)
+        .minInputs(1, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_CAUSALITY)
+        .logoPos(146, 68)
+        .neiTransferRect(85, 14, 52, 43)
+        .frontend(CausalityRecipeFrontend::new)
         .build();
 }
