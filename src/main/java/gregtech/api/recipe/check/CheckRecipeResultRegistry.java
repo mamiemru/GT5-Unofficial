@@ -130,10 +130,11 @@ public final class CheckRecipeResultRegistry {
         .ofFailure("catalyst_coolant_mixing");
 
     /**
-     * Machine has overheated and can not proceed.
+     * Machine has both the catalyst and the coolant in hatch
      */
     @Nonnull
-    public static final CheckRecipeResult OVERHEAT = SimpleCheckRecipeResult.ofFailure("overheat");
+    public static final CheckRecipeResult FLUID_COOLANT_MIXING = SimpleCheckRecipeResult
+        .ofFailure("catalyst_coolant_mixing");
 
     /**
      * Cannot process recipe because the machine cannot handle required EUt.

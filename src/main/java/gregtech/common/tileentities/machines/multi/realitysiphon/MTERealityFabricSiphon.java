@@ -640,7 +640,7 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
         .addElement('B', ofBlock(GregTechAPI.sBlockCasings13, 10))
         .addElement('C', ofBlock(GregTechAPI.sBlockCasings13, 11))
         .addElement('D', ofBlock(GregTechAPI.sBlockCasings13, 12))
-        .addElement('E', ofBlock(GregTechAPI.sBlockGlass1, 8))
+        .addElement('E', ofBlock(GregTechAPI.sBlockGlass1, 7))
         .addElement(
             'F',
             ofChain(
@@ -676,7 +676,7 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
     // Time before checking reality phase
     private static final int PROCESS_TIME = 5;
     // Required causality to create the Condensed Causality Crystal
-    private static final double REQUIRED_CONDENSED_CAUSALITY = 3 * 60 * 60;
+    private static final double REQUIRED_CONDENSED_CAUSALITY = 4 * 60 * 60;
 
     private final List<MTERealitySiphonModuleBase<?>> moduleHatches = new ArrayList<>();
     private final List<MTERealityPhaseSensor> sensorHatches = new ArrayList<>();
@@ -877,6 +877,11 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
             if (tick % 20 == 0) {
                 consumedCausality = 0;
             }
+            if (causalityGeneratedPerSec > 0) {
+                siphonActiveTime++;
+                if (siphonActiveTime > REQUIRED_CONDENSED_CAUSALITY)
+                    siphonActiveTime = (long) REQUIRED_CONDENSED_CAUSALITY;
+            } else siphonActiveTime = 0;
         }
     }
 
@@ -890,16 +895,7 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
             }
             moduleHatches.forEach(module -> module.setTargetSiphon(this));
             sensorHatches.forEach(sensor -> sensor.updateRedstoneOutput(realityPhase));
-
-            if (causalityGeneratedPerSec > 0) {
-                siphonActiveTime++;
-                if (siphonActiveTime > REQUIRED_CONDENSED_CAUSALITY)
-                    siphonActiveTime = (long) REQUIRED_CONDENSED_CAUSALITY;
-            } else {
-                siphonActiveTime = Math.max(0, Math.round(siphonActiveTime * 0.99));
-            }
-
-            // Using last consumed to prevent seeing value jump from x to 0 then x every second
+            // Using last consumed to prevent seeing value jump from x to 0 then x every seconde
             if (baseMetaTileEntity.isActive() && tick % 20 == 2) {
                 lastConsumedCausality = consumedCausality;
                 condensedCausality += causalityGeneratedPerSec - consumedCausality;
@@ -1072,7 +1068,7 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
         aNBT.setDouble("condensedCausality", condensedCausality);
         aNBT.setDouble("consumedCausality", consumedCausality);
         aNBT.setDouble("realityPhase", realityPhase);
-        aNBT.setLong("siphonActiveTime", siphonActiveTime);
+        aNBT.setDouble("siphonActiveTime", siphonActiveTime);
     }
 
     @Override

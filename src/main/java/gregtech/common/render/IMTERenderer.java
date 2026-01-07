@@ -12,6 +12,7 @@ import gregtech.api.net.GTPacketClientMTERendererData;
 import io.netty.buffer.ByteBuf;
 
 import com.google.common.io.ByteArrayDataInput;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -26,7 +27,7 @@ public interface IMTERenderer {
         return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
     }
 
-    default double getMaxRenderDistanceSquared(){
+    default double getMaxRenderDistanceSquared() {
         return 4096.0D;
     }
 
@@ -34,7 +35,7 @@ public interface IMTERenderer {
 
     void decodeRenderData(ByteArrayDataInput buffer);
 
-    default void sendRenderDataToClient(IMetaTileEntity mte){
+    default void sendRenderDataToClient(IMetaTileEntity mte) {
         IGregTechTileEntity tile = mte.getBaseMetaTileEntity();
         if (tile.isClientSide()) return;
 
@@ -45,9 +46,9 @@ public interface IMTERenderer {
 
         tile.getWorld().playerEntities.stream()
             .filter(player -> player.getDistanceSq(x + 0.5, y + 0.5, z + 0.5) <= maxDistSq)
-            .forEach(player -> GTValues.NW.sendToPlayer(
-                new GTPacketClientMTERendererData(x, y, z, this), (EntityPlayerMP) player)
-            );
+            .forEach(
+                player -> GTValues.NW
+                    .sendToPlayer(new GTPacketClientMTERendererData(x, y, z, this), (EntityPlayerMP) player));
     }
 
 }

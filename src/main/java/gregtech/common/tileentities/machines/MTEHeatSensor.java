@@ -170,20 +170,19 @@ public class MTEHeatSensor extends MTEHatch {
 
     public enum HeatSensorHatchElement implements IHatchElement<IHeatProducer> {
 
-        HEAT_SENSOR(IHeatProducer::addHeatSensorHatchToMachineList, MTEHeatSensor.class);
+        HeatSensor(IHeatProducer::addHeatSensorHatchToMachineList, MTEHeatSensor.class);
 
-        private final List<Class<? extends IMetaTileEntity>> mteClasses;
         private final IGTHatchAdder<IHeatProducer> adder;
+        private final List<Class<? extends IMetaTileEntity>> mteClasses;
+
+        HeatSensorHatchElement(IGTHatchAdder<IHeatProducer> adder, Class<? extends IMetaTileEntity> mteClasse) {
+            this.adder = adder;
+            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasse));
+        }
 
         @Override
         public long count(IHeatProducer heatProducer) {
             return heatProducer.getHeatSensorHatchNum();
-        }
-
-        @SafeVarargs
-        HeatSensorHatchElement(IGTHatchAdder<IHeatProducer> adder, Class<? extends IMetaTileEntity>... mteClasses) {
-            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
-            this.adder = adder;
         }
 
         @Override
@@ -194,6 +193,7 @@ public class MTEHeatSensor extends MTEHatch {
         public IGTHatchAdder<? super IHeatProducer> adder() {
             return adder;
         }
+
     }
 
 }

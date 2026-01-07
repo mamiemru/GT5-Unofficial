@@ -95,20 +95,20 @@ public class MTERealityPhaseTunerModule extends MTERealitySiphonModuleBase<MTERe
     // new Integer[]{0 required amount, 1 cooling min, 2 cooling max}
     private static final Map<String, Integer[]> COOLANT_FLUIDS = ImmutableMap.of(
         "cryotheum",
-        new Integer[] { 3000, 1, 4 },
+        new Integer[] { 5000, 1, 4 },
         "spatialfluid",
-        new Integer[] { 1500, 4, 6 },
+        new Integer[] { 2500, 4, 6 },
         "phononmedium",
-        new Integer[] { 50, 8, 12 });
+        new Integer[] { 500, 8, 12 });
 
     // new Integer[]{0 required amount, 1 heat range min, 2 heat range max, 3 stabilization min, 4 stabilization max}
     private static final Map<String, Integer[]> PHASE_SHIFTING_FLUIDS = ImmutableMap.of(
-        "dimensionallytranscendentresidue",
-        new Integer[] { 2500, 15, 20, 5, 15 },
+        "temporalfluid",
+        new Integer[] { 5000, 15, 20, 5, 15 },
         "protomatter",
-        new Integer[] { 500, 10, 15, 10, 25 },
+        new Integer[] { 3000, 10, 15, 10, 25 },
         "molten.eternity",
-        new Integer[] { 100, 5, 10, 20, 25 },
+        new Integer[] { 1000, 5, 10, 20, 25 },
         "molten.universium",
         new Integer[] { 10, 1, 5, 10, 10 });
 
@@ -192,6 +192,8 @@ public class MTERealityPhaseTunerModule extends MTERealitySiphonModuleBase<MTERe
 
                 if (foundCoolant != null && foundShifting != null) {
                     getBaseMetaTileEntity().setActive(false);
+                    depleteInput(foundCoolant);
+                    depleteInput(foundShifting);
                     return CheckRecipeResultRegistry.FLUID_COOLANT_MIXING;
                 }
 
