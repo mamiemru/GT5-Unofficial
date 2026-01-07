@@ -9,6 +9,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import com.gtnewhorizon.structurelib.alignment.enumerable.Rotation;
+
 import gregtech.api.enums.Dyes;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
 
@@ -16,13 +17,14 @@ public class RealityFabricSiphonRenderer {
 
     public static final ResourceLocation SIPHON_TEXTURE = new ResourceLocation("textures/entity/end_portal.png");
 
-    public static void renderTileEntityAt(MTERealityFabricSiphon mteRealityFabricSiphon, double x, double y, double z, float timeSinceLastTick) {
+    public static void renderTileEntityAt(MTERealityFabricSiphon mteRealityFabricSiphon, double x, double y, double z,
+        float timeSinceLastTick) {
         final var baseMetaTileEntity = mteRealityFabricSiphon.getBaseMetaTileEntity();
-        if( baseMetaTileEntity != null && baseMetaTileEntity.isActive() ) {
+        if (baseMetaTileEntity != null && baseMetaTileEntity.isActive()) {
             GL11.glPushMatrix();
 
             GL11.glTranslated(x, y, z);
-            renderBoundingBoxWireframe(mteRealityFabricSiphon.getRenderBoundingBox((int)x, (int)y, (int)z));
+            renderBoundingBoxWireframe(mteRealityFabricSiphon.getRenderBoundingBox(0, 0, 0));
 
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -30,8 +32,10 @@ public class RealityFabricSiphonRenderer {
             GL11.glTranslated(0.5, 0, 0.5);
 
             var mc = Minecraft.getMinecraft();
-            if(mteRealityFabricSiphon.renderCore()) renderCore(mteRealityFabricSiphon, mc.theWorld.getTotalWorldTime()+timeSinceLastTick);
-            if(mteRealityFabricSiphon.renderSiphon()) renderSiphon(mteRealityFabricSiphon, mc.theWorld.getTotalWorldTime()+timeSinceLastTick);
+            if (mteRealityFabricSiphon.renderCore())
+                renderCore(mteRealityFabricSiphon, mc.theWorld.getTotalWorldTime() + timeSinceLastTick);
+            if (mteRealityFabricSiphon.renderSiphon())
+                renderSiphon(mteRealityFabricSiphon, mc.theWorld.getTotalWorldTime() + timeSinceLastTick);
 
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
@@ -50,8 +54,8 @@ public class RealityFabricSiphonRenderer {
         float pulseTime = (time * 0.05f) % 1.0f; // 1 second cycle
         float animatedWidth = 0.75f + 0.25f * (float) Math.sin(pulseTime * 2 * Math.PI); // 0.5 to 1.0 (1 to 2 blocks)
 
-        float r,g,b;
-        if( mteRealityFabricSiphon.getColor() < 0){
+        float r, g, b;
+        if (mteRealityFabricSiphon.getColor() < 0) {
             // Light rainbow color that cycles over time globally
             float colorTime = (time * 0.1f) % 1.0f;
             float hue = colorTime * 2 * (float) Math.PI;
@@ -59,7 +63,7 @@ public class RealityFabricSiphonRenderer {
             r = 0.7f + 0.3f * (float) Math.sin(hue);
             g = 0.7f + 0.3f * (float) Math.sin(hue + 2.094f); // 120 degrees
             b = 0.7f + 0.3f * (float) Math.sin(hue + 4.188f); // 240 degrees
-        }else{
+        } else {
             int rgb = Dyes.get(mteRealityFabricSiphon.getColor()).rgba;
             r = ((rgb >> 24) & 0xFF) / 255.0f;
             g = ((rgb >> 16) & 0xFF) / 255.0f;
@@ -100,14 +104,16 @@ public class RealityFabricSiphonRenderer {
     }
 
     private static void renderSiphon(MTERealityFabricSiphon mteRealityFabricSiphon, float time) {
-        float speed = (float)  mteRealityFabricSiphon.getCurrentCausalityGenerated();
-        if( speed > 0 ){
+        float speed = (float) mteRealityFabricSiphon.getBaseCausalityGenerated();
+        if (speed > 0) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             var mc = Minecraft.getMinecraft();
-            mc.getTextureManager().bindTexture(SIPHON_TEXTURE);
+            mc.getTextureManager()
+                .bindTexture(SIPHON_TEXTURE);
 
             GL11.glPushMatrix();
-            RealityFabricSiphonRenderer.rotate(mteRealityFabricSiphon.getDirection(), mteRealityFabricSiphon.getRotation());
+            RealityFabricSiphonRenderer
+                .rotate(mteRealityFabricSiphon.getDirection(), mteRealityFabricSiphon.getRotation());
             GL11.glTranslated(0, 17, 2);
 
             int segments = 16;
@@ -125,9 +131,6 @@ public class RealityFabricSiphonRenderer {
                 // Color gradient from purple at bottom to white at top
                 float colorFactor = y / maxHeight;
 
-                float r = 0.5f + colorFactor * 0.5f;
-                float g = 0.2f + colorFactor * 0.8f;
-                float b = 0.8f + colorFactor * 0.2f;
                 float alpha = 0.3f + 0.4f * (1f - colorFactor) * speed;
 
                 for (int i = 0; i < segments; i++) {
@@ -151,10 +154,10 @@ public class RealityFabricSiphonRenderer {
                     double nextCos2 = Math.cos(nextAngle2);
                     double nextSin2 = Math.sin(nextAngle2);
 
-                    tessellator.setColorRGBA_F(r, g, b, alpha);
+                    tessellator.setColorRGBA_F(1, 1, 1, alpha);
 
                     // Texture coordinates with downward movement
-                    float texOffset = (time * 0.05f * speed) % 1.0f;
+                    float texOffset = (time * 0.05f * (0.5f + speed / 2.0f)) % 1.0f;
                     float u1 = (float) i / segments;
                     float u2 = (float) (i + 1) / segments;
                     float v1 = (y / maxHeight + texOffset) % 1.0f;
@@ -200,10 +203,10 @@ public class RealityFabricSiphonRenderer {
         return baseRadius;
     }
 
-    private static void rotate(ForgeDirection direction, Rotation rotation){
+    private static void rotate(ForgeDirection direction, Rotation rotation) {
         switch (direction) {
             case NORTH -> {
-                //GL11.glRotatef(90, 1, 0, 0);
+                // no rotation here
             }
             case EAST -> {
                 GL11.glRotatef(-90, 0, 1, 0);
@@ -217,26 +220,27 @@ public class RealityFabricSiphonRenderer {
             case UP -> {
                 GL11.glRotatef(180, 0, 1, 0);
                 GL11.glRotatef(90, 1, 0, 0);
-                GL11.glTranslatef(0,0,-0.5f);
+                GL11.glTranslatef(0, 0, -0.5f);
             }
             case DOWN -> {
                 GL11.glRotatef(-90, 1, 0, 0);
-                GL11.glTranslatef(0,0,0.5f);
+                GL11.glTranslatef(0, 0, 0.5f);
 
             }
         }
-        if(direction.ordinal() >= 2 && rotation != Rotation.NORMAL) GL11.glTranslatef(0,0.5f,0);
+        if (direction.ordinal() >= 2 && rotation != Rotation.NORMAL) GL11.glTranslatef(0, 0.5f, 0);
 
-        if(rotation == Rotation.NORMAL) {
-            GL11.glTranslatef(0,-0.5f,0);
-        }if(rotation == Rotation.CLOCKWISE) {
-            GL11.glTranslatef(0.5f, 0,0);
+        if (rotation == Rotation.NORMAL) {
+            GL11.glTranslatef(0, -0.5f, 0);
+        }
+        if (rotation == Rotation.CLOCKWISE) {
+            GL11.glTranslatef(0.5f, 0, 0);
             GL11.glRotatef(90, 0, 0, 1);
-        }else if(rotation == Rotation.UPSIDE_DOWN){
-            GL11.glTranslatef(0,0.5f,0);
+        } else if (rotation == Rotation.UPSIDE_DOWN) {
+            GL11.glTranslatef(0, 0.5f, 0);
             GL11.glRotatef(180, 0, 0, 1);
-        }else if(rotation == Rotation.COUNTER_CLOCKWISE){
-            GL11.glTranslatef(-0.5f, 0,0);
+        } else if (rotation == Rotation.COUNTER_CLOCKWISE) {
+            GL11.glTranslatef(-0.5f, 0, 0);
             GL11.glRotatef(-90, 0, 0, 1);
         }
     }

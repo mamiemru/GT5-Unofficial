@@ -10,14 +10,14 @@ import gregtech.api.util.IGTHatchAdder;
 
 public enum RealityFabricSiphonModule implements IHatchElement<MTERealityFabricSiphon> {
 
-    SiphonModule(MTERealityFabricSiphon::addModuleToMachineList, MTERealitySiphonModuleBase.class);
+    SIPHON_MODULE(MTERealityFabricSiphon::addModuleToMachineList, MTERealitySiphonModuleBase.class);
 
     private final List<Class<? extends IMetaTileEntity>> mteClasses;
     private final IGTHatchAdder<MTERealityFabricSiphon> adder;
 
     @SafeVarargs
     RealityFabricSiphonModule(IGTHatchAdder<MTERealityFabricSiphon> adder,
-                         Class<? extends IMetaTileEntity>... mteClasses) {
+        Class<? extends IMetaTileEntity>... mteClasses) {
         this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
         this.adder = adder;
     }
