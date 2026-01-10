@@ -14,9 +14,10 @@ import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.HYPOGEN;
 import static gtnhintergalactic.recipe.IGRecipeMaps.MODULE_TIER;
 import static gtnhintergalactic.recipe.IGRecipeMaps.spaceAssemblerRecipes;
 
+import bartworks.system.material.WerkstoffLoader;
+import gregtech.api.util.PCBFactoryManager;
 import net.minecraft.item.ItemStack;
 
-import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -28,6 +29,9 @@ import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import tectech.thing.CustomItemList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdvCircuitAssemblyLineRecipes implements Runnable {
 
@@ -66,11 +70,13 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.RadoxPolymer.getPlates(1),
                 new ItemStack(WerkstoffLoader.items.get(OrePrefixes.foil), 20, 10106),
                 HYPOGEN.getFoil(20),
-                ADVANCED_NITINOL.getFoil(20))
+                ADVANCED_NITINOL.getFoil(20)
+            )
             .fluidInputs(
                 Materials.SulfuricAcid.getFluid(707),
                 Materials.IronIIIChloride.getFluid(17677),
-                Materials.CosmicNeutronium.getMolten(6109))
+                Materials.CosmicNeutronium.getMolten(6109)
+            )
             .itemOutputs(ItemList.Circuit_Board_Exotic.get(14))
             .duration(15 * SECONDS)
             .eut(TierEU.UHV)
@@ -83,11 +89,13 @@ public class AdvCircuitAssemblyLineRecipes implements Runnable {
                 Materials.RadoxPolymer.getPlates(1),
                 new ItemStack(WerkstoffLoader.items.get(OrePrefixes.foil), 22, 10106),
                 HYPOGEN.getFoil(22),
-                ADVANCED_NITINOL.getFoil(22))
+                ADVANCED_NITINOL.getFoil(22)
+            )
             .fluidInputs(
                 Materials.SulfuricAcid.getFluid(707),
                 Materials.IronIIIChloride.getFluid(17677),
-                Materials.CosmicNeutronium.getMolten(6109))
+                Materials.CosmicNeutronium.getMolten(6109)
+            )
             .itemOutputs(ItemList.Circuit_Board_Exotic.get(18))
             .duration(13 * SECONDS)
             .eut(TierEU.UEV)
