@@ -44,6 +44,7 @@ import static gregtech.api.recipe.RecipeMaps.sifterRecipes;
 import static gregtech.api.recipe.RecipeMaps.thermalCentrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 
+import gregtech.common.tileentities.machines.multi.acal.MTEAdvancedCircuitAssemblyLine;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.enums.GTValues;

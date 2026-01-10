@@ -1058,6 +1058,9 @@ gt.recipe.drawerframer.description=Frames drawers exactly like the Framing Table
 gt.recipe.advcircuitassemblyline=Advanced Circuit Assembly Line
 gt.recipe.advcircuitassemblyline.description=Faster circuit assembler
 
+gt.recipe.advcircuitassemblyline=Advanced Circuit Assembly Line
+gt.recipe.advcircuitassemblyline.description=Faster circuit assembler
+
 # RecipeMaps that are not listed on MachineType enum
 gt.recipe.fakeAssemblylineProcess=Assemblyline Process
 gt.recipe.fusionreactor=Fusion Reactor
