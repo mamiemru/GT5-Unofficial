@@ -2777,6 +2777,16 @@ public enum ItemList implements IItemContainer {
     CokeOvenCasing,
     CokeOvenHatch,
 
+    AdvCircuitAssemblyLine,
+    Circuit_Board_Exotic,
+    Exotic_Super_CPU,
+    Circuit_Parts_ResistorISMD,
+    Circuit_Parts_DiodeISMD,
+    Circuit_Parts_TransistorISMD,
+    Circuit_Parts_CapacitorISMD,
+    Circuit_Parts_InductorISMD,
+    Circuit_Parts_UniversalISMD,
+
     CausalityResistantCasing,
     CausalityResistantGlass,
     RealityAttunedCasing,

@@ -563,4 +563,6 @@ public class GTUITextures {
     public static final UITexture PICTURE_ITEM_OUT = UITexture.fullImage(GregTech.ID, "gui/picture/item_out");
     public static final UITexture PICTURE_FLUID_IN = UITexture.fullImage(GregTech.ID, "gui/picture/fluid_in");
     public static final UITexture PICTURE_FLUID_OUT = UITexture.fullImage(GregTech.ID, "gui/picture/fluid_out");
+    public static final UITexture PROGRESSBAR_CIRCUIT_ASSEMBLY_LINE = UITexture
+        .fullImage(GregTech.ID, "gui/progressbar/adv_circuit_assembly_line");
 }

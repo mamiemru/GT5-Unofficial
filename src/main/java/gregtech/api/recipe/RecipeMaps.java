@@ -1337,6 +1337,13 @@ public final class RecipeMaps {
             builder -> builder.setDisplayStack(ItemList.Machine_Multi_ExoFoundry.get(1))
                 .setHeight(100))
         .build();
+
+    public static final RecipeMap<RecipeMapBackend> advCircuitAssemblylineRecipes = RecipeMapBuilder
+        .of("gt.recipe.advcircuitassemblyline")
+        .maxIO(9, 8, 4, 0)
+        .minInputs(1, 1)
+        .build();
+
     public static final RecipeMap<RecipeMapBackend> causalityRecipes = RecipeMapBuilder
         .of("gt.recipe.causalityenricher")
         .maxIO(12, 1, 4, 0)
