@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 
+import gregtech.loaders.postload.recipes.AdvancedCircuitAssemblyLineRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -433,6 +434,7 @@ public class GTMod {
         new CropLoader().run();
         new GTWorldgenloader().run();
         new CoverLoader().run();
+        new AdvancedCircuitAssemblyLineRecipes().run();
         StoneType.init();
 
         GTRecipeRegistrator.registerUsagesForMaterials(
