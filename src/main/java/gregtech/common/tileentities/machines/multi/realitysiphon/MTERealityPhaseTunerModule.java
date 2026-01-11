@@ -95,16 +95,16 @@ public class MTERealityPhaseTunerModule extends MTERealitySiphonModuleBase<MTERe
     // new Integer[]{0 required amount, 1 cooling min, 2 cooling max}
     private static final Map<String, Integer[]> COOLANT_FLUIDS = ImmutableMap.of(
         "cryotheum",
-        new Integer[] { 5000, 1, 4 },
+        new Integer[] { 3000, 1, 4 },
         "spatialfluid",
-        new Integer[] { 2500, 4, 6 },
+        new Integer[] { 1500, 4, 6 },
         "phononmedium",
-        new Integer[] { 500, 8, 12 });
+        new Integer[] { 50, 8, 12 });
 
     // new Integer[]{0 required amount, 1 heat range min, 2 heat range max, 3 stabilization min, 4 stabilization max}
     private static final Map<String, Integer[]> PHASE_SHIFTING_FLUIDS = ImmutableMap.of(
-        "temporalfluid",
-        new Integer[] { 5000, 15, 20, 5, 15 },
+        "dimensionallytranscendentresidue",
+        new Integer[] { 7500, 15, 20, 5, 15 },
         "protomatter",
         new Integer[] { 3000, 10, 15, 10, 25 },
         "molten.eternity",

@@ -30,6 +30,8 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.google.common.io.ByteArrayDataInput;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -1000,6 +1002,16 @@ public class MTEExoFoundry extends MTEExtendedPowerMultiBlockBase<MTEExoFoundry>
     @Override
     public AxisAlignedBB getRenderBoundingBox(int x, int y, int z) {
         return AxisAlignedBB.getBoundingBox(x - 10, y + 7, z - 10, x + 10, y + 44, z + 10);
+    }
+
+    @Override
+    public void encodeRenderData(ByteBuf buffer) {
+
+    }
+
+    @Override
+    public void decodeRenderData(ByteArrayDataInput buffer) {
+
     }
 
     @Override
