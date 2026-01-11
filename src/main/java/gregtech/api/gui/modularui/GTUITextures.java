@@ -173,6 +173,7 @@ public class GTUITextures {
     public static final UITexture PROGRESSBAR_BOILER_WATER = UITexture
         .fullImage(GregTech.ID, "gui/progressbar/boiler_water");
     public static final UITexture PROGRESSBAR_CANNER = UITexture.fullImage(GregTech.ID, "gui/progressbar/canner");
+    public static final UITexture PROGRESSBAR_CAUSALITY = UITexture.fullImage(GregTech.ID, "gui/progressbar/causality");
     public static final UITexture PROGRESSBAR_CIRCUIT_ASSEMBLER = UITexture
         .fullImage(GregTech.ID, "gui/progressbar/circuit_assembler");
     public static final UITexture PROGRESSBAR_ADVANCED_CIRCUIT_ASSEMBLY_LINE = UITexture

@@ -2680,6 +2680,7 @@ public enum ItemList implements IItemContainer {
     Relativistic_Heat_Capacitor,
     Phononic_Seed_Crystal,
     Harmonic_Compound,
+    Condensed_Causality_Crystal,
     ResearchCompleter,
     Spray_Color_Infinite,
     Casing_AirFilter_Turbine_T1,
@@ -2785,6 +2786,16 @@ public enum ItemList implements IItemContainer {
     CokeOvenController,
     CokeOvenCasing,
     CokeOvenHatch,
+
+    CausalityResistantCasing,
+    CausalityResistantGlass,
+    RealityAttunedCasing,
+    CausalityAttractionEngine,
+    RealityShifterCasing,
+    RealityFabricSiphonController,
+    RealityPhaseTunerModule,
+    CausalityAssemblingModule,
+    Hatch_RealityPhaseSensor
 
     // semicolon after the comment to reduce merge conflicts
     ;

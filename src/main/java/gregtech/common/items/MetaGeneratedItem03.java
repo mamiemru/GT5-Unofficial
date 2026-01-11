@@ -275,6 +275,7 @@ import static gregtech.common.items.IDMetaItem03.White_Dwarf_Shape_Extruder_Turb
 import static gregtech.common.items.IDMetaItem03.White_Dwarf_Shape_Extruder_Wire;
 import static gregtech.common.items.IDMetaItem03.WovenKevlar;
 import static gregtech.common.items.IDMetaItem03.ZPM_Coil;
+import static gregtech.common.items.IDMetaItem03.*;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -1471,6 +1472,16 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
             .set(addItem(Circuit_Parts_InductorISMD.ID, "Innovative SMD Inductor", "Innovative Component", o));
         ItemList.Circuit_Parts_UniversalISMD
             .set(addItem(Circuit_Parts_UniversalISMD.ID, "Innovative Universal SMD", "Universal SMD Component", o));
+        ItemList.Condensed_Causality_Crystal
+            .set(
+                addItem(
+                    Condensed_Causality_Crystal.ID,
+                    "Condensed Causality Crystal",
+                    String.join(
+                        "/n ",
+                        "Isn't that like a big bang shard ?",
+                        "Don't try to compress multiple of that... thing")))
+            .setRender(new InfinityMetaItemRenderer());
 
         registerAllTieredTooltips();
         registerAllAnimatedTooltips();
