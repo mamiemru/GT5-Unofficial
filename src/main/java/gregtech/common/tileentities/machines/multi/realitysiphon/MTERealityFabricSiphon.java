@@ -896,7 +896,7 @@ public class MTERealityFabricSiphon extends MTEExtendedPowerMultiBlockBase<MTERe
                 if (siphonActiveTime > REQUIRED_CONDENSED_CAUSALITY)
                     siphonActiveTime = (long) REQUIRED_CONDENSED_CAUSALITY;
             } else {
-                siphonActiveTime = Math.max(0 ,Math.round(siphonActiveTime * 0.99));
+                siphonActiveTime = Math.max(0, Math.round(siphonActiveTime * 0.99));
             }
 
             // Using last consumed to prevent seeing value jump from x to 0 then x every second
