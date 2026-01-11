@@ -22,6 +22,7 @@ import static gregtech.client.GTTooltipHandler.Tier.UV;
 import static gregtech.client.GTTooltipHandler.Tier.UXV;
 import static gregtech.client.GTTooltipHandler.Tier.ZPM;
 import static gregtech.client.GTTooltipHandler.registerTieredTooltip;
+import static gregtech.common.items.IDMetaItem03.*;
 import static gregtech.common.items.IDMetaItem03.Activated_Carbon_Filter_Mesh;
 import static gregtech.common.items.IDMetaItem03.Alumina_Support_Ring;
 import static gregtech.common.items.IDMetaItem03.Alumina_Support_Ring_Raw;
@@ -275,7 +276,6 @@ import static gregtech.common.items.IDMetaItem03.White_Dwarf_Shape_Extruder_Turb
 import static gregtech.common.items.IDMetaItem03.White_Dwarf_Shape_Extruder_Wire;
 import static gregtech.common.items.IDMetaItem03.WovenKevlar;
 import static gregtech.common.items.IDMetaItem03.ZPM_Coil;
-import static gregtech.common.items.IDMetaItem03.*;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
