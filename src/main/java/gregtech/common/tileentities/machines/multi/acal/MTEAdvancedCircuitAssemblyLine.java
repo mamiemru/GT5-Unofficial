@@ -42,7 +42,6 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
@@ -56,7 +55,7 @@ import gregtech.common.gui.modularui.multiblock.MTEAdvancedCircuitAssemblyLineGu
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 import gregtech.common.misc.GTStructureChannels;
 
-public class MTEAdvancedCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MTEAdvancedCircuitAssemblyLine>
+public class MTEAdvancedCircuitAssemblyLine extends MTEModulableController<MTEAdvancedCircuitAssemblyLine>
     implements ISurvivalConstructable {
 
     private UUID ownerUUID;
@@ -395,6 +394,27 @@ public class MTEAdvancedCircuitAssemblyLine extends MTEEnhancedMultiBlockBase<MT
     @Override
     public boolean supportsPowerPanel() {
         return false;
+    }
+
+    public void registerLinkedUnit(MTEModuleBase<?> unit) {
+        /*if (unit instanceof MTEPCBBioChamber) {
+            if (mBioChamber != null && mBioChamber != unit) {
+                mBioChamber.unlinkController(this);
+            }
+            mBioChamber = (MTEPCBBioChamber) unit;
+            mBioChamberX = unit.getBaseMetaTileEntity()
+                .getXCoord();
+            mBioChamberY = unit.getBaseMetaTileEntity()
+                .getYCoord();
+            mBioChamberZ = unit.getBaseMetaTileEntity()
+                .getZCoord();
+        }*/
+    }
+
+    public void unregisterLinkedUnit(MTEModuleBase<?> unit) {
+        /*if (unit instanceof MTEPCBBioChamber) {
+            mBioChamber = null;
+        }*/
     }
 
 }
