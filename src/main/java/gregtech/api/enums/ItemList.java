@@ -2940,26 +2940,6 @@ public enum ItemList implements IItemContainer {
     CausalityAssemblingModule,
     Hatch_RealityPhaseSensor
 
-    CausalityResistantCasing,
-    CausalityResistantGlass,
-    RealityAttunedCasing,
-    CausalityAttractionEngine,
-    RealityShifterCasing,
-    RealityFabricSiphonController,
-    RealityPhaseTunerModule,
-    CausalityAssemblingModule,
-    Hatch_RealityPhaseSensor
-
-    CausalityResistantCasing,
-    CausalityResistantGlass,
-    RealityAttunedCasing,
-    CausalityAttractionEngine,
-    RealityShifterCasing,
-    RealityFabricSiphonController,
-    RealityPhaseTunerModule,
-    CausalityAssemblingModule,
-    Hatch_RealityPhaseSensor
-
     // semicolon after the comment to reduce merge conflicts
     ;
 

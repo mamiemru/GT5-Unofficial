@@ -1,15 +1,11 @@
 package gregtech.common.tileentities.machines.multi.acal;
 
-import com.gtnewhorizon.structurelib.util.Vec3Impl;
-import gregtech.api.enums.ItemList;
-import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
-import gregtech.api.metatileentity.implementations.MTEHatchInput;
-import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.recipe.check.CheckRecipeResultRegistry;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
+import java.util.HashSet;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -20,18 +16,25 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
+import com.gtnewhorizon.structurelib.util.Vec3Impl;
 
+import gregtech.api.enums.ItemList;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
+import gregtech.api.metatileentity.implementations.MTEHatchInput;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 
-public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEEnhancedMultiBlockBase<T>{
+public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEEnhancedMultiBlockBase<T> {
 
     public static final int UPGRADE_RANGE = 16;
+
     private enum LinkResult {
         TOO_FAR,
         NO_VALID_FACTORY,
@@ -54,7 +57,6 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
     public MTEModuleBase(String aName) {
         super(aName);
     }
-
 
     @Override
     public boolean doRandomMaintenanceDamage() {
@@ -126,13 +128,12 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         var factory = getCastedController();
 
         // MTEModulableController<?> factory = getCastedController();
-        //if (!(metaTileEntity instanceof MTEAdvancedCircuitAssemblyLine)) return LinkResult.NO_VALID_FACTORY;
+        // if (!(metaTileEntity instanceof MTEAdvancedCircuitAssemblyLine)) return LinkResult.NO_VALID_FACTORY;
         // Now link to new controller
         factory.registerLinkedUnit(this);
 
         return LinkResult.SUCCESS;
     }
-
 
     public NBTTagIntArray saveLinkDataToNBT() {
         int[] array = new int[controllerCoords.size() * 3];
@@ -180,7 +181,8 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         } else if (result == LinkResult.TOO_FAR) {
             aPlayer.addChatMessage(new ChatComponentText("Link failed: Out of range."));
         } else if (result == LinkResult.NO_VALID_FACTORY) {
-            aPlayer.addChatMessage(new ChatComponentText("Link failed: No AdvancedCircuitAssemblyLine found at link location"));
+            aPlayer.addChatMessage(
+                new ChatComponentText("Link failed: No AdvancedCircuitAssemblyLine found at link location"));
         }
         if (result == LinkResult.SUCCESS) {
             controllerCoords.add(new Vec3Impl(x, y, z));
@@ -236,7 +238,7 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
                 .getWorld()
                 .getTileEntity(controllerCoord.get(0), controllerCoord.get(1), controllerCoord.get(2));
             if (TE instanceof IGregTechTileEntity GTTE) {
-                if (GTTE.getMetaTileEntity() instanceof MTEModulableController<?> controller) {
+                if (GTTE.getMetaTileEntity() instanceof MTEModulableController<?>controller) {
                     controller.unregisterLinkedUnit(this);
                 }
             }
@@ -286,7 +288,7 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
 
     @Override
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
-                                int z) {
+        int z) {
         boolean isActive = this.getBaseMetaTileEntity()
             .isActive();
         tag.setBoolean("isActive", isActive);
@@ -301,10 +303,9 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
     }
 
-
     @Override
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
-                             IWailaConfigHandler config) {
+        IWailaConfigHandler config) {
         NBTTagCompound tag = accessor.getNBTData();
 
         // Display linked controller in Waila.
@@ -314,7 +315,9 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
             if (coordinates.length % 3 != 0) return;
             for (int i = 0; i < coordinates.length; i += 3) {
                 currentTip.add(
-                    EnumChatFormatting.AQUA + "Linked to "+ getCastedController().getLocalName() +" Factory at: "
+                    EnumChatFormatting.AQUA + "Linked to "
+                        + getCastedController().getLocalName()
+                        + " Factory at: "
                         + EnumChatFormatting.WHITE
                         + coordinates[i]
                         + ", "
