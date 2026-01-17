@@ -300,6 +300,7 @@ import gregtech.common.powergoggles.ItemPowerGoggles;
 import gregtech.common.render.items.GlitchEffectMetaItemRenderer;
 import gregtech.common.render.items.InfinityMetaItemRenderer;
 import gregtech.common.render.items.RainbowOverlayMetaItemRenderer;
+import gregtech.common.render.items.TranscendentalMetaItemRenderer;
 import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 
 @Optional.Interface(
@@ -1459,6 +1460,12 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
 
         ItemList.Circuit_Board_Exotic
             .set(addItem(Circuit_Board_Exotic.ID, "Innovative Circuit Board", "Innovative Purple Board", o));
+        ItemList.Circuit_Board_Cosmic
+            .set(addItem(Circuit_Board_Cosmic.ID, "Futuristic Circuit Board", "Galaxy Inside Board", o))
+            .setRender(new TranscendentalMetaItemRenderer());
+        ItemList.Circuit_Board_Transcendent
+            .set(addItem(Circuit_Board_Transcendent.ID, "Cutting-edge Circuit Board", "Timeless Board", o))
+            .setRender(new InfinityMetaItemRenderer());
         ItemList.Exotic_Super_CPU.set(addItem(Exotic_Super_CPU.ID, "Exotic Super CPU", "Exotic Super CPU", o));
         ItemList.Circuit_Parts_ResistorISMD
             .set(addItem(Circuit_Parts_ResistorISMD.ID, "Innovative SMD Resistor", "Innovative Component", o));
@@ -1482,6 +1489,20 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
                         "Isn't that like a big bang shard ?",
                         "Don't try to compress multiple of that... thing")))
             .setRender(new InfinityMetaItemRenderer());
+        ItemList.Circuit_Wafer_IPCRL.set(
+            addItem(
+                Circuit_Wafer_IPCRL.ID,
+                "Stellaris-Forged Paracausal Luminance Wafer (IPCRL)",
+                "Interstellar Photonic–Cosmic Resonance Lattice Integrated",
+                o));
+        ItemList.Circuit_Wafer_MIPCRL
+            .set(
+                addItem(
+                    Circuit_Wafer_MIPCRL.ID,
+                    "Stellaris Paracausal Luminance Slice (MIPCRL)",
+                    "Compression reverses cohesion into disassembly",
+                    o))
+            .setRender(new TranscendentalMetaItemRenderer());
 
         registerAllTieredTooltips();
         registerAllAnimatedTooltips();
