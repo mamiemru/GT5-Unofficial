@@ -1,10 +1,12 @@
 package gregtech.common.tileentities.machines.multi.acal;
 
-import com.gtnewhorizon.structurelib.util.Vec3Impl;
-import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
+import java.util.ArrayList;
+
 import net.minecraft.util.StatCollector;
 
-import java.util.ArrayList;
+import com.gtnewhorizon.structurelib.util.Vec3Impl;
+
+import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
 
 public abstract class MTEACALupgradeBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEModuleBase<T> {
 
@@ -29,9 +31,9 @@ public abstract class MTEACALupgradeBase<T extends MTEEnhancedMultiBlockBase<T>>
                         controllerCoord.get(0),
                         controllerCoord.get(0)));
             }
-        } else ret.add(StatCollector.translateToLocal("GT5U.infodata.advanced_circuit_assembly_line_upgrade_base.not_linked"));
+        } else ret.add(
+            StatCollector.translateToLocal("GT5U.infodata.advanced_circuit_assembly_line_upgrade_base.not_linked"));
         return ret.toArray(new String[0]);
     }
-
 
 }

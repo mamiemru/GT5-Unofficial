@@ -1942,6 +1942,8 @@ public enum ItemList implements IItemContainer {
     Circuit_Board_Optical,
 
     Circuit_Board_Exotic,
+    Circuit_Board_Cosmic,
+    Circuit_Board_Transcendent,
     Exotic_Super_CPU,
     Circuit_Parts_ResistorISMD,
     Circuit_Parts_DiodeISMD,
@@ -1949,6 +1951,8 @@ public enum ItemList implements IItemContainer {
     Circuit_Parts_CapacitorISMD,
     Circuit_Parts_InductorISMD,
     Circuit_Parts_UniversalISMD,
+    Circuit_Wafer_IPCRL,
+    Circuit_Wafer_MIPCRL,
 
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,

@@ -4,10 +4,13 @@ import static gregtech.api.enums.Mods.ModIDs.NEW_HORIZONS_CORE_MOD;
 import static gregtech.api.recipe.RecipeMaps.advancedCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
+import static gregtech.api.recipe.RecipeMaps.laserEngraverRecipes;
+import static gregtech.api.recipe.RecipeMaps.neutroniumCompressorRecipes;
 import static gregtech.api.recipe.RecipeMaps.pcbFactoryRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeConstants.COMPRESSION_TIER;
 import static gregtech.api.util.GTRecipeConstants.PCB_NANITE_MATERIAL;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.ADVANCED_NITINOL;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.HYPOGEN;
@@ -23,6 +26,7 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
@@ -37,6 +41,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
         registerComponents();
         registerAnyCircuitRecipes();
         registerExoticLineRecipe();
+        registerCosmicLineRecipe();
     }
 
     private void registerAcal() {
@@ -93,6 +98,23 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.UEV)
             .metadata(PCB_NANITE_MATERIAL, Materials.TranscendentMetal)
             .addTo(pcbFactoryRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(3),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Ichorium, 1),
+                new ItemStack(WerkstoffLoader.items.get(OrePrefixes.foil), 27, 10106),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Void, 47),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Mellion, 13))
+            .fluidInputs(
+                Materials.SulfuricAcid.getFluid(866L),
+                Materials.IronIIIChloride.getFluid(21650L),
+                Materials.TranscendentMetal.getMolten(7482L))
+            .itemOutputs(ItemList.Circuit_Board_Cosmic.get(12))
+            .duration(11 * SECONDS)
+            .eut(TierEU.UIV)
+            .metadata(PCB_NANITE_MATERIAL, Materials.TranscendentMetal)
+            .addTo(RecipeMaps.pcbFactoryRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -198,6 +220,23 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(spaceAssemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Condensed_Causality_Crystal.get(0), ItemList.Circuit_Silicon_Wafer7.get(16L))
+            .fluidInputs(Materials.Protomatter.getMolten(INGOTS))
+            .itemOutputs(ItemList.Circuit_Wafer_IPCRL.get(1L))
+            .duration(5 * SECONDS)
+            .eut(TierEU.RECIPE_UIV)
+            .addTo(laserEngraverRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
+            .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
+            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(64))
+            .metadata(COMPRESSION_TIER, 2)
+            .duration(7 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .addTo(neutroniumCompressorRecipes);
     }
 
     private ItemStack[] computeOutputForAnyCircuits(String aItem, int amount) {
@@ -399,4 +438,73 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
     }
 
+    private void registerCosmicLineRecipe() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Cosmic.get(1L),
+                ItemList.Exotic_Super_CPU.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(1L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
+                ItemList.Circuit_Wafer_QPIC.get(16L),
+                CustomItemList.DATApipe.get(16L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 2L))
+            .fluidInputs(
+                Materials.Samarium.getPlasma(2 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
+            .itemOutputs(ItemList.Circuit_CosmicProcessor.get(1L))
+            .duration(200 * SECONDS)
+            .eut(TierEU.RECIPE_UEV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Cosmic.get(1L),
+                ItemList.Circuit_CosmicProcessor.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(1L),
+                ItemList.Circuit_Parts_CapacitorISMD.get(12L),
+                ItemList.Circuit_Parts_InductorISMD.get(12L),
+                ItemList.Circuit_Parts_ResistorISMD.get(12L),
+                ItemList.Circuit_Parts_TransistorISMD.get(12L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Ichorium, 16L))
+            .fluidInputs(
+                Materials.Samarium.getPlasma(4 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
+            .itemOutputs(ItemList.Circuit_CosmicAssembly.get(1L))
+            .duration(250 * SECONDS)
+            .eut(TierEU.RECIPE_UIV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Cosmic.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(2L),
+                ItemList.Circuit_CosmicAssembly.get(2L),
+                ItemList.Circuit_Parts_UniversalISMD.get(32L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TengamPurified, 8L))
+            .fluidInputs(
+                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
+                Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
+            .itemOutputs(ItemList.Circuit_CosmicComputer.get(1L))
+            .duration(400 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_CosmicComputer.get(2L),
+                ItemList.Exotic_Super_CPU.get(2L),
+                ItemList.Circuit_Wafer_MIPCRL.get(2L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Flerovium, 8L))
+            .fluidInputs(
+                Materials.Infinity.getPlasma(32 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
+                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.MagMatter.getMolten(4 * INGOTS))
+            .itemOutputs(ItemList.Circuit_CosmicMainframe.get(1L))
+            .duration(600 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+    }
 }
