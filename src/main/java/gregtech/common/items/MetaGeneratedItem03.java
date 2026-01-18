@@ -1503,6 +1503,14 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
                     "Compression reverses cohesion into disassembly",
                     o))
             .setRender(new TranscendentalMetaItemRenderer());
+        ItemList.Paracasual_Super_Mainframe
+            .set(
+                addItem(
+                    Paracasual_Super_Mainframe.ID,
+                    "Paracasual Super Mainframe",
+                    "Computational order collapses under excessive convergence.",
+                    o))
+            .setRender(new TranscendentalMetaItemRenderer());
 
         registerAllTieredTooltips();
         registerAllAnimatedTooltips();

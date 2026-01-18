@@ -1976,6 +1976,7 @@ public enum ItemList implements IItemContainer {
     Circuit_Parts_UniversalISMD,
     Circuit_Wafer_IPCRL,
     Circuit_Wafer_MIPCRL,
+    Paracasual_Super_Mainframe,
 
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,
@@ -2240,6 +2241,7 @@ public enum ItemList implements IItemContainer {
     DecayWarehouse,
     LATEX,
     AdvancedCircuitAssemblyLine,
+    ACALModuleBioChamber,
     AcceleratorLV,
     AcceleratorMV,
     AcceleratorHV,

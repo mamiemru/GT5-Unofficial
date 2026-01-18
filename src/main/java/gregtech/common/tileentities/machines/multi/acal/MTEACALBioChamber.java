@@ -31,10 +31,10 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multi.pcb.MTEPCBFactory;
 
-public class MTEACALBioChamber extends MTEACALupgradeBase<MTEACALBioChamber>
+public class MTEACALBioChamber extends MTEACALUpgradeBase<MTEACALBioChamber>
     implements ISurvivalConstructable, INEIPreviewModifier {
 
-    private static final String STRUCTURE_PIECE_BIO_CHAMBER = "bioUpgrade";
+    private static final String STRUCTURE_PIECE_BIO_CHAMBER = "ACALbioUpgrade";
     private static final String[][] structure = new String[][] {
         // spotless:off
             {"     ","     ","F   F","FGGGF","FGGGF","FGGGF","FS~SF"},
@@ -72,7 +72,7 @@ public class MTEACALBioChamber extends MTEACALupgradeBase<MTEACALBioChamber>
 
     @Override
     public MTEModulableController<?> getCastedController() {
-        return this;
+        return currentFactory;
     }
 
     @Override

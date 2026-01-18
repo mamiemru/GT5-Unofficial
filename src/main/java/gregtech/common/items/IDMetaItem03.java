@@ -218,6 +218,7 @@ public enum IDMetaItem03 {
     Circuit_Parts_UniversalISMD(266),
     Circuit_Wafer_IPCRL(267),
     Circuit_Wafer_MIPCRL(268),
+    Paracasual_Super_Mainframe(269),
     Circuit_Silicon_Ingot6(721),
     Circuit_Silicon_Wafer6(722),
     Circuit_Silicon_Wafer7(723),

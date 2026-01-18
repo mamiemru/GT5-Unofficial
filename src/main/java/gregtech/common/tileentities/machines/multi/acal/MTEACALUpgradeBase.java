@@ -8,14 +8,19 @@ import com.gtnewhorizon.structurelib.util.Vec3Impl;
 
 import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
 
-public abstract class MTEACALupgradeBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEModuleBase<T> {
+public abstract class MTEACALUpgradeBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEModuleBase<T> {
 
-    protected MTEACALupgradeBase(int aID, String aName, String aNameRegional) {
+    protected MTEACALUpgradeBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public MTEACALupgradeBase(String aName) {
+    public MTEACALUpgradeBase(String aName) {
         super(aName);
+    }
+
+    @Override
+    public ModulableMachineTypes getTargetedMachineType() {
+        return ModulableMachineTypes.AdvancedCircuitAssemblyLine;
     }
 
     @Override

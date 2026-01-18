@@ -44,6 +44,7 @@ import static gregtech.api.recipe.RecipeMaps.sifterRecipes;
 import static gregtech.api.recipe.RecipeMaps.thermalCentrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 
+import gregtech.common.tileentities.machines.multi.acal.MTEACALBioChamber;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.enums.GTValues;
@@ -622,6 +623,13 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 AdvancedCircuitAssemblyLine.ID,
                 "multimachine.adv-circuit-assemblyline",
                 "Advanced Circuit Assembly line").getStackForm(1));
+        ItemList.ACALModuleBioChamber.set(
+            new MTEACALBioChamber(
+                ACALModuleBioChamber.ID,
+                "multimachine.adv-circuit-assemblyline-module-biochamber",
+                "ACAL Module BioChamber").getStackForm(1));
+
+
 
         ItemList.RealityFabricSiphonController.set(
             new MTERealityFabricSiphon(

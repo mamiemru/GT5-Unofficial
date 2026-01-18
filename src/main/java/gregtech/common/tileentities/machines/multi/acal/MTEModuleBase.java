@@ -41,12 +41,13 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         SUCCESS,
     }
 
+    abstract ModulableMachineTypes getTargetedMachineType();
     /**
      * Queue of all currently active factories, ## nop: sorted by time left in their recipe.
      */
-    private final Queue<MTEModulableController<?>> activeFactories = new PriorityQueue<>();
+    protected final Queue<MTEModulableController<?>> activeFactories = new PriorityQueue<>();
 
-    private MTEModulableController<?> currentFactory;
+    protected MTEModulableController<?> currentFactory;
 
     protected final Set<Vec3Impl> controllerCoords = new HashSet<>();
 
@@ -164,7 +165,7 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
 
         // Make sure this data stick is a proper purification plant link data stick.
         if (!dataStick.hasTagCompound() || !dataStick.stackTagCompound.getString("type")
-            .equals("AdvancedCircuitAssemblyLine")) {
+            .equals(getTargetedMachineType().name())) {
             return false;
         }
 

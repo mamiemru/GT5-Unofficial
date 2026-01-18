@@ -1690,6 +1690,7 @@ public enum MetaTileEntityIDs {
     REALITY_PHASE_TUNER_MODULE(15755),
     CAUSALITY_ASSEMBLING_MODULE(15756),
     HATCH_REALITY_PHASE_SENSOR(15757),
+    ACALModuleBioChamber(15758),
     BasicTeslaTransceiver1by1(16000),
     AdvancedTeslaTransceiver1by1(16001),
     EpycTeslaTransceiver1by1(16002),

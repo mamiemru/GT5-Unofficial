@@ -10,7 +10,6 @@ import static gregtech.api.recipe.RecipeMaps.pcbFactoryRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeConstants.COMPRESSION_TIER;
 import static gregtech.api.util.GTRecipeConstants.PCB_NANITE_MATERIAL;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.ADVANCED_NITINOL;
 import static gtPlusPlus.core.material.MaterialsElements.STANDALONE.HYPOGEN;
@@ -27,6 +26,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.recipe.metadata.CompressionTierKey;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
@@ -223,7 +223,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Condensed_Causality_Crystal.get(0), ItemList.Circuit_Silicon_Wafer7.get(16L))
-            .fluidInputs(Materials.Protomatter.getMolten(INGOTS))
+            .fluidInputs(Materials.Protomatter.getFluid(INGOTS))
             .itemOutputs(ItemList.Circuit_Wafer_IPCRL.get(1L))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UIV)
@@ -232,11 +232,12 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
             .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
-            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(64))
-            .metadata(COMPRESSION_TIER, 2)
+            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(16))
+            .metadata(CompressionTierKey.INSTANCE, 2)
             .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .addTo(neutroniumCompressorRecipes);
+
     }
 
     private ItemStack[] computeOutputForAnyCircuits(String aItem, int amount) {
@@ -357,6 +358,20 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.RECIPE_ZPM)
             .addTo(advancedCircuitAssemblylineRecipes);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Cosmic.get(1L),
+                ItemList.Optically_Perfected_CPU.get(1L),
+                ItemList.Optically_Compatible_Memory.get(2L),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Ichorium, 2L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Void, 2L))
+            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitUV", 32, 0))
+            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
+            .duration(700 * SECONDS)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        // next numbers are: 23, 12, 8, 3, 1
     }
 
     private void registerExoticLineRecipe() {
@@ -482,7 +497,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Parts_UniversalISMD.get(32L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TengamPurified, 8L))
             .fluidInputs(
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.Void.getMolten(8 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicComputer.get(1L))
@@ -500,7 +515,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .fluidInputs(
                 Materials.Infinity.getPlasma(32 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.Ichorium.getMolten(8 * INGOTS),
                 Materials.MagMatter.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicMainframe.get(1L))
             .duration(600 * SECONDS)
