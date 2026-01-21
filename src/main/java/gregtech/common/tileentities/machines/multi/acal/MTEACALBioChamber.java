@@ -55,11 +55,11 @@ public class MTEACALBioChamber extends MTEACALUpgradeBase<MTEACALBioChamber>
         .<MTEACALBioChamber>builder()
         .addShape(STRUCTURE_PIECE_BIO_CHAMBER, structure)
         // Damascus steel frame box
-        .addElement('F', ofFrame(Materials.DamascusSteel))
+        .addElement('F', ofFrame(Materials.Aluminium))
         // any glass
         .addElement('G', chainAllGlasses())
         // Clean stainless steel casing
-        .addElement('S', ofBlock(GregTechAPI.sBlockCasings4, 1))
+        .addElement('S', ofBlock(GregTechAPI.sBlockCasings4, 2))
         .build();
 
     public MTEACALBioChamber(int aID, String aName, String aNameRegional) {
@@ -70,10 +70,6 @@ public class MTEACALBioChamber extends MTEACALUpgradeBase<MTEACALBioChamber>
         super(aName);
     }
 
-    @Override
-    public MTEModulableController<?> getCastedController() {
-        return currentFactory;
-    }
 
     @Override
     public boolean isCasterController(IMetaTileEntity metaTileEntity) {

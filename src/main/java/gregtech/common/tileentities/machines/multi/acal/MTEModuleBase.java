@@ -6,6 +6,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import gregtech.common.tileentities.machines.multi.purification.MTEPurificationPlant;
+import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -37,7 +39,9 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
 
     private enum LinkResult {
         TOO_FAR,
-        NO_VALID_FACTORY,
+        NO_VALID_FACTORY, //Not a GT Machine
+        NO_VALID_CONTROLLER, // Not a MTEModulableController child
+        NO_VALID_PLANT, // Not the right MTEModulable
         SUCCESS,
     }
 
@@ -53,6 +57,10 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
 
     protected MTEModuleBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
+    }
+
+    public MTEModulableController<?> getCastedController() {
+        return getFactoryFromCoords();
     }
 
     public MTEModuleBase(String aName) {
@@ -109,8 +117,6 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         }
     }
 
-    public abstract MTEModulableController<?> getCastedController();
-
     public abstract boolean isCasterController(IMetaTileEntity metaTileEntity);
 
     private LinkResult trySetControllerFromCoord(int x, int y, int z) {
@@ -126,13 +132,11 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
             .getTileEntity(x, y, z);
         if (tileEntity == null) return LinkResult.NO_VALID_FACTORY;
         if (!(tileEntity instanceof IGregTechTileEntity gtTileEntity)) return LinkResult.NO_VALID_FACTORY;
-        var factory = getCastedController();
-
-        // MTEModulableController<?> factory = getCastedController();
-        // if (!(metaTileEntity instanceof MTEAdvancedCircuitAssemblyLine)) return LinkResult.NO_VALID_FACTORY;
-        // Now link to new controller
-        factory.registerLinkedUnit(this);
-
+        var metaTileEntity = gtTileEntity.getMetaTileEntity();
+        if (!(metaTileEntity instanceof MTEModulableController<?> mTileEntity)) return LinkResult.NO_VALID_CONTROLLER;
+        if (mTileEntity.getMachineType() != getTargetedMachineType()) return LinkResult.NO_VALID_PLANT;
+        mTileEntity.registerLinkedUnit(this);
+        this.currentFactory = mTileEntity;
         return LinkResult.SUCCESS;
     }
 
@@ -181,9 +185,9 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
             aPlayer.addChatMessage(new ChatComponentText("Link successful"));
         } else if (result == LinkResult.TOO_FAR) {
             aPlayer.addChatMessage(new ChatComponentText("Link failed: Out of range."));
-        } else if (result == LinkResult.NO_VALID_FACTORY) {
+        } else if (result == LinkResult.NO_VALID_FACTORY || result == LinkResult.NO_VALID_CONTROLLER || result == LinkResult.NO_VALID_PLANT) {
             aPlayer.addChatMessage(
-                new ChatComponentText("Link failed: No AdvancedCircuitAssemblyLine found at link location"));
+                new ChatComponentText("Link failed: No "+ getTargetedMachineType().name() +" Controller found at link location"));
         }
         if (result == LinkResult.SUCCESS) {
             controllerCoords.add(new Vec3Impl(x, y, z));
@@ -192,21 +196,23 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
         return true;
     }
 
+    protected MTEModulableController<?> getFactoryFromCoords(Vec3Impl coords) {
+        TileEntity tileEntity = this.getBaseMetaTileEntity()
+            .getWorld()
+            .getTileEntity(coords.get(0), coords.get(1), coords.get(2));
+        if (tileEntity == null) return null;
+        if (!(tileEntity instanceof IGregTechTileEntity gtTileEntity)) return null;
+        var metaTileEntity = gtTileEntity.getMetaTileEntity();
+        if (!(metaTileEntity instanceof MTEModulableController<?> mTileEntity)) return null;
+        if (mTileEntity.getMachineType() != getTargetedMachineType()) return null;
+        return mTileEntity;
+    }
+
     /**
      * removes any factories that are not there anymore, in case onBlockBreak didn't fire
      */
     protected void checkFactories() {
-        for (Vec3Impl coords : controllerCoords) {
-            TileEntity TE = this.getBaseMetaTileEntity()
-                .getWorld()
-                .getTileEntity(coords.get(0), coords.get(1), coords.get(2));
-            if (TE instanceof IGregTechTileEntity GTTE) {
-                IMetaTileEntity MTE = GTTE.getMetaTileEntity();
-                if (!(MTE instanceof MTEAdvancedCircuitAssemblyLine)) {
-                    controllerCoords.remove(coords);
-                }
-            } else controllerCoords.remove(coords);
-        }
+        controllerCoords.removeIf(coords -> getFactoryFromCoords(coords) == null);
     }
 
     @Override
@@ -234,16 +240,11 @@ public abstract class MTEModuleBase<T extends MTEEnhancedMultiBlockBase<T>> exte
     @Override
     public void onBlockDestroyed() {
         // When this block is destroyed, explicitly unlink it from the controller if there is any.
-        for (Vec3Impl controllerCoord : controllerCoords) {
-            TileEntity TE = this.getBaseMetaTileEntity()
-                .getWorld()
-                .getTileEntity(controllerCoord.get(0), controllerCoord.get(1), controllerCoord.get(2));
-            if (TE instanceof IGregTechTileEntity GTTE) {
-                if (GTTE.getMetaTileEntity() instanceof MTEModulableController<?>controller) {
-                    controller.unregisterLinkedUnit(this);
-                }
+        for (Vec3Impl coords : controllerCoords) {
+            MTEModulableController<?> m = getFactoryFromCoords(coords);
+            if (m != null) {
+                m.unregisterLinkedUnit(this);
             }
-
         }
         super.onBlockDestroyed();
     }
