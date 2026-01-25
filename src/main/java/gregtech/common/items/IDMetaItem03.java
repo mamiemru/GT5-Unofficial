@@ -218,6 +218,7 @@ public enum IDMetaItem03 {
     Circuit_Parts_UniversalISMD(266),
     Circuit_Wafer_IPCRL(267),
     Circuit_Wafer_MIPCRL(268),
+    Chronological_disruption_mainframe(269),
     Circuit_Silicon_Ingot6(721),
     Circuit_Silicon_Wafer6(722),
     Circuit_Silicon_Wafer7(723),
@@ -226,13 +227,13 @@ public enum IDMetaItem03 {
     Optically_Perfected_CPU(726),
     Optical_Cpu_Containment_Housing(727),
     Circuit_Board_Optical(728),
+    Condensed_Causality_Crystal(729),
     Timepiece(757),
     Transdimensional_Alignment_Matrix(758),
     Thermal_Superconductor(759),
     Relativistic_Heat_Capacitor(760),
     Phononic_Seed_Crystal(761),
-    Harmonic_Compound(762),
-    Condensed_Causality_Crystal(764);
+    Harmonic_Compound(762);
 
     public final int ID;
 

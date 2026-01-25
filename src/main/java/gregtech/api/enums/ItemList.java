@@ -1953,6 +1953,7 @@ public enum ItemList implements IItemContainer {
     Circuit_Parts_UniversalISMD,
     Circuit_Wafer_IPCRL,
     Circuit_Wafer_MIPCRL,
+    Chronological_disruption_mainframe,
 
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,
@@ -2927,17 +2928,7 @@ public enum ItemList implements IItemContainer {
     Wrap_OpticalCPUContainmentHousings,
     Wrap_OpticallyCompatibleMemories,
     Wrap_LivingCrystalChips,
-    Wrap_LivingBioChips
-
-    CausalityResistantCasing,
-    CausalityResistantGlass,
-    RealityAttunedCasing,
-    CausalityAttractionEngine,
-    RealityShifterCasing,
-    RealityFabricSiphonController,
-    RealityPhaseTunerModule,
-    CausalityAssemblingModule,
-    Hatch_RealityPhaseSensor
+    Wrap_LivingBioChips,
 
     CausalityResistantCasing,
     CausalityResistantGlass,

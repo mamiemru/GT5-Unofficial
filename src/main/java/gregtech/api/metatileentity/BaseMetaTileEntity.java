@@ -2254,7 +2254,6 @@ public class BaseMetaTileEntity extends CommonBaseMetaTileEntity
             : super.getRenderBoundingBox();
     }
 
-
     @Override
     public double getMaxRenderDistanceSquared() {
         return getMetaTileEntity() instanceof IMTERenderer mteRenderer ? mteRenderer.getMaxRenderDistanceSquared()
