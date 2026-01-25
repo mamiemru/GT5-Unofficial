@@ -3,6 +3,7 @@ package gregtech.loaders.postload.recipes;
 import static gregtech.api.enums.Mods.ModIDs.NEW_HORIZONS_CORE_MOD;
 import static gregtech.api.recipe.RecipeMaps.advancedCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
+import static gregtech.api.recipe.RecipeMaps.causalityRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
 import static gregtech.api.recipe.RecipeMaps.laserEngraverRecipes;
 import static gregtech.api.recipe.RecipeMaps.neutroniumCompressorRecipes;
@@ -28,6 +29,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
@@ -223,7 +225,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Condensed_Causality_Crystal.get(0), ItemList.Circuit_Silicon_Wafer7.get(16L))
-            .fluidInputs(Materials.Protomatter.getMolten(INGOTS))
+            .fluidInputs(Materials.Protomatter.getFluid(INGOTS))
             .itemOutputs(ItemList.Circuit_Wafer_IPCRL.get(1L))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UIV)
@@ -231,12 +233,42 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
-            .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
-            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(64))
+            .fluidInputs(Materials.Void.getMolten(8 * INGOTS))
+            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(4))
             .metadata(COMPRESSION_TIER, 2)
             .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .addTo(neutroniumCompressorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
+            .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
+            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(32))
+            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
+            .duration(5 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .addTo(causalityRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_CosmicComputer.get(8),
+                ItemList.Circuit_ExoticMainframe.get(2),
+                ItemList.Circuit_Parts_UniversalISMD.get(64),
+                ItemList.Circuit_Wafer_MIPCRL.get(32),
+                ItemList.EnergisedTesseract.get(8),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.Infinity, 16),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Ichorium, 8),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SpaceTime, 2))
+            .fluidInputs(
+                Materials.Void.getMolten(32 * INGOTS),
+                Materials.QuarkGluonPlasma.getFluid(8 * INGOTS),
+                Materials.WhiteDwarfMatter.getMolten(18),
+                Materials.BlackDwarfMatter.getMolten(18))
+            .itemOutputs(ItemList.Chronological_disruption_mainframe.get(1))
+            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.8)
+            .duration(16 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .addTo(causalityRecipes);
     }
 
     private ItemStack[] computeOutputForAnyCircuits(String aItem, int amount) {
@@ -263,11 +295,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
     private void registerAnyCircuitRecipes() {
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Wafer_Simple_SoC.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.RedAlloy, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.RedAlloy, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitULV", 64 * 8))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Wafer_Simple_SoC.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.RedAlloy, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.RedAlloy, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitULV", 64 * 8))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(200 * SECONDS)
             .eut(TierEU.RECIPE_ULV)
@@ -275,11 +307,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Wafer_SoC.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Copper, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitLV", 64 * 6))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Wafer_SoC.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Copper, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitLV", 64 * 6))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(250 * SECONDS)
             .eut(TierEU.RECIPE_LV)
@@ -287,11 +319,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Wafer_SoC.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.AnnealedCopper, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.AnnealedCopper, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitMV", 64 * 4))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Wafer_SoC.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.AnnealedCopper, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.AnnealedCopper, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitMV", 64 * 4))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(300 * SECONDS)
             .eut(TierEU.RECIPE_MV)
@@ -299,11 +331,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Wafer_SoC2.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Electrum, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Platinum, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitHV", 182))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Wafer_SoC2.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Electrum, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Platinum, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitHV", 182))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(350 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -311,11 +343,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Wafer_SoC2.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Platinum, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.NiobiumTitanium, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitEV", 128))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Wafer_SoC2.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Platinum, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.NiobiumTitanium, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitEV", 128))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -323,11 +355,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Chip_CrystalSoC.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Yttrium, 2L))
-            .itemOutputs(computeOutputForAnyCircuits("item.CircuitIV", 92))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Chip_CrystalSoC.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Yttrium, 2))
+            .itemOutputs(computeOutputForAnyCircuits("CircuitIV", 92))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(450 * SECONDS)
             .eut(TierEU.RECIPE_IV)
@@ -335,11 +367,11 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Parts_Crystal_Chip_Wetware.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Yttrium, 2L),
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.CosmicNeutronium, 2L))
-            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitLuV", 64, 0))
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Parts_Crystal_Chip_Wetware.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Yttrium, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.CosmicNeutronium, 2))
+            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "CircuitLuV", 64, 0))
             .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(4 * INGOTS))
             .duration(500 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
@@ -347,14 +379,40 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_Board_Exotic.get(1L),
-                ItemList.Circuit_Parts_Chip_Bioware.get(1L),
+                ItemList.Circuit_Board_Exotic.get(1),
+                ItemList.Circuit_Parts_Chip_Bioware.get(1),
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 2L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Infinity, 2L))
-            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "item.CircuitZPM", 46, 0))
+            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "CircuitZPM", 46, 0))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
             .duration(600 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Cosmic.get(1),
+                ItemList.Optically_Perfected_CPU.get(1),
+                ItemList.Optically_Compatible_Memory.get(2),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Ichorium, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Void, 2))
+            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "CircuitUV", 32, 0))
+            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
+            .duration(700 * SECONDS)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Chronological_disruption_mainframe.get(4),
+                ItemList.Exotic_Super_CPU.get(2),
+                ItemList.Circuit_Wafer_MIPCRL.get(4),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Infinity, 2),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.ProtoHalkonite, 2))
+            .itemOutputs(getModItem(NEW_HORIZONS_CORE_MOD, "CircuitUHV", 24, 0))
+            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(4 * INGOTS))
+            .duration(800 * SECONDS)
+            .eut(TierEU.RECIPE_UHV)
             .addTo(advancedCircuitAssemblylineRecipes);
 
     }

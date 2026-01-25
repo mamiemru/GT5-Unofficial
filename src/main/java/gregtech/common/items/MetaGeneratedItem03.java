@@ -1246,16 +1246,6 @@ public class MetaGeneratedItem03 extends MetaGeneratedItemX32 implements IItemFi
         ItemList.Harmonic_Compound
             .set(addItem(Harmonic_Compound.ID, "Harmonic Compound", "Toxic violet with a red haze", "ingotHotHarmonic"))
             .setRender(new InfinityMetaItemRenderer());
-        ItemList.Condensed_Causality_Crystal
-            .set(
-                addItem(
-                    Condensed_Causality_Crystal.ID,
-                    "Condensed Causality Crystal",
-                    String.join(
-                        "/n ",
-                        "Isn't that like a big bang shard ?",
-                        "Don't try to compress multiple of that... thing")))
-            .setRender(new InfinityMetaItemRenderer());
 
         ItemList.Heavy_Hellish_Mud.set(addItem(Heavy_Hellish_Mud.ID, "Heavy Hellish Mud", "God wouldn't touch this"));
         ItemList.Netherite_Scrap_Seed.set(addItem(Netherite_Scrap_Seed.ID, "Netherite Scrap Seed", ""));

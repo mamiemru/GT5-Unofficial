@@ -77,7 +77,6 @@ import gregtech.common.blocks.BlockOresLegacy;
 import gregtech.common.blocks.BlockReinforced;
 import gregtech.common.blocks.BlockRenderer;
 import gregtech.common.blocks.BlockSheetMetal;
-import gregtech.common.blocks.BlockRenderer;
 import gregtech.common.blocks.BlockStones;
 import gregtech.common.blocks.BlockTintedIndustrialGlass;
 import gregtech.common.blocks.TileEntityOres;
