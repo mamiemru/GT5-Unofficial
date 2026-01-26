@@ -2888,7 +2888,10 @@ public enum ItemList implements IItemContainer {
     Wrap_OpticalCPUContainmentHousings,
     Wrap_OpticallyCompatibleMemories,
     Wrap_LivingCrystalChips,
-    Wrap_LivingBioChips
+    Wrap_LivingBioChips,
+
+    Machine_Prototype_Chamber,
+    Machine_Prototype
 
     // semicolon after the comment to reduce merge conflicts
     ;

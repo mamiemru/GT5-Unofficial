@@ -608,6 +608,13 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         ItemList.LATEX.set(new MTELatex(LATEX.ID, "multimachine.latex", "L.A.T.E.X.").getStackForm(1));
         addItemTooltip(ItemList.LATEX.get(1), chain(() -> "Author: ", GTValues.AuthorThree));
 
+        ItemList.Machine_Prototype_Chamber.set(
+            new MTEMultiLathe(Machine_Prototype_Chamber.ID, "Machine_Prototype_Chamber", "Machine_Prototype_Chamber")
+                .getStackForm(1));
+        ItemList.Machine_Prototype.set(
+            new MTEMultiLathe(Machine_Prototype.ID, "Machine_Prototype", "Machine_Prototype")
+                .getStackForm(1));
+
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(
                 new MTEResearchCompleter(ResearchCompleter.ID, "Research Completer", "Research Completer")
