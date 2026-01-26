@@ -11,26 +11,13 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
-import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.common.items.ItemComb;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import org.jetbrains.annotations.NotNull;
-
-import java.text.DecimalFormat;
-import java.util.List;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
@@ -46,14 +33,10 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_LATEX_A
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_LATEX_GLOW;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
-public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> implements ISurvivalConstructable {
+public class MTEPrototypeChamber extends MTEExtendedPowerMultiBlockBase<MTEPrototypeChamber> implements ISurvivalConstructable {
 
-    private int beamLevel = 0;
-
-    private static final int ENERGY_CONSUMPTION = ItemComb.Voltage.UIV.getVoltage();
-    private static final int MAX_BEAM_LEVEL = 10000;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final IStructureDefinition<MTEPrototype> STRUCTURE_DEFINITION = StructureDefinition.<MTEPrototype>builder()
+    private static final IStructureDefinition<MTEPrototypeChamber> STRUCTURE_DEFINITION = StructureDefinition.<MTEPrototypeChamber>builder()
         .addShape(
             STRUCTURE_PIECE_MAIN,
             new String[][]{{
@@ -69,7 +52,7 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
             }} )
         .addElement(
             'C',
-            buildHatchAdder(MTEPrototype.class)
+            buildHatchAdder(MTEPrototypeChamber.class)
                 .atLeast(InputBus, InputHatch, OutputBus, Maintenance, Energy.or(MultiAmpEnergy))
                 .casingIndex(176)
                 .hint(1)
@@ -84,22 +67,22 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
     }
 
 
-    public MTEPrototype(final int aID, final String aName, final String aNameRegional) {
+    public MTEPrototypeChamber(final int aID, final String aName, final String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public MTEPrototype(String aName) {
+    public MTEPrototypeChamber(String aName) {
         super(aName);
     }
 
     @Override
-    public IStructureDefinition<MTEPrototype> getStructureDefinition() {
+    public IStructureDefinition<MTEPrototypeChamber> getStructureDefinition() {
         return STRUCTURE_DEFINITION;
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTEPrototype(this.mName);
+        return new MTEPrototypeChamber(this.mName);
     }
 
     @Override
@@ -165,36 +148,9 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
         return checkPiece(STRUCTURE_PIECE_MAIN, 2, 0, 0);
     }
 
-
-    @NotNull
     @Override
-    public CheckRecipeResult checkProcessing() {
-
-        ++beamLevel;
-
-        if (beamLevel > MAX_BEAM_LEVEL) {
-            explodeMultiblock();
-        }
-
-        return CheckRecipeResultRegistry.SUCCESSFUL;
-    }
-
-    @Override
-    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
-                                int z) {
-        super.getWailaNBTData(player, tile, tag, world, x, y, z);
-        tag.setInteger("beamLevel", beamLevel);
-    }
-
-    @Override
-    public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-                             IWailaConfigHandler config) {
-        super.getWailaBody(itemStack, currenttip, accessor, config);
-        NBTTagCompound tag = accessor.getNBTData();
-        currenttip.add(
-            "beamLevel: "
-                + EnumChatFormatting.WHITE
-                + tag.getInteger("beamLevel"));
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.cableRecipes;
     }
 
     @Override

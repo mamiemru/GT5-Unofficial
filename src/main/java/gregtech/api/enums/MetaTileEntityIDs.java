@@ -1720,6 +1720,8 @@ public enum MetaTileEntityIDs {
     UMV256ADynamoHatch(16034),
     UXV256ADynamoHatch(16035),
     FuelRefineFactory(16999),
+    Machine_Prototype_Chamber(17000),
+    Machine_Prototype(17001),
     MAGLEV_PYLON_MV(29990),
     MAGLEV_PYLON_HV(29991),
     MAGLEV_PYLON_EV(29992),
