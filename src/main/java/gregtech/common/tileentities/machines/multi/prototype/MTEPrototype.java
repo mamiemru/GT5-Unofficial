@@ -6,11 +6,13 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
+import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -34,6 +36,7 @@ import java.util.List;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -170,7 +173,21 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
     @Override
     public CheckRecipeResult checkProcessing() {
 
-        ++beamLevel;
+        long mEutTemp = 0;
+        int beamLevelTemp = 0;
+        for (MTEHatchEnergy ea : mEnergyHatches){
+            int tier = (int) ea.getInputTier();
+            beamLevelTemp += Math.max(0, (tier - 10));
+            mEutTemp += V[tier];
+        }
+
+        mEUt = (int) mEutTemp;
+
+        if (mEUt <= 0) {
+            return CheckRecipeResultRegistry.insufficientPower(TierEU.RECIPE_UIV);
+        }
+
+        beamLevel += beamLevelTemp;
 
         if (beamLevel > MAX_BEAM_LEVEL) {
             explodeMultiblock();
@@ -195,6 +212,19 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
             "beamLevel: "
                 + EnumChatFormatting.WHITE
                 + tag.getInteger("beamLevel"));
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        // NBT can be loaded as any primitive type, so we can load it as long.
+        this.beamLevel = aNBT.getInteger("beamLevel");
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setInteger("beamLevel", this.beamLevel);
     }
 
     @Override
