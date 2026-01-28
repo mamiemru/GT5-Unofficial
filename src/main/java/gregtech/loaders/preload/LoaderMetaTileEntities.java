@@ -43,6 +43,8 @@ import static gregtech.api.recipe.RecipeMaps.sifterRecipes;
 import static gregtech.api.recipe.RecipeMaps.thermalCentrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 
+import gregtech.common.tileentities.machines.multi.prototype.MTEPrototype;
+import gregtech.common.tileentities.machines.multi.prototype.MTEPrototypeChamber;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.enums.GTValues;
@@ -609,10 +611,10 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         addItemTooltip(ItemList.LATEX.get(1), chain(() -> "Author: ", GTValues.AuthorThree));
 
         ItemList.Machine_Prototype_Chamber.set(
-            new MTEMultiLathe(Machine_Prototype_Chamber.ID, "Machine_Prototype_Chamber", "Machine_Prototype_Chamber")
+            new MTEPrototypeChamber(Machine_Prototype_Chamber.ID, "Machine_Prototype_Chamber", "Machine_Prototype_Chamber")
                 .getStackForm(1));
         ItemList.Machine_Prototype.set(
-            new MTEMultiLathe(Machine_Prototype.ID, "Machine_Prototype", "Machine_Prototype")
+            new MTEPrototype(Machine_Prototype.ID, "Machine_Prototype", "Machine_Prototype")
                 .getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {
