@@ -245,7 +245,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
             .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(32))
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
-            .duration(5 * SECONDS)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .addTo(causalityRecipes);
 
@@ -266,7 +266,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 Materials.BlackDwarfMatter.getMolten(18))
             .itemOutputs(ItemList.Chronological_disruption_mainframe.get(1))
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.8)
-            .duration(16 * SECONDS)
+            .duration(160 * SECONDS)
             .eut(TierEU.RECIPE_UXV)
             .addTo(causalityRecipes);
     }
