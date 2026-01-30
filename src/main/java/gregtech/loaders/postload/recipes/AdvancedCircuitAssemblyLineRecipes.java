@@ -508,6 +508,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 2L))
             .fluidInputs(
                 Materials.Samarium.getPlasma(2 * INGOTS),
+                Materials.Void.getMolten(10 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
             .itemOutputs(ItemList.Circuit_CosmicProcessor.get(1L))
             .duration(200 * SECONDS)
@@ -526,6 +527,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Ichorium, 16L))
             .fluidInputs(
                 Materials.Samarium.getPlasma(4 * INGOTS),
+                Materials.Void.getMolten(20 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
             .itemOutputs(ItemList.Circuit_CosmicAssembly.get(1L))
             .duration(250 * SECONDS)
@@ -540,7 +542,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 ItemList.Circuit_Parts_UniversalISMD.get(32L),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.TengamPurified, 8L))
             .fluidInputs(
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.Void.getMolten(40 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
                 Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicComputer.get(1L))
@@ -558,7 +560,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .fluidInputs(
                 Materials.Infinity.getPlasma(32 * INGOTS),
                 Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
-                Materials.SixPhasedCopper.getPlasma(8 * INGOTS),
+                Materials.Void.getMolten(80 * INGOTS),
                 Materials.MagMatter.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Circuit_CosmicMainframe.get(1L))
             .duration(600 * SECONDS)
