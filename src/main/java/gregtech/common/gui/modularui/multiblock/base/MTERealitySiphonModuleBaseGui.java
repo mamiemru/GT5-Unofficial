@@ -20,8 +20,8 @@ public class MTERealitySiphonModuleBaseGui<T extends MTERealitySiphonModuleBase<
     @Override
     protected ListWidget<IWidget, ?> createTerminalTextWidget(PanelSyncManager syncManager, ModularPanel parent) {
         return super.createTerminalTextWidget(syncManager, parent).childIf(
-            () -> !siphonLinkedSyncer.getBoolValue(),
-            IKey.lang("GT5U.gui.text.no_target_siphon")
+            !siphonLinkedSyncer.getBoolValue(),
+            () -> IKey.lang("GT5U.gui.text.no_target_siphon")
                 .asWidget()
                 .setEnabledIf((useless) -> !siphonLinkedSyncer.getBoolValue()));
     }

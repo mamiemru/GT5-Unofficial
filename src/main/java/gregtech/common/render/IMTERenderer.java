@@ -11,14 +11,6 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.net.GTPacketClientMTERendererData;
 import io.netty.buffer.ByteBuf;
 
-import com.google.common.io.ByteArrayDataInput;
-
-import gregtech.api.enums.GTValues;
-import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.net.GTPacketClientMTERendererData;
-import io.netty.buffer.ByteBuf;
-
 public interface IMTERenderer {
 
     void renderTESR(double x, double y, double z, float timeSinceLastTick);
