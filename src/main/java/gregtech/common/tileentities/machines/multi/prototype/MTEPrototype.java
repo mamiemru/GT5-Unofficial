@@ -64,7 +64,7 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
             },{
                 "CCCCC"
             },{
-                "CCCCC"
+                "CCXCC"
             },{
                 "CCCCC"
             },{
@@ -73,10 +73,13 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
         .addElement(
             'C',
             buildHatchAdder(MTEPrototype.class)
-                .atLeast(InputBus, InputHatch, OutputBus, Maintenance, Energy.or(MultiAmpEnergy))
+                .atLeast(InputBus, InputHatch, OutputBus, Energy)
                 .casingIndex(176)
                 .hint(1)
                 .buildAndChain(onElementPass(e -> {}, ofBlock(GregTechAPI.sBlockCasings8, 0))))
+        .addElement(
+            'X',ofBlock(GregTechAPI.sBlockCasings4, 0)
+        )
         .build();
 
     protected ProcessingLogic createProcessingLogic() {
