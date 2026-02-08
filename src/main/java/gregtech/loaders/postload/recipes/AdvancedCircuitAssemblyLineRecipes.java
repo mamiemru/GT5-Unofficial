@@ -291,8 +291,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.preciousMetalAlloy.get(OrePrefixes.screw, 4))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
             .itemOutputs(ItemList.Optically_Perfected_CPU.get(1L))
-            .metadata(IGRecipeMaps.MODULE_TIER, 1)
-            .duration(10 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
             .addTo(causalityRecipes);
@@ -310,8 +309,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.enrichedNaquadahAlloy.get(OrePrefixes.screw, 8))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(576))
             .itemOutputs(ItemList.Optically_Perfected_CPU.get(4L))
-            .metadata(IGRecipeMaps.MODULE_TIER, 2)
-            .duration(10 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.5)
             .addTo(causalityRecipes);
@@ -330,8 +328,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GGMaterial.shirabon.get(OrePrefixes.screw, 16))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(1152))
             .itemOutputs(ItemList.Optically_Perfected_CPU.get(16L))
-            .metadata(IGRecipeMaps.MODULE_TIER, 2)
-            .duration(10 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.8)
             .addTo(causalityRecipes);
@@ -346,8 +343,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 getModItem(SuperSolarPanels.ID, "solarsplitter", 1L, 0)) // Solar Light Splitter
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
             .itemOutputs(ItemList.Optically_Compatible_Memory.get(2))
-            .metadata(IGRecipeMaps.MODULE_TIER, 1)
-            .duration(5 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
             .addTo(causalityRecipes);
@@ -362,8 +358,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 getModItem(SuperSolarPanels.ID, "solarsplitter", 4L, 0)) // Solar Light Splitter
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(576))
             .itemOutputs(ItemList.Optically_Compatible_Memory.get(8))
-            .metadata(IGRecipeMaps.MODULE_TIER, 2)
-            .duration(5 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
             .addTo(causalityRecipes);
@@ -378,8 +373,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 getModItem(SuperSolarPanels.ID, "solarsplitter", 16L, 0)) // Solar Light Splitter
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(1152))
             .itemOutputs(ItemList.Optically_Compatible_Memory.get(32))
-            .metadata(IGRecipeMaps.MODULE_TIER, 2)
-            .duration(5 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.5)
             .addTo(causalityRecipes);
@@ -399,8 +393,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Platinum, 64))
             .fluidInputs(Materials.SolderingAlloy.getMolten(720))
             .itemOutputs(ItemList.Energy_LapotronicOrb2.get(1))
-            .metadata(IGRecipeMaps.MODULE_TIER, 1)
-            .duration(50 * SECONDS)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
             .addTo(causalityRecipes);
@@ -421,8 +414,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get("wireFineHypogen", 48))
             .fluidInputs(Materials.SolderingAlloy.getMolten(720))
             .itemOutputs(ItemList.Energy_Module.get(1))
-            .metadata(IGRecipeMaps.MODULE_TIER, 1)
-            .duration(50 * SECONDS)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
             .addTo(causalityRecipes);
@@ -444,8 +436,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 12L))
             .fluidInputs(Materials.SolderingAlloy.getMolten(720))
             .itemOutputs(ItemList.Energy_Cluster.get(1))
-            .metadata(IGRecipeMaps.MODULE_TIER, 1)
-            .duration(50 * SECONDS)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.4)
             .addTo(causalityRecipes);
@@ -460,7 +451,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 GTOreDictUnificator.get(OrePrefixes.screw, Materials.TranscendentMetal, 1L))
             .fluidInputs(Materials.Kevlar.getMolten(4 * INGOTS))
             .itemOutputs(ItemList.Exotic_Super_CPU.get(1L))
-            .duration(5 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 1.2)
             .addTo(causalityRecipes);
