@@ -1,5 +1,6 @@
 package gregtech.loaders.postload.recipes;
 
+import static goodgenerator.loader.Loaders.advancedRadiationProtectionPlate;
 import static gregtech.api.enums.Mods.ModIDs.NEW_HORIZONS_CORE_MOD;
 import static gregtech.api.enums.Mods.OpenComputers;
 import static gregtech.api.enums.Mods.SuperSolarPanels;
@@ -36,7 +37,6 @@ import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
-import gtnhintergalactic.recipe.IGRecipeMaps;
 import tectech.thing.CustomItemList;
 
 public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
@@ -454,6 +454,25 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .duration(SECONDS)
             .eut(TierEU.RECIPE_UIV)
             .metadata(GTRecipeConstants.CAUSALITY_STREAM, 1.2)
+            .addTo(causalityRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Lanthanum, 32L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.ElectrumFlux, 16L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Trinium, 16L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 64L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 16L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmiridium, 16L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.VibrantAlloy, 16L),
+                ItemList.Radiation_Proof_Prismatic_Naquadah_Composite_Sheet.get(16L))
+            .fluidInputs(
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(32 * 144),
+                Materials.Lead.getMolten(64 * 144L))
+            .itemOutputs(new ItemStack(advancedRadiationProtectionPlate, 4))
+            .duration(5 * SECONDS)
+            .eut(TierEU.RECIPE_ZPM)
+            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.1)
             .addTo(causalityRecipes);
     }
 
