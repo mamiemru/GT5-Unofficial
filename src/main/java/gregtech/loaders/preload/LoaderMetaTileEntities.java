@@ -220,6 +220,7 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPhAdjustment;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPlasmaHeater;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
+import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterSteel;
 import gregtech.common.tileentities.machines.steam.MTESteamCompressorBronze;
@@ -412,6 +413,12 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 TRANSCENDENT_PLASMA_MIXER_CONTROLLER.ID,
                 "multimachine.transcendentplasmamixer",
                 "Transcendent Plasma Mixer").getStackForm(1));
+
+        ItemList.Machine_Multi_Special_DoctorMindBender.set(
+            new MTEDoctorMindBender(
+                SPECIAL_DOCTOR_MIND_BENDER.ID,
+                "multimachine.doctorminbender",
+                "Cobra's Doctor Mind Bender").getStackForm(1));
 
         ItemList.LargePlasmaTurbine.set(
             new MTELargeTurbinePlasma(
