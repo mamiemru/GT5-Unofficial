@@ -47,6 +47,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.ByteArrayDataInput;
 import com.gtnewhorizon.gtnhlib.client.renderer.postprocessing.I3DGeometryRenderer;
 import com.gtnewhorizon.gtnhlib.client.renderer.postprocessing.PostProcessingManager;
 import com.gtnewhorizon.gtnhlib.client.renderer.postprocessing.shaders.BloomShader;
@@ -94,6 +95,7 @@ import gregtech.common.misc.GTStructureChannels;
 import gregtech.common.render.IMTERenderer;
 import gtPlusPlus.core.block.ModBlocks;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSolidifier;
+import io.netty.buffer.ByteBuf;
 import tectech.thing.block.BlockGodforgeGlass;
 import tectech.thing.casing.TTCasingsContainer;
 
@@ -1010,6 +1012,16 @@ public class MTEExoFoundry extends MTEExtendedPowerMultiBlockBase<MTEExoFoundry>
     @Override
     public AxisAlignedBB getRenderBoundingBox(int x, int y, int z) {
         return AxisAlignedBB.getBoundingBox(x - 10, y + 7, z - 10, x + 10, y + 44, z + 10);
+    }
+
+    @Override
+    public void encodeRenderData(ByteBuf buffer) {
+
+    }
+
+    @Override
+    public void decodeRenderData(ByteArrayDataInput buffer) {
+
     }
 
     @Override

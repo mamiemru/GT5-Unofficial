@@ -58,6 +58,7 @@ import gregtech.api.objects.ItemData;
 import gregtech.api.recipe.maps.AssemblerBackend;
 import gregtech.api.recipe.maps.AssemblyLineFrontend;
 import gregtech.api.recipe.maps.CauldronFrontend;
+import gregtech.api.recipe.maps.CausalityRecipeFrontend;
 import gregtech.api.recipe.maps.DistillationTowerFrontend;
 import gregtech.api.recipe.maps.EFRBlastingBackend;
 import gregtech.api.recipe.maps.EFRSmokingBackend;
@@ -1850,5 +1851,20 @@ public final class RecipeMaps {
         .of("gt.recipe.nanochip.biologicalcoordinator", NACRecipeMapBackend::new)
         .maxIO(1, 1, 1, 0)
         .minInputs(1, 0)
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> advancedCircuitAssemblylineRecipes = RecipeMapBuilder
+        .of("gt.recipe.advancedcircuitassemblyline")
+        .maxIO(9, 8, 4, 0)
+        .minInputs(1, 1)
+        .build();
+    public static final RecipeMap<RecipeMapBackend> causalityRecipes = RecipeMapBuilder
+        .of("gt.recipe.causalityenricher")
+        .maxIO(12, 1, 4, 0)
+        .minInputs(1, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_CAUSALITY)
+        .logoPos(146, 68)
+        .neiTransferRect(85, 14, 52, 43)
+        .frontend(CausalityRecipeFrontend::new)
         .build();
 }

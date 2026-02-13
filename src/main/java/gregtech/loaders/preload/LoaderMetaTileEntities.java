@@ -114,6 +114,8 @@ import gregtech.common.tileentities.machines.MTEHatchCraftingInputSlave;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchInputME;
 import gregtech.common.tileentities.machines.MTEHatchPatternProvider;
+import gregtech.common.tileentities.machines.MTEHeatSensor;
+import gregtech.common.tileentities.machines.MTERealityPhaseSensor;
 import gregtech.common.tileentities.machines.basic.MTEAdvSeismicProspector;
 import gregtech.common.tileentities.machines.basic.MTEBetterJukebox;
 import gregtech.common.tileentities.machines.basic.MTEBoxinator;
@@ -210,10 +212,10 @@ import gregtech.common.tileentities.machines.multi.beamcrafting.MTEBeamSplitter;
 import gregtech.common.tileentities.machines.multi.beamcrafting.MTEBeamStabilizer;
 import gregtech.common.tileentities.machines.multi.beamcrafting.MTEHatchAdvancedOutputBeamline;
 import gregtech.common.tileentities.machines.multi.beamcrafting.MTELargeHadronCollider;
+import gregtech.common.tileentities.machines.multi.acal.MTEAdvancedCircuitAssemblyLine;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleUtility;
 import gregtech.common.tileentities.machines.multi.compressor.MTEHIPCompressor;
-import gregtech.common.tileentities.machines.multi.compressor.MTEHeatSensor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEIndustrialCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTENeutroniumCompressor;
 import gregtech.common.tileentities.machines.multi.drone.MTEDroneCentre;
@@ -251,6 +253,9 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPhAdjustment;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPlasmaHeater;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAssemblingModule;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -792,6 +797,12 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         addItemTooltip(
             ItemList.NanoChipModule_BiologicalCoordinator.get(1),
             chain(() -> "Author: ", GTValues.AuthorNotAPenguinAnimated));
+
+        ItemList.AdvancedCircuitAssemblyLine.set(
+            new MTEAdvancedCircuitAssemblyLine(
+                AdvancedCircuitAssemblyLine.ID,
+                "multimachine.adv-circuit-assemblyline",
+                "Advanced Circuit Assembly line").getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(

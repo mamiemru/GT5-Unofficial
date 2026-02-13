@@ -134,6 +134,13 @@ public final class CheckRecipeResultRegistry {
     @Nonnull
     public static final CheckRecipeResult CYCLE_IDLE = SimpleCheckRecipeResult.ofSuccess("cycle_idle");
 
+    /**
+     * Machine has both the catalyst and the coolant in hatch
+     */
+    @Nonnull
+    public static final CheckRecipeResult FLUID_COOLANT_MIXING = SimpleCheckRecipeResult
+        .ofFailure("catalyst_coolant_mixing");
+
     @Nonnull
     public static final CheckRecipeResult NAC_OPTICAL_MISSING_WATER = SimpleCheckRecipeResult
         .ofFailure("nac.missing_water");
@@ -192,6 +199,14 @@ public final class CheckRecipeResultRegistry {
         return new ResultNoValidOutputColor(color);
     }
 
+    /**
+     * Cannot process recipe because the machine don't have a Reality Fabric Siphon with enough causality generated.
+     */
+    @Nonnull
+    public static CheckRecipeResult insufficientCausality(double required) {
+        return new ResultInsufficientCausality(required);
+    }
+
     static {
         register(new SimpleCheckRecipeResult(false, "", false));
         register(new ResultInsufficientPower(0));
@@ -203,5 +218,6 @@ public final class CheckRecipeResultRegistry {
         register(new ResultMissingItem());
         register(new ResultMissingApiaryFlowers());
         register(new ResultNoValidOutputColor((byte) 0));
+        register(new ResultInsufficientCausality(0));
     }
 }

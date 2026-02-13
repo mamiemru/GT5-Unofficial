@@ -943,6 +943,7 @@ gt.recipe.cable=Cable Coating
 gt.recipe.cablecoater.description=Coating Cables
 gt.recipe.canner=Canner
 gt.recipe.canner.description=Unmobile Food Canning Machine GTA4
+gt.recipe.causalityenricher=Causality Crafter
 gt.recipe.centrifuge=Centrifuge
 gt.recipe.centrifuge.description=Separating Molecules
 gt.recipe.chemicalbath=Chemical Bath
@@ -1028,6 +1029,12 @@ gt.recipe.wiremill=Wiremill
 gt.recipe.wiremill.description=Produces Wires more efficiently
 gt.recipe.drawerframer=Drawer Framer
 gt.recipe.drawerframer.description=Frames drawers exactly like the Framing Table
+
+gt.recipe.advcircuitassemblyline=Advanced Circuit Assembly Line
+gt.recipe.advcircuitassemblyline.description=Faster circuit assembler
+
+gt.recipe.advcircuitassemblyline=Advanced Circuit Assembly Line
+gt.recipe.advcircuitassemblyline.description=Faster circuit assembler
 
 # RecipeMaps that are not listed on MachineType enum
 gt.recipe.fakeAssemblylineProcess=Assemblyline Process
@@ -1498,7 +1505,6 @@ GT5U.gui.text.no_immersion_fluid=§7No immersion fluid available
 GT5U.gui.text.backfiller_finished=§aWork complete
 GT5U.gui.text.backfiller_working=§aPouring concrete
 GT5U.gui.text.backfiller_current_area=§7Filling at y-level: §a%s
-GT5U.gui.text.overheated=§7HIP Unit overheated!
 GT5U.gui.text.pump_fluid_type=Fluid: §a%s
 GT5U.gui.text.pump_rate.1=Pumping rate: %s§r
 GT5U.gui.text.pump_rate.2= L/t
@@ -1512,6 +1518,7 @@ GT5U.gui.text.insufficient_voltage=§7Recipe needs a higher voltage to start. Re
 GT5U.gui.text.insufficient_heat=§7Recipe needs more heat to start. Required: %s K (%s§7)
 GT5U.gui.text.insufficient_machine_tier=§7Recipe needs higher structure tier. Required: %s
 GT5U.gui.text.insufficient_startup_power=§7Recipe needs higher startup power. Required: %s
+GT5U.gui.text.insufficient_causality=§7Recipe needs higher causality stream. Required: %s
 GT5U.gui.text.internal_error=§4Recipe was found, but had internal error
 GT5U.gui.text.drill_ores_left_chunk=Ores left in current chunk: §a%s
 GT5U.gui.text.drill_ores_left_layer=Ores left at y-level %s: §a%s
@@ -1550,6 +1557,7 @@ GT5U.gui.text.out_of_fluid=§4No following fluids supplied: §b%s§f x §6%s L
 GT5U.gui.text.out_of_item=§4No following items supplied: §b%s§f x §6%s
 GT5U.gui.text.out_of_stuff=§4No following stuffs supplied: §b%s§f x §6%s
 GT5U.gui.text.power_loss=§4Shut down due to power loss.
+GT5U.gui.text.causality_loss=§4Shut down due to causality loss.
 GT5U.gui.text.no_void_mining=§4Cannot void mine this dimension (%s).
 GT5U.gui.text.pollution_fail=§4Failed to output the pollution.
 GT5U.gui.text.structure_incomplete=§4Shut down due to incomplete structure.
@@ -1561,6 +1569,7 @@ GT5U.gui.text.missing_item=§7Missing required item: §b%s§f
 GT5U.gui.text.ph_sensor=pH threshold
 GT5U.gui.text.critical_ph_value=pH exceeded critical value.
 GT5U.gui.text.heat_sensor=Heat threshold
+GT5U.gui.text.phase_sensor=Phase threshold
 GT5U.gui.text.no_maintenance=Missing Maintenance Hatch
 GT5U.gui.text.no_muffler=Missing Muffler Hatch
 GT5U.gui.text.pulse_mode=Pulse Mode
@@ -1610,6 +1619,40 @@ GT5U.gui.text.bus_settings=Bus Settings
 GT5U.gui.text.amount_out_of=§9Amount: %,d / %,d
 GT5U.gui.text.compressed_bus_stored_items=Hold SHIFT to show all stored items
 
+GT5U.gui.text.heat_value=Heat: §c%d§r%%
+GT5U.gui.text.catalyst_coolant_mixing=Catalyst and coolant have been mixed ! Stoping machine.
+GT5U.gui.text.overheat_fail=Shut down due to §coverheat
+GT5U.gui.text.overheated=§cOverheated !
+GT5U.gui.text.no_target_siphon=No Target Reality Siphon
+GT5U.gui.text.attached_modules=Attached Module(s): %d
+GT5U.gui.text.current_reality_phase=Current Reality Phase: %d
+GT5U.gui.text.accumulated_causality=Accumulated Causality: %d
+GT5U.gui.text.generating_causality=Generating Causality: %d/s
+GT5U.gui.text.used_causality=Used Causality: %d/s
+GT5U.gui.text.remaining_generated_causality=Remaining Causality Generated: %d
+GT5U.gui.text.heat_value=Heat: §c%d§r%%
+GT5U.gui.text.catalyst_coolant_mixing=Catalyst and coolant have been mixed ! Stoping machine.
+GT5U.gui.text.overheat_fail=Shut down due to §coverheat
+GT5U.gui.text.overheated=§cOverheated !
+GT5U.gui.text.no_target_siphon=No Target Reality Siphon
+GT5U.gui.text.attached_modules=Attached Module(s): %d
+GT5U.gui.text.current_reality_phase=Current Reality Phase: %d
+GT5U.gui.text.accumulated_causality=Accumulated Causality: %d
+GT5U.gui.text.generating_causality=Generating Causality: %d/s
+GT5U.gui.text.used_causality=Used Causality: %d/s
+GT5U.gui.text.remaining_generated_causality=Remaining Causality Generated: %d
+GT5U.gui.text.heat_value=Heat: %d
+GT5U.gui.text.heat_value=Heat: §c%d§r%%
+GT5U.gui.text.catalyst_coolant_mixing=Catalyst and coolant have been mixed ! Stoping machine.
+GT5U.gui.text.overheat_fail=Shut down due to §coverheat
+GT5U.gui.text.overheated=§cOverheated !
+GT5U.gui.text.no_target_siphon=No Target Reality Siphon
+GT5U.gui.text.attached_modules=Attached Module(s): %d
+GT5U.gui.text.current_reality_phase=Current Reality Phase: %d
+GT5U.gui.text.accumulated_causality=Accumulated Causality: %d
+GT5U.gui.text.generating_causality=Generating Causality: %d/s
+GT5U.gui.text.used_causality=Used Causality: %d/s
+GT5U.gui.text.remaining_generated_causality=Remaining Causality Generated: %d
 
 # NAC Keys
 GT5U.gui.text.nac.missing_water=Insufficient Water Supplied
@@ -2432,6 +2475,7 @@ GT5U.nei.purified_water.grade_3.2=Returned in amount equivalent to consumed floc
 GT5U.nei.purified_water.grade_4.0=+%s pH/stack
 GT5U.nei.purified_water.grade_4.1=%s pH/1000L
 GT5U.nei.cauldron.consumed=Consumed per operation
+GT5U.nei.causality_assembler.causality_stream=Causality stream require: %d
 
 
 GT5U.config.colormodulation=Color Modulator
@@ -3323,6 +3367,8 @@ achievement.gt.blockmachines.multimachine.em.infuser=Energy Infuser
 achievement.gt.blockmachines.multimachine.em.infuser.desc=Pickup this item to see the recipe in NEI
 achievement.gt.blockmachines.hatch.holder.tier.09=Object Holder
 achievement.gt.blockmachines.hatch.holder.tier.09.desc=Pickup this item to see the recipe in NEI
+achievement.gt.blockmachines.multimachine.reality_siphon=Causality Breach
+achievement.gt.blockmachines.multimachine.reality_siphon.desc=Craft a Reality Fabric Siphon to... do some stuff with reality... hoppîng it's fine...
 
 achievement.item.StargateShieldingFoil=Stargate-Radiation-Containment-Plate
 achievement.item.StargateShieldingFoil.desc=Pickup this item to see the recipe in NEI
@@ -3800,6 +3846,7 @@ GTPP.waila.steam.use=Currently uses: §e%s§r L/s Steam
 GTPP.CC.machinetier=Control Core Tier
 GTPP.CC.discount=EU Discount
 GTPP.CC.parallel=Maximum Parallel
+GTPP.CC.duration=Crafting Duration
 
 # Tooltips for the Charger Packs
 GTPP.battpack.tooltip.1=Worn as a Belt within Baubles

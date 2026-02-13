@@ -7,6 +7,7 @@ import static gregtech.api.util.GTRecipeConstants.ALGAE_POND_TIER;
 import static gtPlusPlus.api.recipe.GTPPRecipeMaps.algaePondRecipes;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.Materials;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
 public class RecipeLoaderAlgaePond {
@@ -238,7 +239,10 @@ public class RecipeLoaderAlgaePond {
                 GregtechItemList.GreenAlgaeBiomass.get(14),
                 GregtechItemList.BrownAlgaeBiomass.get(4),
                 GregtechItemList.GoldenBrownAlgaeBiomass.get(4),
-                GregtechItemList.RedAlgaeBiomass.get(12))
+                GregtechItemList.RedAlgaeBiomass.get(12),
+                Materials.Steeleaf.getDust(16),
+                Materials.FierySteel.getDust(16),
+                Materials.Knightmetal.getDust(16))
             .outputChances(
                 100_00,
                 100_00,
@@ -252,7 +256,10 @@ public class RecipeLoaderAlgaePond {
                 90_00,
                 90_00,
                 90_00,
-                90_00)
+                90_00,
+                75_00,
+                75_00,
+                75_00)
             .metadata(ALGAE_POND_TIER, 13)
             .duration(4 * TICKS)
             .eut(0)
@@ -274,7 +281,10 @@ public class RecipeLoaderAlgaePond {
                 GregtechItemList.GreenAlgaeBiomass.get(14),
                 GregtechItemList.BrownAlgaeBiomass.get(4),
                 GregtechItemList.GoldenBrownAlgaeBiomass.get(4),
-                GregtechItemList.RedAlgaeBiomass.get(12))
+                GregtechItemList.RedAlgaeBiomass.get(12),
+                Materials.Steeleaf.getDust(24),
+                Materials.FierySteel.getDust(24),
+                Materials.Knightmetal.getDust(24))
             .outputChances(
                 100_00,
                 100_00,
@@ -289,7 +299,10 @@ public class RecipeLoaderAlgaePond {
                 90_00,
                 90_00,
                 90_00,
-                90_00)
+                90_00,
+                75_00,
+                75_00,
+                75_00)
             .metadata(ALGAE_POND_TIER, 14)
             .duration(2 * TICKS)
             .eut(0)
@@ -312,7 +325,10 @@ public class RecipeLoaderAlgaePond {
                 GregtechItemList.GreenAlgaeBiomass.get(14),
                 GregtechItemList.BrownAlgaeBiomass.get(4),
                 GregtechItemList.GoldenBrownAlgaeBiomass.get(4),
-                GregtechItemList.RedAlgaeBiomass.get(12))
+                GregtechItemList.RedAlgaeBiomass.get(12),
+                Materials.Steeleaf.getDust(48),
+                Materials.FierySteel.getDust(48),
+                Materials.Knightmetal.getDust(48))
             .outputChances(
                 100_00,
                 100_00,
@@ -328,7 +344,10 @@ public class RecipeLoaderAlgaePond {
                 90_00,
                 90_00,
                 90_00,
-                90_00)
+                90_00,
+                75_00,
+                75_00,
+                75_00)
             .metadata(ALGAE_POND_TIER, 15)
             .duration(1 * TICKS)
             .eut(0)
