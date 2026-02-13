@@ -257,6 +257,7 @@ import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAss
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
+import gregtech.common.tileentities.machines.multi.specials.MTEGenderBlender;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -484,6 +485,11 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 SPECIAL_DOCTOR_MIND_BENDER.ID,
                 "multimachine.doctorminbender",
                 "Cobra's Doctor Mind Bender").getStackForm(1));
+        ItemList.Machine_Multi_Special_GenderBlender.set(
+            new MTEGenderBlender(
+                SPECIAL_GENDER_BLENDER.ID,
+                "multimachine.genderblender",
+                "The Undefined Gender Blender").getStackForm(1));
 
         ItemList.LargePlasmaTurbine.set(
             new MTELargeTurbinePlasma(

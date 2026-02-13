@@ -3,7 +3,9 @@ package gregtech.common.tileentities.machines.multi.specials;
 import static com.gtnewhorizon.gtnhlib.util.numberformatting.NumberFormatUtil.formatNumber;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.InputBus;
+import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_DTPF_OFF;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_DTPF_ON;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1_GLOW;
@@ -14,7 +16,6 @@ import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap
 import static gregtech.common.misc.WirelessNetworkManager.getUserEU;
 import static gregtech.common.misc.WirelessNetworkManager.processInitialSettings;
 import static kekztech.util.Util.toStandardForm;
-import static net.minecraft.util.StatCollector.translateToLocal;
 
 import java.math.BigInteger;
 import java.util.UUID;
@@ -44,7 +45,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase;
-import gregtech.api.modularui2.GTGuiTextures;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -54,59 +54,93 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import gregtech.common.gui.modularui.multiblock.MTEDoctorMindBenderrGui;
+import gregtech.common.gui.modularui.multiblock.MTEGenderBlenderGUI;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
-public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMindBender>
-    implements ISurvivalConstructable {
-
-    private static final int MACHINEMODE_BENDER = 0;
-    private static final int MACHINEMODE_FORMER = 1;
+public class MTEGenderBlender extends MTEEnhancedMultiBlockBase<MTEGenderBlender> implements ISurvivalConstructable {
 
     private static final String[][] structure = new String[][] {
-        { "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ",
-            "         ", "         ", "         ", "  CC~CC  " },
-        { "  CCCCC  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ",
-            "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", " CCCCCCC " },
-        { " CCFFFCC ", " BB E BB ", " BB E BB ", " BBEEEBB ", " BB E BB ", " BB E BB ", " BB E BB ", " BB E BB ",
-            " BBEEEBB ", " BB E BB ", " BB E BB ", "CCCCCCCCC" },
-        { " CFFFFFC ", " A DDD A ", " A DDD A ", " AEDDDEA ", " A DDD A ", " A DDD A ", " A DDD A ", " A DDD A ",
-            " AEDDDEA ", " A DDD A ", " A DDD A ", "CCCCCCCCC" },
-        { " CFFFFFC ", " AEDDDEA ", " AEDDDEA ", " AEDDDEA ", " AEDDDEA ", " AEDDDEA ", " AEDDDEA ", " AEDDDEA ",
-            " AEDDDEA ", " AEDDDEA ", " AEDDDEA ", "CCCCCCCCC" },
-        { " CFFFFFC ", " A DDD A ", " A DDD A ", " AEDDDEA ", " A DDD A ", " A DDD A ", " A DDD A ", " A DDD A ",
-            " AEDDDEA ", " A DDD A ", " A DDD A ", "CCCCCCCCC" },
-        { " CCFFFCC ", " BB E BB ", " BB E BB ", " BBEEEBB ", " BB E BB ", " BB E BB ", " BB E BB ", " BB E BB ",
-            " BBEEEBB ", " BB E BB ", " BB E BB ", "CCCCCCCCC" },
-        { "  CCCCC  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", "  BAAAB  ",
-            "  BAAAB  ", "  BAAAB  ", "  BAAAB  ", " CCCCCCC " },
-        { "         ", "         ", "         ", "         ", "         ", "         ", "         ", "         ",
-            "         ", "         ", "         ", "  CCCCC  " } };
+        { "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "               ", "      F G      ", "      B~B      " },
+        { "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "               ", "               ", "               ",
+            "               ", "      BBB      ", "      BBB      ", "     BBBBB     ", "     BBBBB     " },
+        { "               ", "    AAAAAAA    ", "      ECE      ", "      ECE      ", "      ECE      ",
+            "      ECE      ", "      ECE      ", "      ECE      ", "      ECE      ", "      ECE      ",
+            "      CCC      ", "     BBBBB     ", "     BBBBB     ", "   BBBBBBBBB   ", "   BBBBBBBBB   " },
+        { "     AAAAA     ", "   AA  C  AA   ", "    EE C EE    ", "    EE   EE    ", "    EE   EE    ",
+            "    EE   EE    ", "    EE   EE    ", "    EE   EE    ", "    EE   EE    ", "    EE   EE    ",
+            "    EE   EE    ", "   BBB   BBB   ", "   BBB   BBB   ", "  BBBBBBBBBBB  ", "  BBBBBBBBBBB  " },
+        { "    ADDDDDA    ", "  AA   C   AA  ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   BB     BB   ", "   BB  A  BB   ", "  BBBBBBBBBBB  ", "  BBBBBBBBBBB  " },
+        { "   ADDDDDDDA   ", "  A   ACA   A  ", "   E  AAA  E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "  BB       BB  ", "  BB A A A BB  ", " BBBBBBBBBBBBB ", " BBBBBBBBBBBBB " },
+        { "   ADDDDDDDA   ", "  A  AACAA  A  ", "  E  ACCCA  E  ", "  E   CCC   E  ", "  E   CCC   E  ",
+            "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ",
+            "  C    C    C  ", " BB         BB ", "BBB   AAA   BBB", "BBBBBBBBBBBBBBB", "BBBBBBBBBBBBBBB" },
+        { "   ADDDDDDDA   ", "  ACCCCCCCCCA  ", "  CC ACCCA CC  ", "  C   CCC   C  ", "  C   CCC   C  ",
+            "  C   CCC   C  ", "  C   CCC   C  ", "  C   CCC   C  ", "  C   CCC   C  ", "  C   CCC   C  ",
+            "  C   CCC   C  ", " BB    C    BB ", "BBB AAACAAA BBB", "BBBBBBBBBBBBBBB", "BBBBBBBBBBBBBBB" },
+        { "   ADDDDDDDA   ", "  A  AACAA  A  ", "  E  ACCCA  E  ", "  E   CCC   E  ", "  E   CCC   E  ",
+            "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ", "  E   CCC   E  ",
+            "  C    C    C  ", " BB         BB ", "BBB   AAA   BBB", "BBBBBBBBBBBBBBB", "BBBBBBBBBBBBBBB" },
+        { "   ADDDDDDDA   ", "  A   ACA   A  ", "   E  AAA  E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "  BB       BB  ", "  BB A A A BB  ", " BBBBBBBBBBBBB ", " BBBBBBBBBBBBB " },
+        { "    ADDDDDA    ", "  AA   C   AA  ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ", "   E       E   ",
+            "   E       E   ", "   BB     BB   ", "   BB  A  BB   ", "  BBBBBBBBBBB  ", "  BBBBBBBBBBB  " },
+        { "     AAAAA     ", "   AA  C  AA   ", "    EE C EE    ", "    EE   EE    ", "    EE   EE    ",
+            "    EE   EE    ", "    EE   EE    ", "    EE   EE    ", "    EE   EE    ", "    EE   EE    ",
+            "    EE   EE    ", "   BBB   BBB   ", "   BBB   BBB   ", "  BBBBBBBBBBB  ", "  BBBBBBBBBBB  " },
+        { "               ", "    AAAAAAA    ", "      ECE      ", "      ECE      ", "      ECE      ",
+            "      ECE      ", "      ECE      ", "      ECE      ", "      ECE      ", "      ECE      ",
+            "      CCC      ", "     BBBBB     ", "     BBBBB     ", "   BBBBBBBBB   ", "   BBBBBBBBB   " },
+        { "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "               ", "               ", "               ",
+            "               ", "      BBB      ", "      BBB      ", "     BBBBB     ", "     BBBBB     " },
+        { "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "               ", "               ", "               ",
+            "               ", "               ", "      BBB      ", "      BBB      ", "      BBB      " } };
 
     private static final String STRUCTURE_PIECE_MAIN = "MAIN";
-    private static final IStructureDefinition<MTEDoctorMindBender> STRUCTURE_DEFINITION = StructureDefinition
-        .<MTEDoctorMindBender>builder()
+    private static final IStructureDefinition<MTEGenderBlender> STRUCTURE_DEFINITION = StructureDefinition
+        .<MTEGenderBlender>builder()
         .addShape(STRUCTURE_PIECE_MAIN, structure)
         .addElement(
-            'F',
-            buildHatchAdder(MTEDoctorMindBender.class).atLeast(ImmutableMap.of(OutputBus, 1, InputBus, 1))
+            'D',
+            buildHatchAdder(MTEGenderBlender.class).atLeast(ImmutableMap.of(InputBus, 1, InputHatch, 1))
                 .casingIndex(4)
                 .hint(1)
                 .buildAndChain(GregTechAPI.sBlockCasings2, 0))
-        .addElement('A', chainAllGlasses())
-        .addElement('B', ofBlock(GregTechAPI.sBlockCasings10, 11))
-        .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
-        .addElement('D', ofBlock(GregTechAPI.sBlockCasings5, 13))
-        .addElement('E', ofBlock(GregTechAPI.sBlockCasings8, 14))
+        .addElement(
+            'F',
+            buildHatchAdder(MTEGenderBlender.class).atLeast(ImmutableMap.of(OutputHatch, 1))
+                .casingIndex(4)
+                .hint(2)
+                .buildAndChain(GregTechAPI.sBlockCasings8, 6))
+        .addElement(
+            'G',
+            buildHatchAdder(MTEGenderBlender.class).atLeast(ImmutableMap.of(OutputBus, 1))
+                .casingIndex(4)
+                .hint(3)
+                .buildAndChain(GregTechAPI.sBlockCasings8, 6))
+        .addElement('E', chainAllGlasses())
+        .addElement('A', ofBlock(GregTechAPI.sBlockCasings2, 0))
+        .addElement('B', ofBlock(GregTechAPI.sBlockCasings8, 6))
+        .addElement('C', ofBlock(GregTechAPI.sBlockCasings8, 7))
         .build();
 
     private UUID ownerUUID;
 
-    public MTEDoctorMindBender(int aID, String aName, String aNameRegional) {
+    public MTEGenderBlender(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public MTEDoctorMindBender(String aName) {
+    public MTEGenderBlender(String aName) {
         super(aName);
     }
 
@@ -116,21 +150,17 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
     }
 
     @Override
-    public IStructureDefinition<MTEDoctorMindBender> getStructureDefinition() {
+    public IStructureDefinition<MTEGenderBlender> getStructureDefinition() {
         return STRUCTURE_DEFINITION;
-    }
-
-    public String getMachineType() {
-        return "Bending Machine, Forming Press, IMP";
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(getMachineType())
+        tt.addMachineType("Mixer")
             .addBulkMachineInfo(4, 6f, 1f)
             .addPollutionAmount(getPollutionPerSecond(null))
-            .beginStructureBlock(9, 14, 9, true)
+            .beginStructureBlock(7, 14, 7, true)
             .addController("Front Center")
             .addCasingInfoMin("Material Press Machine Casings", 6, false)
             .addInputHatch("Any Casing", 1)
@@ -145,7 +175,7 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTEDoctorMindBender(mName);
+        return new MTEGenderBlender(mName);
     }
 
     @Override
@@ -183,7 +213,7 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return (machineMode == MACHINEMODE_FORMER) ? RecipeMaps.formingPressRecipes : RecipeMaps.benderRecipes;
+        return RecipeMaps.mixerRecipes;
     }
 
     @Override
@@ -244,8 +274,8 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
         logic.setUnlimitedTierSkips();
     }
 
-    private static final int HORIZONTAL_OFFSET = 4;
-    private static final int VERTICAL_OFFSET = 11;
+    private static final int HORIZONTAL_OFFSET = 7;
+    private static final int VERTICAL_OFFSET = 14;
     private static final int DEPTH_OFFSET = 0;
 
     @Override
@@ -290,28 +320,19 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
 
     @Override
     protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
-        return new MTEDoctorMindBenderrGui(this).withMachineModeIcons(
-            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_BENDING,
-            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_FORMING);
+        return new MTEGenderBlenderGUI(this);
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         aNBT.setInteger("eMultiplier", multiplier);
-        aNBT.setBoolean("mFormingMode", machineMode == MACHINEMODE_FORMER);
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
         multiplier = aNBT.getInteger("eMultiplier");
-        machineMode = aNBT.getBoolean("mFormingMode") ? MACHINEMODE_FORMER : MACHINEMODE_BENDER;
         super.loadNBTData(aNBT);
-    }
-
-    @Override
-    public String getMachineModeName() {
-        return translateToLocal("GT5U.GTPP_MULTI_INDUSTRIAL_PLATE_PRESS.mode." + machineMode);
     }
 
     public BigInteger getTheoriticalEnergyConsumption() {
@@ -321,10 +342,6 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
     @Override
     public String[] getInfoData() {
         return new String[] {
-            StatCollector.translateToLocal("GT5U.multiblock.Mode") + ": "
-                + EnumChatFormatting.BLUE
-                + getMachineModeName()
-                + EnumChatFormatting.RESET,
             StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
                 + EnumChatFormatting.GREEN
                 + formatNumber(mProgresstime / 20)
@@ -359,7 +376,6 @@ public class MTEDoctorMindBender extends MTEEnhancedMultiBlockBase<MTEDoctorMind
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
-        tag.setString("mode", getMachineModeName());
     }
 
 }

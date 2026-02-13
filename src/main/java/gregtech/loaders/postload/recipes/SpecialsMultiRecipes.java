@@ -29,5 +29,22 @@ public class SpecialsMultiRecipes implements Runnable {
             .duration(100 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
             .addTo(assemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                ItemList.MixerUMV.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64),
+                GregtechItemList.Industrial_Mixer.get(64))
+            .circuit(1)
+            .itemOutputs(ItemList.Machine_Multi_Special_GenderBlender.get(1L))
+            .duration(100 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .addTo(assemblerRecipes);
     }
 }

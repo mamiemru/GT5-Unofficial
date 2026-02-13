@@ -2143,6 +2143,7 @@ public enum ItemList implements IItemContainer {
     InfinityCooledCasing,
     Machine_Multi_TranscendentPlasmaMixer,
     Machine_Multi_Special_DoctorMindBender,
+    Machine_Multi_Special_GenderBlender,
     Cover_Metrics_Transmitter,
     NC_AdvancedSensorCard,
     Machine_Multi_DroneCentre,
