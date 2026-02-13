@@ -253,10 +253,10 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPhAdjustment;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPlasmaHeater;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
-import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAssemblingModule;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
+import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -10973,8 +10973,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 "Plasma Generator Mark IV",
                 7).getStackForm(1L));
 
-      
-      
         ItemList.Generator_Plasma_UV.set(
             new MTEPlasmaGenerator(
                 PLASMA_GENERATOR_UV.ID,
