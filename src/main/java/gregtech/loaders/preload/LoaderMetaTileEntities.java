@@ -108,8 +108,6 @@ import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputSlave;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchInputME;
-import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
-import gregtech.common.tileentities.machines.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.MTEHeatSensor;
 import gregtech.common.tileentities.machines.MTERealityPhaseSensor;
 import gregtech.common.tileentities.machines.basic.MTEAdvSeismicProspector;
@@ -230,9 +228,6 @@ import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabri
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
-import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAssemblingModule;
-import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
-import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterSteel;
 import gregtech.common.tileentities.machines.steam.MTESteamCompressorBronze;
