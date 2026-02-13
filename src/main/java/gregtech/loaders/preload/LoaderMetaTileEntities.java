@@ -108,8 +108,8 @@ import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputSlave;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchInputME;
-import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
-import gregtech.common.tileentities.machines.MTEHatchOutputME;
+import gregtech.common.tileentities.machines.MTEHeatSensor;
+import gregtech.common.tileentities.machines.MTERealityPhaseSensor;
 import gregtech.common.tileentities.machines.basic.MTEAdvSeismicProspector;
 import gregtech.common.tileentities.machines.basic.MTEBetterJukebox;
 import gregtech.common.tileentities.machines.basic.MTEBoxinator;
@@ -155,9 +155,12 @@ import gregtech.common.tileentities.machines.multi.MTEFusionComputer3;
 import gregtech.common.tileentities.machines.multi.MTEHeatExchanger;
 import gregtech.common.tileentities.machines.multi.MTEImplosionCompressor;
 import gregtech.common.tileentities.machines.multi.MTEIndustrialBrewery;
+import gregtech.common.tileentities.machines.multi.MTEIndustrialCentrifuge;
 import gregtech.common.tileentities.machines.multi.MTEIndustrialElectromagneticSeparator;
 import gregtech.common.tileentities.machines.multi.MTEIndustrialExtractor;
 import gregtech.common.tileentities.machines.multi.MTEIndustrialLaserEngraver;
+import gregtech.common.tileentities.machines.multi.MTEIndustrialPackager;
+import gregtech.common.tileentities.machines.multi.MTEIndustrialWireMill;
 import gregtech.common.tileentities.machines.multi.MTEIntegratedOreFactory;
 import gregtech.common.tileentities.machines.multi.MTELargeBoilerBronze;
 import gregtech.common.tileentities.machines.multi.MTELargeBoilerSteel;
@@ -195,10 +198,10 @@ import gregtech.common.tileentities.machines.multi.MTESpinmatron;
 import gregtech.common.tileentities.machines.multi.MTETranscendentPlasmaMixer;
 import gregtech.common.tileentities.machines.multi.MTEVacuumFreezer;
 import gregtech.common.tileentities.machines.multi.MTEWormholeGenerator;
+import gregtech.common.tileentities.machines.multi.acal.MTEAdvancedCircuitAssemblyLine;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEBlackHoleUtility;
 import gregtech.common.tileentities.machines.multi.compressor.MTEHIPCompressor;
-import gregtech.common.tileentities.machines.multi.compressor.MTEHeatSensor;
 import gregtech.common.tileentities.machines.multi.compressor.MTEIndustrialCompressor;
 import gregtech.common.tileentities.machines.multi.compressor.MTENeutroniumCompressor;
 import gregtech.common.tileentities.machines.multi.drone.MTEDroneCentre;
@@ -221,6 +224,11 @@ import gregtech.common.tileentities.machines.multi.purification.MTEPurificationU
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPlasmaHeater;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
 import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTECausalityAssemblingModule;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabricSiphon;
+import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
+import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
+import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterSteel;
 import gregtech.common.tileentities.machines.steam.MTESteamCompressorBronze;
@@ -617,11 +625,51 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         ItemList.LATEX.set(new MTELatex(LATEX.ID, "multimachine.latex", "L.A.T.E.X.").getStackForm(1));
         addItemTooltip(ItemList.LATEX.get(1), chain(() -> "Author: ", GTValues.AuthorThree));
 
+        ItemList.AdvancedCircuitAssemblyLine.set(
+            new MTEAdvancedCircuitAssemblyLine(
+                AdvancedCircuitAssemblyLine.ID,
+                "multimachine.adv-circuit-assemblyline",
+                "Advanced Circuit Assembly line").getStackForm(1));
+
+        ItemList.RealityFabricSiphonController.set(
+            new MTERealityFabricSiphon(
+                REALITY_FABRIC_SIPHON_CONTROLLER.ID,
+                "multimachine.reality_siphon",
+                "Reality Fabric Siphon").getStackForm(1));
+        ItemList.RealityPhaseTunerModule.set(
+            new MTERealityPhaseTunerModule(
+                REALITY_PHASE_TUNER_MODULE.ID,
+                "multimachine.reality_phase_tuner_module",
+                "Reality Phase Tuner").getStackForm(1));
+        ItemList.CausalityAssemblingModule.set(
+            new MTECausalityAssemblingModule(
+                CAUSALITY_ASSEMBLING_MODULE.ID,
+                "multimachine.causality_assembler_module",
+                "Causality Assembler").getStackForm(1));
+
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(
                 new MTEResearchCompleter(ResearchCompleter.ID, "Research Completer", "Research Completer")
                     .getStackForm(1));
         }
+
+        ItemList.IndustrialWireFactory.set(
+            new MTEIndustrialWireMill(
+                IndustrialWireMill.ID,
+                "industrialwiremill.controller.tier.single",
+                "Industrial Wire Factory").getStackForm(1));
+
+        ItemList.IndustrialPackager.set(
+            new MTEIndustrialPackager(
+                IndustrialPackager.ID,
+                "amazonprime.controller.tier.single",
+                "Amazon Warehousing Depot").getStackForm(1L));
+
+        ItemList.IndustrialCentrifuge.set(
+            new MTEIndustrialCentrifuge(
+                IndustrialCentrifuge.ID,
+                "industrialcentrifuge.controller.tier.single",
+                "Industrial Centrifuge").getStackForm(1));
     }
 
     private static void registerSteamMachines() {
@@ -10614,6 +10662,8 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 "Plasma Generator Mark IV",
                 7).getStackForm(1L));
 
+      
+      
         ItemList.Generator_Plasma_UV.set(
             new MTEPlasmaGenerator(
                 PLASMA_GENERATOR_UV.ID,
@@ -10825,6 +10875,12 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 "Bulk Catalyst Housing",
                 10,
                 Integer.MAX_VALUE).getStackForm(1));
+        ItemList.Hatch_RealityPhaseSensor.set(
+            new MTERealityPhaseSensor(
+                HATCH_REALITY_PHASE_SENSOR.ID,
+                "multimachine.reality_phase_sensor",
+                "Reality Phase Sensor",
+                12).getStackForm(1));
 
         ItemList.LargeMolecularAssembler.set(
             new MTELargeMolecularAssembler(

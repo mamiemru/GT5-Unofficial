@@ -1941,6 +1941,20 @@ public enum ItemList implements IItemContainer {
     Circuit_Board_Bio_Ultra,
     Circuit_Board_Optical,
 
+    Circuit_Board_Exotic,
+    Circuit_Board_Cosmic,
+    Circuit_Board_Transcendent,
+    Exotic_Super_CPU,
+    Circuit_Parts_ResistorISMD,
+    Circuit_Parts_DiodeISMD,
+    Circuit_Parts_TransistorISMD,
+    Circuit_Parts_CapacitorISMD,
+    Circuit_Parts_InductorISMD,
+    Circuit_Parts_UniversalISMD,
+    Circuit_Wafer_IPCRL,
+    Circuit_Wafer_MIPCRL,
+    Chronological_disruption_mainframe,
+
     Circuit_Parts_Resistor,
     Circuit_Parts_ResistorSMD,
     Circuit_Parts_Glass_Tube,
@@ -2204,6 +2218,7 @@ public enum ItemList implements IItemContainer {
     EntropicProcessor,
     DecayWarehouse,
     LATEX,
+    AdvancedCircuitAssemblyLine,
     AcceleratorLV,
     AcceleratorMV,
     AcceleratorHV,
@@ -2648,6 +2663,7 @@ public enum ItemList implements IItemContainer {
     Relativistic_Heat_Capacitor,
     Phononic_Seed_Crystal,
     Harmonic_Compound,
+    Condensed_Causality_Crystal,
     ResearchCompleter,
     Spray_Color_Infinite,
     Casing_AirFilter_Turbine_T1,
@@ -2753,6 +2769,25 @@ public enum ItemList implements IItemContainer {
     CokeOvenController,
     CokeOvenCasing,
     CokeOvenHatch,
+
+    // new controllers
+    IndustrialWireFactory,
+    IndustrialPackager,
+    IndustrialCentrifuge,
+
+    BasicCircuitBoard,
+    EnhancedCircuitBoard,
+    RefinedCircuitBoard,
+    IntricateCircuitBoard,
+
+    ControllerCircuit,
+    ReceiverCircuit,
+    SignalCircuit,
+
+    HighEnergyFlowCircuit,
+
+    RawImprintBoard,
+    ImprintBoard,
 
     CircuitImprint_NanoProcessor,
     CircuitImprint_BasicCircuitBoard,
@@ -2894,7 +2929,17 @@ public enum ItemList implements IItemContainer {
     Wrap_OpticalCPUContainmentHousings,
     Wrap_OpticallyCompatibleMemories,
     Wrap_LivingCrystalChips,
-    Wrap_LivingBioChips
+    Wrap_LivingBioChips,
+
+    CausalityResistantCasing,
+    CausalityResistantGlass,
+    RealityAttunedCasing,
+    CausalityAttractionEngine,
+    RealityShifterCasing,
+    RealityFabricSiphonController,
+    RealityPhaseTunerModule,
+    CausalityAssemblingModule,
+    Hatch_RealityPhaseSensor
 
     // semicolon after the comment to reduce merge conflicts
     ;
