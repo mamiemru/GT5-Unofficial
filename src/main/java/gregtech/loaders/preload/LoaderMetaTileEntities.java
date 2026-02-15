@@ -258,6 +258,7 @@ import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityFabri
 import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhaseTunerModule;
 import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
 import gregtech.common.tileentities.machines.multi.specials.MTEGenderBlender;
+import gregtech.common.tileentities.machines.multi.specials.MTENoodler;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -490,6 +491,9 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 SPECIAL_GENDER_BLENDER.ID,
                 "multimachine.genderblender",
                 "The Undefined Gender Blender").getStackForm(1));
+        ItemList.Machine_Multi_Special_Noodler.set(
+            new MTENoodler(SPECIAL_NOODLER.ID, "multimachine.nooodler", "Extrem Noodle Extrudatinator 9000")
+                .getStackForm(1));
 
         ItemList.LargePlasmaTurbine.set(
             new MTELargeTurbinePlasma(
