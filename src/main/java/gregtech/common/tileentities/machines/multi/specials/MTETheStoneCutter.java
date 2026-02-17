@@ -10,7 +10,6 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_DTPF_ON;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 import static gregtech.common.misc.WirelessNetworkManager.getUserEU;
 import static gregtech.common.misc.WirelessNetworkManager.processInitialSettings;
@@ -53,75 +52,88 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import gregtech.common.gui.modularui.multiblock.MTENoodlerGUI;
+import gregtech.common.gui.modularui.multiblock.MTETheStoneCutterGUI;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
-public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements ISurvivalConstructable {
+public class MTETheStoneCutter extends MTEEnhancedMultiBlockBase<MTETheStoneCutter> implements ISurvivalConstructable {
 
     private static final String[][] structure = new String[][] {
-        { "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "     CCC     ", "    CC CC    ", "   CCCFCCC   ", "   CCC~CCC   " },
-        { "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "     CCC     ", "    CCCCC    ", "   CCCCCCC   ", "   CCCCCCC   " },
-        { "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "     CCC     ", "    CCCCC    ", "   CCCCCCC   ", "  CCCCCCCCC  " },
-        { "             ", "    CCCCC    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ",
-            "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ",
-            "   CCCCCCC   ", "   CCCCCCC   ", "   CCCCCCC   ", "   CCCCCCC   ", "  CCCCCCCCC  ", " CCCCCCCCCCC " },
-        { "    EEEEE    ", "   CCCCCCC   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ",
-            "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ",
-            "   C     C   ", "   C     C   ", "   BBBBBBBC  ", "  CBBBBBBBC  ", " CCBBBBBBBCC ", "BBBBBBBBBBBBB" },
-        { "    EEEEE    ", "   CCDDDCC   ", "   A DDD A   ", "   A DDD A   ", "   A D D A   ", "   A D D A   ",
-            "   A DDD A   ", "   A DDD A   ", "   A DDD A   ", "   A D D A   ", "   A D D A   ", "   A D D A   ",
-            "   C DDD C   ", "   C DDD C   ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", "BBBBBBBBBBBBB" },
-        { "    EEEEE    ", "   CCDDDCC   ", "   A DDD A   ", "   A DDD A   ", "   A     A   ", "   A     A   ",
-            "   A D D A   ", "   A D D A   ", "   A D D A   ", "   A     A   ", "   A     A   ", "   A     A   ",
-            "   C DDD C   ", "   C DDD C   ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", "BBBBBBBBBBBBB" },
-        { "    EEEEE    ", "   CCDDDCC   ", "   A DDD A   ", "   A DDD A   ", "   A D D A   ", "   A D D A   ",
-            "   A DDD A   ", "   A DDD A   ", "   A DDD A   ", "   A D D A   ", "   A D D A   ", "   A D D A   ",
-            "   C DDD C   ", "   C DDD C   ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", " DDDBBBBBDDD ", "BBBBBBBBBBBBB" },
-        { "    EEEEE    ", "   CCCCCCC   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ",
-            "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ", "   A     A   ",
-            "   C     C   ", "   C     C   ", "  CBBBBBBBC  ", "  CBBBBBBBC  ", " CCBBBBBBBCC ", "BBBBBBBBBBBBB" },
-        { "             ", "    CCCCC    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ",
-            "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ", "    AAAAA    ",
-            "   CCCCCCC   ", "   CCCCCCC   ", "   CCCCCCC   ", "  CCCCCCCCC  ", "  CCCCCCCCC  ", " CCCCCCCCCCC " },
-        { "             ", "             ", "             ", "             ", "             ", "             ",
-            "             ", "             ", "             ", "             ", "             ", "             ",
-            "     CCC     ", "    CEEEC    ", "    CEEEC    ", "   CEEEEEC   ", "   CEEEEEC   ", "  CCEEEEECC  " } };
+        { "         BBB     ", "           BB    ", "           BBB   ", "          B BB   ", "         B  BB   ",
+            "        B        ", "   BB  B         ", "   BB B          ", "   BBB           ", "    BB           ",
+            "     BBB         ", "                 " },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "        A        ", "        A        ", "        A        ", "        A        ",
+            "        A        ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "                 ", "                 ", "                 ", "                 ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "                 ", "                 ", "                 ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "       FFF       ", "       F~F       ", "   AAAAFFFAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "       AAA       ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "        A        ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "      AAAAA      ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "       AAA       ",
+            "      AAAAA      ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "        A        ", "       AAA       ",
+            "      AAAAA      ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "       AAA       ",
+            "      AAAAA      ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "      AAAAA      ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "     AAAAAAA     ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "                 ", "    AAAAAAAAA    ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "                 ", "                 ", "   AAAAAAAAAAA   ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "                 ", "                 ", "                 ", "  AAAAAAAAAAAAA  ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "                 ", "                 ", "                 ", "                 ",
+            " AAAAAAAAAAAAAAA ", "AAAAAAAAAAAAAAAAA" },
+        { "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "                 ", "                 ", "                 ", "                 ",
+            "                 ", "AAAAAAAAAAAAAAAAA" } };
 
     private static final String STRUCTURE_PIECE_MAIN = "MAIN";
-    private static final IStructureDefinition<MTENoodler> STRUCTURE_DEFINITION = StructureDefinition
-        .<MTENoodler>builder()
+    private static final IStructureDefinition<MTETheStoneCutter> STRUCTURE_DEFINITION = StructureDefinition
+        .<MTETheStoneCutter>builder()
         .addShape(STRUCTURE_PIECE_MAIN, structure)
         .addElement(
-            'E',
-            buildHatchAdder(MTENoodler.class).atLeast(ImmutableMap.of(InputBus, 1, InputHatch, 1))
+            'F',
+            buildHatchAdder(MTETheStoneCutter.class).atLeast(ImmutableMap.of(InputBus, 1, InputHatch, 1, OutputBus, 1))
                 .casingIndex(4)
                 .hint(1)
-                .buildAndChain(GregTechAPI.sBlockCasings8, 10))
-        .addElement(
-            'F',
-            buildHatchAdder(MTENoodler.class).atLeast(ImmutableMap.of(OutputBus, 1))
-                .casingIndex(4)
-                .hint(3)
-                .buildAndChain(GregTechAPI.sBlockCasings8, 10))
-        .addElement('A', chainAllGlasses())
-        .addElement('B', ofBlock(GregTechAPI.sBlockCasings10, 3))
-        .addElement('C', ofBlock(GregTechAPI.sBlockCasings8, 10))
-        .addElement('D', ofBlock(GregTechAPI.sBlockCasings8, 14))
+                .buildAndChain(GregTechAPI.sBlockCasings10, 0))
+        .addElement('A', ofBlock(GregTechAPI.sBlockCasings10, 0))
+        .addElement('B', ofBlock(GregTechAPI.sBlockCasings11, 6))
         .build();
 
     private UUID ownerUUID;
 
-    public MTENoodler(int aID, String aName, String aNameRegional) {
+    public MTETheStoneCutter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public MTENoodler(String aName) {
+    public MTETheStoneCutter(String aName) {
         super(aName);
     }
 
@@ -131,14 +143,14 @@ public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements
     }
 
     @Override
-    public IStructureDefinition<MTENoodler> getStructureDefinition() {
+    public IStructureDefinition<MTETheStoneCutter> getStructureDefinition() {
         return STRUCTURE_DEFINITION;
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Extrusion machine, Extruder")
+        tt.addMachineType("Cutting machine, cutter")
             .addBulkMachineInfo(4, 6f, 1f)
             .addPollutionAmount(getPollutionPerSecond(null))
             .beginStructureBlock(7, 14, 7, true)
@@ -156,7 +168,7 @@ public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTENoodler(mName);
+        return new MTETheStoneCutter(mName);
     }
 
     @Override
@@ -194,7 +206,7 @@ public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.extruderRecipes;
+        return RecipeMaps.cutterRecipes;
     }
 
     @Override
@@ -255,9 +267,9 @@ public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements
         logic.setUnlimitedTierSkips();
     }
 
-    private static final int HORIZONTAL_OFFSET = 6;
-    private static final int VERTICAL_OFFSET = 17;
-    private static final int DEPTH_OFFSET = 0;
+    private static final int HORIZONTAL_OFFSET = 8;
+    private static final int VERTICAL_OFFSET = 7;
+    private static final int DEPTH_OFFSET = 4;
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
@@ -301,7 +313,7 @@ public class MTENoodler extends MTEEnhancedMultiBlockBase<MTENoodler> implements
 
     @Override
     protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
-        return new MTENoodlerGUI(this);
+        return new MTETheStoneCutterGUI(this);
     }
 
     @Override

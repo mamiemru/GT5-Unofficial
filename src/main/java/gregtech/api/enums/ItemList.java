@@ -2145,6 +2145,7 @@ public enum ItemList implements IItemContainer {
     Machine_Multi_Special_DoctorMindBender,
     Machine_Multi_Special_GenderBlender,
     Machine_Multi_Special_Noodler,
+    Machine_Multi_Special_The_Stone_Cutter,
     Cover_Metrics_Transmitter,
     NC_AdvancedSensorCard,
     Machine_Multi_DroneCentre,

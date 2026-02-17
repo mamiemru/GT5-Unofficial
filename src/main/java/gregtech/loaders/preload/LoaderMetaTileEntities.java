@@ -259,6 +259,7 @@ import gregtech.common.tileentities.machines.multi.realitysiphon.MTERealityPhase
 import gregtech.common.tileentities.machines.multi.specials.MTEDoctorMindBender;
 import gregtech.common.tileentities.machines.multi.specials.MTEGenderBlender;
 import gregtech.common.tileentities.machines.multi.specials.MTENoodler;
+import gregtech.common.tileentities.machines.multi.specials.MTETheStoneCutter;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputBusME;
 import gregtech.common.tileentities.machines.outputme.MTEHatchOutputME;
 import gregtech.common.tileentities.machines.steam.MTESteamAlloySmelterBronze;
@@ -493,6 +494,9 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 "The Undefined Gender Blender").getStackForm(1));
         ItemList.Machine_Multi_Special_Noodler.set(
             new MTENoodler(SPECIAL_NOODLER.ID, "multimachine.nooodler", "Extrem Noodle Extrudatinator 9000")
+                .getStackForm(1));
+        ItemList.Machine_Multi_Special_The_Stone_Cutter.set(
+            new MTETheStoneCutter(SPECIAL_THE_STONE_CUTTER.ID, "multimachine.thestonecutter", "The Stone Cutter")
                 .getStackForm(1));
 
         ItemList.LargePlasmaTurbine.set(
