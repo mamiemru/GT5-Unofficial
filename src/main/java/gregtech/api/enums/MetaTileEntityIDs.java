@@ -1722,6 +1722,7 @@ public enum MetaTileEntityIDs {
     FuelRefineFactory(16999),
     Machine_Prototype_Chamber(17000),
     Machine_Prototype(17001),
+    Machine_Prototype_Hatch(17002),
     MAGLEV_PYLON_MV(29990),
     MAGLEV_PYLON_HV(29991),
     MAGLEV_PYLON_EV(29992),

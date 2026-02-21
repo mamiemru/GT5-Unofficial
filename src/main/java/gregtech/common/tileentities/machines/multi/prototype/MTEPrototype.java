@@ -19,6 +19,9 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.items.ItemComb;
+import gtnhlanth.common.hatch.MTEHatchInputBeamline;
+import gtnhlanth.common.hatch.MTEHatchOutputBeamline;
+import gtnhlanth.common.tileentity.MTELINAC;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -78,8 +81,12 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
                 .hint(1)
                 .buildAndChain(onElementPass(e -> {}, ofBlock(GregTechAPI.sBlockCasings8, 0))))
         .addElement(
-            'X',ofBlock(GregTechAPI.sBlockCasings4, 0)
-        )
+            'X',
+            buildHatchAdder(MTEPrototype.class).hatchClass(PrototypeHatch.class)
+                .casingIndex(176)
+                .hint(2)
+                .adder(MTEPrototype::addChargeHatch)
+                .build())
         .build();
 
     protected ProcessingLogic createProcessingLogic() {
@@ -147,6 +154,19 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
         return rTexture;
     }
 
+    private boolean addChargeHatch(IGregTechTileEntity te, int casingIndex) {
+        if (te == null) return false;
+
+        IMetaTileEntity mte = te.getMetaTileEntity();
+        if (mte == null) return false;
+
+        if (mte instanceof PrototypeHatch) {
+            return ((PrototypeHatch) mte).connectToController(this);
+        }
+
+        return false;
+    }
+
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
@@ -169,6 +189,10 @@ public class MTEPrototype extends MTEExtendedPowerMultiBlockBase<MTEPrototype> i
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         return checkPiece(STRUCTURE_PIECE_MAIN, 2, 0, 0);
+    }
+
+    public int getCharge() {
+        return beamLevel;
     }
 
 

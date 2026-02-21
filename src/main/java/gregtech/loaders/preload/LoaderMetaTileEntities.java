@@ -46,6 +46,7 @@ import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 
 import gregtech.common.tileentities.machines.multi.prototype.MTEPrototype;
 import gregtech.common.tileentities.machines.multi.prototype.MTEPrototypeChamber;
+import gregtech.common.tileentities.machines.multi.prototype.PrototypeHatch;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.enums.GTValues;
@@ -617,6 +618,9 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 .getStackForm(1));
         ItemList.Machine_Prototype.set(
             new MTEPrototype(Machine_Prototype.ID, "Machine_Prototype", "Machine_Prototype")
+                .getStackForm(1));
+        ItemList.Machine_Prototype_Hatch.set(
+            new PrototypeHatch(Machine_Prototype_Hatch.ID, "Machine_Prototype_hatch", 12, "Machine_Prototype_Hatch")
                 .getStackForm(1));
 
         if (Thaumcraft.isModLoaded()) {

@@ -2896,7 +2896,8 @@ public enum ItemList implements IItemContainer {
     Wrap_LivingBioChips,
 
     Machine_Prototype_Chamber,
-    Machine_Prototype
+    Machine_Prototype,
+    Machine_Prototype_Hatch
 
     // semicolon after the comment to reduce merge conflicts
     ;
