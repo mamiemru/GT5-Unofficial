@@ -199,14 +199,6 @@ public final class CheckRecipeResultRegistry {
         return new ResultNoValidOutputColor(color);
     }
 
-    /**
-     * Cannot process recipe because the machine don't have a Reality Fabric Siphon with enough causality generated.
-     */
-    @Nonnull
-    public static CheckRecipeResult insufficientCausality(double required) {
-        return new ResultInsufficientCausality(required);
-    }
-
     static {
         register(new SimpleCheckRecipeResult(false, "", false));
         register(new ResultInsufficientPower(0));
@@ -218,6 +210,5 @@ public final class CheckRecipeResultRegistry {
         register(new ResultMissingItem());
         register(new ResultMissingApiaryFlowers());
         register(new ResultNoValidOutputColor((byte) 0));
-        register(new ResultInsufficientCausality(0));
     }
 }

@@ -14,7 +14,6 @@ import gregtech.loaders.postload.recipes.BenderRecipes;
 import gregtech.loaders.postload.recipes.BlastFurnaceRecipes;
 import gregtech.loaders.postload.recipes.BreweryRecipes;
 import gregtech.loaders.postload.recipes.CannerRecipes;
-import gregtech.loaders.postload.recipes.CausalityAssemblerRecipes;
 import gregtech.loaders.postload.recipes.CentrifugeRecipes;
 import gregtech.loaders.postload.recipes.ChemicalBathRecipes;
 import gregtech.loaders.postload.recipes.ChemicalRecipes;
@@ -118,7 +117,6 @@ public class MachineRecipeLoader implements Runnable {
         new VacuumFreezerRecipes().run();
         new WiremillRecipes().run();
         new TranscendentPlasmaMixerRecipes().run();
-        new CausalityAssemblerRecipes().run();
 
         BauxiteRefineChain.run();
         NaniteChain.run();

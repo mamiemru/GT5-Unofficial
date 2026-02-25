@@ -1,12 +1,8 @@
 package gregtech.loaders.postload.recipes;
 
-import static goodgenerator.loader.Loaders.advancedRadiationProtectionPlate;
 import static gregtech.api.enums.Mods.ModIDs.NEW_HORIZONS_CORE_MOD;
-import static gregtech.api.enums.Mods.OpenComputers;
-import static gregtech.api.enums.Mods.SuperSolarPanels;
 import static gregtech.api.recipe.RecipeMaps.advancedCircuitAssemblylineRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
-import static gregtech.api.recipe.RecipeMaps.causalityRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
 import static gregtech.api.recipe.RecipeMaps.laserEngraverRecipes;
 import static gregtech.api.recipe.RecipeMaps.neutroniumCompressorRecipes;
@@ -32,11 +28,9 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
-import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
-import gtPlusPlus.core.material.MaterialsElements;
 import tectech.thing.CustomItemList;
 
 public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
@@ -226,21 +220,12 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
-            .fluidInputs(Materials.Void.getMolten(8 * INGOTS))
-            .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(4))
-            .metadata(COMPRESSION_TIER, 2)
-            .duration(7 * SECONDS)
-            .eut(TierEU.RECIPE_UMV)
-            .addTo(neutroniumCompressorRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(ItemList.Circuit_Wafer_IPCRL.get(1))
             .fluidInputs(Materials.Void.getMolten(32 * INGOTS))
             .itemOutputs(ItemList.Circuit_Wafer_MIPCRL.get(32))
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
+            .metadata(COMPRESSION_TIER, 2)
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UMV)
-            .addTo(causalityRecipes);
+            .addTo(neutroniumCompressorRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -258,10 +243,9 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 Materials.WhiteDwarfMatter.getMolten(18),
                 Materials.BlackDwarfMatter.getMolten(18))
             .itemOutputs(ItemList.Chronological_disruption_mainframe.get(1))
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.8)
-            .duration(16 * SECONDS)
+            .duration(SECONDS)
             .eut(TierEU.RECIPE_UXV)
-            .addTo(causalityRecipes);
+            .addTo(spaceAssemblerRecipes);
     }
 
     private void registerShortcutRecipe() {
@@ -279,201 +263,6 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
             .eut(TierEU.UIV)
             .addTo(formingPressRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                gregtech.api.enums.ItemList.Circuit_Chip_Optical.get(1L),
-                ItemList.Optical_Cpu_Containment_Housing.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.InfinityCatalyst, 4L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.CosmicNeutronium, 4L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Draconium, 4L),
-                CustomItemList.DATApipe.get(1L),
-                GGMaterial.atomicSeparationCatalyst.get(OrePrefixes.screw, 4),
-                GGMaterial.preciousMetalAlloy.get(OrePrefixes.screw, 4))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
-            .itemOutputs(ItemList.Optically_Perfected_CPU.get(1L))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UEV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Chip_Optical.get(4L),
-                ItemList.Optical_Cpu_Containment_Housing.get(4L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.SuperconductorUHVBase, 8L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.TengamAttuned, 8L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.DraconiumAwakened, 8L),
-                CustomItemList.DATApipe.get(4L),
-                GGMaterial.preciousMetalAlloy.get(OrePrefixes.screw, 8),
-                // Enriched Naquadah Alloy screw
-                GGMaterial.enrichedNaquadahAlloy.get(OrePrefixes.screw, 8))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(576))
-            .itemOutputs(ItemList.Optically_Perfected_CPU.get(4L))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UIV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.5)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Chip_Optical.get(16L),
-                ItemList.Optical_Cpu_Containment_Housing.get(16L),
-                MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getScrew(16),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.SpaceTime, 16L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Tritanium, 16L),
-                CustomItemList.DATApipe.get(16L),
-                // Enriched Naquadah Alloy screw
-                GGMaterial.enrichedNaquadahAlloy.get(OrePrefixes.screw, 16),
-                // Shirabon screw
-                GGMaterial.shirabon.get(OrePrefixes.screw, 16))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(1152))
-            .itemOutputs(ItemList.Optically_Perfected_CPU.get(16L))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UMV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.8)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                getModItem(OpenComputers.ID, "item", 1L, 39), // Memory tier 3.5
-                ItemList.Circuit_Chip_Optical.get(1L),
-                CustomItemList.DATApipe.get(4L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUEV, 4L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Infinity, 8L),
-                getModItem(SuperSolarPanels.ID, "solarsplitter", 1L, 0)) // Solar Light Splitter
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
-            .itemOutputs(ItemList.Optically_Compatible_Memory.get(2))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UEV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                getModItem(OpenComputers.ID, "item", 4L, 39), // Memory tier 3.5
-                ItemList.Circuit_Chip_Optical.get(1L),
-                CustomItemList.DATApipe.get(16L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUIV, 4L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Infinity, 16L),
-                getModItem(SuperSolarPanels.ID, "solarsplitter", 4L, 0)) // Solar Light Splitter
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(576))
-            .itemOutputs(ItemList.Optically_Compatible_Memory.get(8))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UIV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                getModItem(OpenComputers.ID, "item", 16L, 39), // Memory tier 3.5
-                ItemList.Circuit_Chip_Optical.get(1L),
-                CustomItemList.DATApipe.get(64L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUMV, 4L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Infinity, 32L),
-                getModItem(SuperSolarPanels.ID, "solarsplitter", 16L, 0)) // Solar Light Splitter
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(1152))
-            .itemOutputs(ItemList.Optically_Compatible_Memory.get(32))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UMV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.5)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Multifiberglass.get(1L),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.NaquadahAlloy, 64L),
-                GTOreDictUnificator.get(OrePrefixes.circuit.get(Materials.LuV), 4L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(8L),
-                ItemList.Circuit_Chip_HPIC.get(64L),
-                ItemList.Circuit_Parts_DiodeASMD.get(8L),
-                ItemList.Circuit_Parts_CapacitorASMD.get(8L),
-                ItemList.Circuit_Parts_ResistorASMD.get(8L),
-                ItemList.Circuit_Parts_TransistorASMD.get(8L),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Platinum, 64))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(720))
-            .itemOutputs(ItemList.Energy_LapotronicOrb2.get(1))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_ZPM)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.2)
-            .addTo(causalityRecipes);
-
-        // Alternate Energy Module Recipe
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Wetware_Extreme.get(1),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Bedrockium, 64L),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 4L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Chip_UHPIC.get(64L),
-                ItemList.Circuit_Parts_DiodeXSMD.get(8L),
-                ItemList.Circuit_Parts_CapacitorXSMD.get(8L),
-                ItemList.Circuit_Parts_ResistorXSMD.get(8L),
-                ItemList.Circuit_Parts_TransistorXSMD.get(8L),
-                GTOreDictUnificator.get("wireFineHypogen", 48))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(720))
-            .itemOutputs(ItemList.Energy_Module.get(1))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_UV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.3)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Bio_Ultra.get(1),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.CosmicNeutronium, 64L),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 4L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Parts_Crystal_Chip_Master.get(64L),
-                ItemList.Circuit_Chip_NPIC.get(64L),
-                ItemList.Circuit_Parts_DiodeXSMD.get(32L),
-                ItemList.Circuit_Parts_CapacitorXSMD.get(32L),
-                ItemList.Circuit_Parts_ResistorXSMD.get(32L),
-                ItemList.Circuit_Parts_TransistorXSMD.get(32L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 12L))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(720))
-            .itemOutputs(ItemList.Energy_Cluster.get(1))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_UHV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.4)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Optically_Perfected_CPU.get(2L),
-                ItemList.Circuit_Wafer_QuantumCPU.get(64L),
-                ItemList.Circuit_Wafer_Ram.get(64L),
-                ItemList.Circuit_Parts_CapacitorXSMD.get(64L),
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 2L),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.TranscendentMetal, 1L))
-            .fluidInputs(Materials.Kevlar.getMolten(4 * INGOTS))
-            .itemOutputs(ItemList.Exotic_Super_CPU.get(1L))
-            .duration(SECONDS)
-            .eut(TierEU.RECIPE_UIV)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 1.2)
-            .addTo(causalityRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Lanthanum, 32L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.ElectrumFlux, 16L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Trinium, 16L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 64L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 16L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmiridium, 16L),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.VibrantAlloy, 16L),
-                ItemList.Radiation_Proof_Prismatic_Naquadah_Composite_Sheet.get(16L))
-            .fluidInputs(
-                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(32 * 144),
-                Materials.Lead.getMolten(64 * 144L))
-            .itemOutputs(new ItemStack(advancedRadiationProtectionPlate, 4))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_ZPM)
-            .metadata(GTRecipeConstants.CAUSALITY_STREAM, 0.1)
-            .addTo(causalityRecipes);
     }
 
     private ItemStack[] computeOutputForAnyCircuits(String aItem, int amount) {

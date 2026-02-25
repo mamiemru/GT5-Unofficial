@@ -97,12 +97,6 @@ public class ShutDownReasonRegistry {
     public static final ShutDownReason OVERHEATED = SimpleShutDownReason.ofCritical("overheat_fail");
 
     /**
-     * Critical unknown state.
-     */
-    @Nonnull
-    public static final ShutDownReason CAUSALITY_LOSS = SimpleShutDownReason.ofCritical("causality_loss");
-
-    /**
      * Fluid that needs to be constantly supplied are out. E.g. PCB coolant with cooling upgrades enabled.
      */
     @Nonnull

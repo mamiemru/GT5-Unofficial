@@ -280,12 +280,6 @@ public class GTRecipeConstants {
         .create(CircuitCalibration.class, "circuit-calibration");
 
     /**
-     * Required causality stream value for Causality Assembler.
-     */
-    public static final RecipeMetadataKey<Double> CAUSALITY_STREAM = SimpleRecipeMetadataKey
-        .create(Double.class, "causality_stream");
-
-    /**
      * Just some trivia to show in the decay recipes, since they don't have a lot of relevant info. Maybe this will come
      * in handy some day.
      */
