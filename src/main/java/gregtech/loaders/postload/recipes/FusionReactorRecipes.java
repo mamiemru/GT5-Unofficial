@@ -144,7 +144,7 @@ public class FusionReactorRecipes implements Runnable {
             .eut(TierEU.RECIPE_IV)
             .metadata(FUSION_THRESHOLD, 40_000_000L)
             .addTo(fusionRecipes); // Mark 1 Expensive
-                                   // //
+        // //
 
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Tungsten.getMolten(1 * NUGGETS), Materials.Helium.getGas(1 * NUGGETS))
@@ -307,9 +307,9 @@ public class FusionReactorRecipes implements Runnable {
             .eut(TierEU.RECIPE_UEV / 2)
             .metadata(FUSION_THRESHOLD, 6_000_000_000L)
             .addTo(fusionRecipes); // FT5
-                                   // because
-                                   // of UEV
-                                   // voltage
+        // because
+        // of UEV
+        // voltage
 
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Tellurium.getMolten(4 * INGOTS), Materials.Zinc.getMolten(4 * INGOTS))
@@ -322,6 +322,15 @@ public class FusionReactorRecipes implements Runnable {
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Osmium.getMolten(4 * INGOTS), Materials.Silicon.getMolten(4 * INGOTS))
             .fluidOutputs(Materials.Thorium.getPlasma(4 * INGOTS))
+            .duration(4 * TICKS)
+            .eut(TierEU.RECIPE_UEV / 2)
+            .metadata(FUSION_THRESHOLD, 6_000_000_000L)
+            .addTo(fusionRecipes); // FT5 because of UEV voltage
+
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(Materials.Thaumium.getMolten(4 * INGOTS), Materials.SpaceTime.getMolten(4 * INGOTS))
+            .fluidOutputs(Materials.Void.getMolten(4 * INGOTS))
             .duration(4 * TICKS)
             .eut(TierEU.RECIPE_UEV / 2)
             .metadata(FUSION_THRESHOLD, 6_000_000_000L)
