@@ -213,7 +213,7 @@ public class MTEExoticModule extends MTEBaseModule {
             null,
             ArrayUtils
                 .addAll(convertItemToPlasma(randomizedItemInput, 9), convertFluidToPlasma(randomizedFluidInput, 1)),
-            new FluidStack[] { Materials.QuarkGluonPlasma.getFluid(1000 * actualParallel) },
+            new FluidStack[] { Materials.QuarkGluonPlasma.getFluid(5000 * actualParallel) },
             10 * SECONDS,
             (int) TierEU.RECIPE_MAX,
             0);
@@ -241,7 +241,7 @@ public class MTEExoticModule extends MTEBaseModule {
                 convertItemToPlasma(randomizedItemInput, spaceAmount - timeAmount),
                 Materials.Time.getMolten(timeAmount),
                 Materials.Space.getMolten(spaceAmount)),
-            new FluidStack[] { Materials.MagMatter.getMolten(576 * actualParallel) },
+            new FluidStack[] { Materials.MagMatter.getMolten(576 * 4  * actualParallel) },
             10 * SECONDS,
             (int) TierEU.RECIPE_MAX,
             0);

@@ -394,7 +394,7 @@ public class RecipeLoaderChemicalSkips {
             .itemInputs(ItemList.Circuit_Chip_Stemcell.get(16), Materials.InfinityCatalyst.getDust(4))
             .itemOutputs(biocells)
             .fluidOutputs(
-                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(2 * STACKS),
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(1000 * 384),
                 Materials.BioMediumSterilized.getFluid(1000 * 256),
                 Materials.BioMediumRaw.getFluid(1000 * 512))
             .duration(20 * SECONDS)
