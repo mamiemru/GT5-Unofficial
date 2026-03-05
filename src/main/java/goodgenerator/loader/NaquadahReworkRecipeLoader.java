@@ -99,7 +99,7 @@ public class NaquadahReworkRecipeLoader {
         GTValues.RA.stdBuilder()
             .itemInputs(GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 32), Materials.Magnesium.getDust(64))
             .itemOutputs(
-                GGMaterial.inertNaquadria.get(OrePrefixes.dust, 1),
+                GGMaterial.inertNaquadria.get(OrePrefixes.dust, 64),
                 Materials.Barium.getDust(64),
                 Materials.Indium.getDust(64),
                 ItemList.NaquadriaSupersolid.get(1))

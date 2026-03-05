@@ -120,6 +120,23 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
+                GTUtility.getIntegratedCircuit(3),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.TranscendentMetal, 1),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Eternity, 27),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.MagMatter, 47),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Universium, 13))
+            .fluidInputs(
+                Materials.SulfuricAcid.getFluid(866L),
+                Materials.IronIIIChloride.getFluid(21650L),
+                Materials.QuarkGluonPlasma.getFluid(7482L))
+            .itemOutputs(ItemList.Circuit_Board_Transcendent.get(10))
+            .duration(9 * SECONDS)
+            .eut(TierEU.UMV)
+            .metadata(PCB_NANITE_MATERIAL, Materials.Universium)
+            .addTo(RecipeMaps.pcbFactoryRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.RadoxPolymer, 4), // here one item
                 MaterialsAlloy.OCTIRON.getFoil(2),
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.SuperconductorUMVBase, 1),
@@ -229,7 +246,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Circuit_CosmicComputer.get(4),
+                ItemList.Circuit_CosmicComputer.get(1),
                 ItemList.Circuit_ExoticMainframe.get(1),
                 ItemList.Circuit_Parts_UniversalISMD.get(64),
                 ItemList.Circuit_Wafer_MIPCRL.get(32),
@@ -242,7 +259,7 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
                 Materials.QuarkGluonPlasma.getFluid(8 * INGOTS),
                 Materials.WhiteDwarfMatter.getMolten(18),
                 Materials.BlackDwarfMatter.getMolten(18))
-            .itemOutputs(ItemList.Chronological_disruption_mainframe.get(1))
+            .itemOutputs(ItemList.Chronological_disruption_mainframe.get(16))
             .duration(SECONDS)
             .eut(TierEU.RECIPE_UXV)
             .addTo(spaceAssemblerRecipes);
@@ -563,6 +580,77 @@ public class AdvancedCircuitAssemblyLineRecipes implements Runnable {
     }
 
     private void registerTemporalRecipe() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Transcendent.get(1L),
+                ItemList.Chronological_disruption_mainframe.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(1L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Wafer_QPIC.get(16L),
+                CustomItemList.DATApipe.get(16L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.SpaceTime, 2L))
+            .fluidInputs(
+                Materials.Universium.getMolten(2 * INGOTS),
+                Materials.Eternity.getMolten(10 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(500L))
+            .itemOutputs(ItemList.Circuit_TranscendentProcessor.get(1L))
+            .duration(400 * SECONDS)
+            .eut(TierEU.RECIPE_UEV)
+            .addTo(advancedCircuitAssemblylineRecipes);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Transcendent.get(1L),
+                ItemList.Circuit_TranscendentProcessor.get(1L),
+                ItemList.Chronological_disruption_mainframe.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(2L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Ichorium, 16L))
+            .fluidInputs(
+                Materials.Universium.getMolten(4 * INGOTS),
+                Materials.Eternity.getMolten(20 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(1000L))
+            .itemOutputs(ItemList.Circuit_TranscendentAssembly.get(1L))
+            .duration(600 * SECONDS)
+            .eut(TierEU.RECIPE_UIV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Transcendent.get(1L),
+                ItemList.Circuit_TranscendentAssembly.get(2L),
+                ItemList.Chronological_disruption_mainframe.get(1L),
+                ItemList.Circuit_Wafer_MIPCRL.get(4L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L))
+            .fluidInputs(
+                Materials.Eternity.getMolten(40 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(2000L),
+                Materials.QuarkGluonPlasma.getFluid(8 * INGOTS))
+            .itemOutputs(ItemList.Circuit_TranscendentComputer.get(1L))
+            .duration(900 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .addTo(advancedCircuitAssemblylineRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_TranscendentComputer.get(2L),
+                ItemList.Chronological_disruption_mainframe.get(2L),
+                ItemList.Circuit_Wafer_MIPCRL.get(8L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L),
+                ItemList.Circuit_Parts_UniversalISMD.get(64L))
+            .fluidInputs(
+                Materials.MHDCSM.getMolten(32 * INGOTS),
+                Materials.DimensionallyShiftedSuperfluid.getFluid(4000L),
+                Materials.Eternity.getMolten(80 * INGOTS),
+                Materials.MagMatter.getMolten(4 * INGOTS))
+            .itemOutputs(ItemList.Circuit_TranscendentMainframe.get(1L))
+            .duration(1200 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .addTo(advancedCircuitAssemblylineRecipes);
     }
 }
