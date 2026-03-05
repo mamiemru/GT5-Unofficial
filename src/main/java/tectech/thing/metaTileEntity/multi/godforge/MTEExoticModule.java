@@ -241,7 +241,7 @@ public class MTEExoticModule extends MTEBaseModule {
                 convertItemToPlasma(randomizedItemInput, spaceAmount - timeAmount),
                 Materials.Time.getMolten(timeAmount),
                 Materials.Space.getMolten(spaceAmount)),
-            new FluidStack[] { Materials.MagMatter.getMolten(576 * 4  * actualParallel) },
+            new FluidStack[] { Materials.MagMatter.getMolten(576 * 4 * actualParallel) },
             10 * SECONDS,
             (int) TierEU.RECIPE_MAX,
             0);

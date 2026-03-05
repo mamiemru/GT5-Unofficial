@@ -331,8 +331,8 @@ public class FusionReactorRecipes implements Runnable {
             .fluidInputs(Materials.Thaumium.getMolten(4 * INGOTS), Materials.SpaceTime.getMolten(4 * INGOTS))
             .fluidOutputs(Materials.Void.getMolten(4 * INGOTS))
             .duration(4 * TICKS)
-            .eut(TierEU.RECIPE_UEV / 2)
-            .metadata(FUSION_THRESHOLD, 6_000_000_000L)
-            .addTo(fusionRecipes); // FT5 because of UEV voltage
+            .eut(TierEU.RECIPE_UHV / 2)
+            .metadata(FUSION_THRESHOLD, 450_000_000L)
+            .addTo(fusionRecipes); // FT5 because of UHV voltage
     }
 }
