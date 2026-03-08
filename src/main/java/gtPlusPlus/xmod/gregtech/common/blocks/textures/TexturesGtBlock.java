@@ -170,6 +170,8 @@ public class TexturesGtBlock {
         "qft/InfinityInfusedShieldingCore") : new CustomIcon("qft/InfinityInfusedShieldingCoreStatic");
     public static final CustomIcon SpaceTimeBendingCore = mAnimated ? new CustomIcon(
         "qft/SpaceTimeBendingCore") : new CustomIcon("qft/SpaceTimeBendingCoreStatic");
+    public static final CustomIcon TemporalAtomsArranger = mAnimated ? new CustomIcon(
+        "qft/TemporalAtomsArranger") : new CustomIcon("qft/TemporalAtomsArrangerStatic");
     public static final CustomIcon ForceFieldGlass = new CustomIcon("qft/ForceFieldGlass");
     public static final CustomIcon ForceField = new CustomIcon("qft/ForceField");
     public static final CustomIcon Blank = new CustomIcon("qft/blank");

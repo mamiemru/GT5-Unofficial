@@ -54,6 +54,7 @@ public class GregtechMetaCasingBlocks5 extends GregtechMetaCasingBlocksAbstract 
             .addStringLocalization(this.getUnlocalizedName() + ".13.name", "Infinity Infused Shielding Core");
         GTLanguageManager.addStringLocalization(this.getUnlocalizedName() + ".14.name", "SpaceTime Bending Core");
         GTLanguageManager.addStringLocalization(this.getUnlocalizedName() + ".15.name", "Force Field Glass");
+        GTLanguageManager.addStringLocalization(this.getUnlocalizedName() + ".16.name", "Temporal Atoms Arranger");
 
         GregtechItemList.Casing_IsaMill_Casing.set(new ItemStack(this, 1, 0));
         GregtechItemList.Casing_IsaMill_Pipe.set(new ItemStack(this, 1, 1));
@@ -71,6 +72,7 @@ public class GregtechMetaCasingBlocks5 extends GregtechMetaCasingBlocksAbstract 
         GregtechItemList.InfinityInfusedShieldingCore.set(new ItemStack(this, 1, 13));
         GregtechItemList.SpaceTimeBendingCore.set(new ItemStack(this, 1, 14));
         GregtechItemList.ForceFieldGlass.set(new ItemStack(this, 1, 15));
+        GregtechItemList.TemporalAtomsArranger.set(new ItemStack(this, 1, 16));
 
         for (int i = 0; i < 4; i++) {
             GTStructureChannels.QFT_MANIPULATOR.registerAsIndicator(new ItemStack(this, 1, i + 7), i + 1);
@@ -86,7 +88,7 @@ public class GregtechMetaCasingBlocks5 extends GregtechMetaCasingBlocksAbstract 
     }
 
     public static IIcon getStaticIcon(final int ordinalSide, final int aMeta) {
-        if ((aMeta >= 0) && (aMeta < 16)) {
+        if ((aMeta >= 0) && (aMeta < 17)) {
             switch (aMeta) {
                 case 0 -> {
                     return TexturesGtBlock.TEXTURE_PIPE_GRINDING_MILL.getIcon();
@@ -150,6 +152,9 @@ public class GregtechMetaCasingBlocks5 extends GregtechMetaCasingBlocksAbstract 
                         return TexturesGtBlock.Blank.getIcon();
                     }
                     return TexturesGtBlock.ForceFieldGlass.getIcon();
+                }
+                case 16 -> {
+                    return TexturesGtBlock.TemporalAtomsArranger.getIcon();
                 }
             }
         }

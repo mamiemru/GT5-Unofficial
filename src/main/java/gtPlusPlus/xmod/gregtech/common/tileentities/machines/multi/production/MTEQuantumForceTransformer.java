@@ -271,6 +271,7 @@ public class MTEQuantumForceTransformer extends MTEExtendedPowerMultiBlockBase<M
                 add(Pair.of(ModBlocks.blockCasings5Misc, 8));
                 add(Pair.of(ModBlocks.blockCasings5Misc, 9));
                 add(Pair.of(ModBlocks.blockCasings5Misc, 10));
+                add(Pair.of(ModBlocks.blockCasings5Misc, 16));
             }
         };
     }
@@ -304,6 +305,9 @@ public class MTEQuantumForceTransformer extends MTEExtendedPowerMultiBlockBase<M
                     }
                     case 10 -> {
                         return 4;
+                    }
+                    case 16 -> {
+                        return 5;
                     }
                 }
             }

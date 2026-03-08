@@ -422,6 +422,31 @@ public class RecipeLoaderChemicalSkips {
             .metadata(QFT_CATALYST, GregtechItemList.SynchrotronCapableCatalyst.get(0))
             .metadata(QFT_FOCUS_TIER, 4)
             .addTo(quantumForceTransformerRecipes);
+        // Rare Particles
+        GTValues.RA.stdBuilder()
+            .fluidOutputs(
+                Materials.Grade1PurifiedWater.getFluid(8000),
+                Materials.Grade2PurifiedWater.getFluid(7000),
+                Materials.Grade3PurifiedWater.getFluid(6000),
+                Materials.Grade4PurifiedWater.getFluid(5000))
+            .fluidInputs(Materials.Water.getFluid(100000))
+            .duration(3 * MINUTES + 20 * SECONDS)
+            .eut(TierEU.RECIPE_UMV)
+            .metadata(QFT_CATALYST, GregtechItemList.WaterCatalyst.get(0))
+            .metadata(QFT_FOCUS_TIER, 5)
+            .addTo(quantumForceTransformerRecipes);
+        GTValues.RA.stdBuilder()
+            .fluidOutputs(
+                Materials.Grade5PurifiedWater.getFluid(4000),
+                Materials.Grade6PurifiedWater.getFluid(3000),
+                Materials.Grade7PurifiedWater.getFluid(2000),
+                Materials.Grade8PurifiedWater.getFluid(1000))
+            .fluidInputs(Materials.Water.getFluid(100000))
+            .duration(3 * MINUTES + 20 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .metadata(QFT_CATALYST, GregtechItemList.AdvancedWaterCatalyst.get(0))
+            .metadata(QFT_FOCUS_TIER, 5)
+            .addTo(quantumForceTransformerRecipes);
 
         if (GalaxySpace.isModLoaded()) {
             // Seaweed
@@ -678,6 +703,30 @@ public class RecipeLoaderChemicalSkips {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GregtechItemList.EmptyCatalystCarrier.get(1),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.WhiteDwarfMatter, 64),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.MHDCSM, 16),
+                Materials.WhiteDwarfMatter.getNanite(16))
+            .circuit(10)
+            .itemOutputs(GregtechItemList.WaterCatalyst.get(1))
+            .fluidInputs(Materials.DimensionallyShiftedSuperfluid.getFluid(10 * STACKS))
+            .duration(60 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .addTo(assemblerRecipes);
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.EmptyCatalystCarrier.get(1),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.BlackDwarfMatter, 64),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.MHDCSM, 16),
+                Materials.BlackDwarfMatter.getNanite(16))
+            .circuit(10)
+            .itemOutputs(GregtechItemList.AdvancedWaterCatalyst.get(1))
+            .fluidInputs(Materials.DimensionallyShiftedSuperfluid.getFluid(10 * STACKS))
+            .duration(60 * SECONDS)
+            .eut(TierEU.RECIPE_UXV)
+            .addTo(assemblerRecipes);
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.EmptyCatalystCarrier.get(1),
                 GTOreDictUnificator.get("blockShirabon", 16),
                 Materials.Universium.getNanite(1),
                 ItemList.Timepiece.get(1))
@@ -770,6 +819,23 @@ public class RecipeLoaderChemicalSkips {
                 new FluidStack(MaterialsElements.getInstance().NEPTUNIUM.getPlasma(), 20_000),
                 new FluidStack(MaterialsElements.getInstance().FERMIUM.getPlasma(), 20_000) },
             GregtechItemList.SpaceTimeContinuumRipper.get(1),
+            60 * 20,
+            (int) TierEU.RECIPE_UXV);
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GregtechItemList.SpaceTimeContinuumRipper.get(1),
+            1024 * 30 * 20,
+            1024,
+            (int) TierEU.RECIPE_UHV,
+            32,
+            new ItemStack[] { GregtechItemList.ForceFieldGlass.get(16), Materials.Carbon.getNanite(64),
+                ItemList.Emitter_UXV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUMV, 16),
+                GregtechItemList.Laser_Lens_Special.get(4), new ItemStack(advancedRadiationProtectionPlate, 64),
+                Particle.getBaseParticle(Particle.ETA_MESON) },
+            new FluidStack[] { Materials.Thulium.getMolten(40 * INGOTS), Materials.ExcitedDTSC.getFluid(5_000),
+                new FluidStack(MaterialsElements.getInstance().NEPTUNIUM.getPlasma(), 40_000),
+                new FluidStack(MaterialsElements.getInstance().FERMIUM.getPlasma(), 40_000) },
+            GregtechItemList.TemporalAtomsArranger.get(1),
             60 * 20,
             (int) TierEU.RECIPE_UXV);
 

@@ -163,6 +163,7 @@ public enum GregtechItemList implements IItemContainer {
     InfinityInfusedShieldingCore,
     SpaceTimeBendingCore,
     ForceFieldGlass,
+    TemporalAtomsArranger,
 
     // Industrial Electrolyzer
     Industrial_Electrolyzer,
@@ -725,6 +726,8 @@ public enum GregtechItemList implements IItemContainer {
     ParticleAccelerationCatalyst,
     SynchrotronCapableCatalyst,
     AlgagenicGrowthPromoterCatalyst,
+    WaterCatalyst,
+    AdvancedWaterCatalyst,
 
     // Algae Items
     AlgaeBiomass,
