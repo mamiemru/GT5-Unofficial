@@ -42,7 +42,7 @@ public class DEFCRecipes {
 
     public static final RecipeMap<RecipeMapBackend> fusionCraftingRecipes = RecipeMapBuilder
         .of("kubatech.defusioncrafter")
-        .maxIO(9, 1, 1, 1)
+        .maxIO(9, 1, 2, 1)
         .minInputs(1, 0)
         .neiSpecialInfoFormatter(new SimpleSpecialValueFormatter("kubatech.defusioncrafter.tier"))
         .slotOverlays((index, isFluid, isOutput, isSpecial) -> !isFluid && !isOutput ? SLOT_FUSION_CRAFTER : null)
@@ -282,6 +282,21 @@ public class DEFCRecipes {
             .fluidOutputs(new FluidStack(FluidRegistry.getFluid("molten.dragonblood"), 288))
             .eut(TierEU.RECIPE_UHV)
             .duration(4200)
+            .metadata(DEFC_CASING_TIER, 3)
+            .addTo(fusionCraftingRecipes);
+
+        // Dragon Blood endgame
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Blocks.dragon_egg, 0),
+                GTModHandler.getModItem(DraconicEvolution.ID, "awakenedCore", 1, 0))
+            .circuit(1)
+            .fluidInputs(
+                Materials.Antimatter.getFluid(2048),
+                new FluidStack(FluidRegistry.getFluid("molten.dragonblood"), 4 * INGOTS))
+            .fluidOutputs(new FluidStack(FluidRegistry.getFluid("molten.dragonblood"), 24 * INGOTS))
+            .eut(TierEU.RECIPE_UHV)
+            .duration(1400)
             .metadata(DEFC_CASING_TIER, 3)
             .addTo(fusionCraftingRecipes);
 
