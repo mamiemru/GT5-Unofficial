@@ -425,24 +425,24 @@ public class RecipeLoaderChemicalSkips {
         // Rare Particles
         GTValues.RA.stdBuilder()
             .fluidOutputs(
-                Materials.Grade1PurifiedWater.getFluid(8000),
-                Materials.Grade2PurifiedWater.getFluid(7000),
-                Materials.Grade3PurifiedWater.getFluid(6000),
-                Materials.Grade4PurifiedWater.getFluid(5000))
-            .fluidInputs(Materials.Water.getFluid(100000))
-            .duration(3 * MINUTES + 20 * SECONDS)
+                Materials.Grade1PurifiedWater.getFluid(800000),
+                Materials.Grade2PurifiedWater.getFluid(700000),
+                Materials.Grade3PurifiedWater.getFluid(600000),
+                Materials.Grade4PurifiedWater.getFluid(500000))
+            .fluidInputs(Materials.Water.getFluid(1000000))
+            .duration(MINUTES)
             .eut(TierEU.RECIPE_UMV)
             .metadata(QFT_CATALYST, GregtechItemList.WaterCatalyst.get(0))
             .metadata(QFT_FOCUS_TIER, 5)
             .addTo(quantumForceTransformerRecipes);
         GTValues.RA.stdBuilder()
             .fluidOutputs(
-                Materials.Grade5PurifiedWater.getFluid(4000),
-                Materials.Grade6PurifiedWater.getFluid(3000),
-                Materials.Grade7PurifiedWater.getFluid(2000),
-                Materials.Grade8PurifiedWater.getFluid(1000))
-            .fluidInputs(Materials.Water.getFluid(100000))
-            .duration(3 * MINUTES + 20 * SECONDS)
+                Materials.Grade5PurifiedWater.getFluid(400000),
+                Materials.Grade6PurifiedWater.getFluid(300000),
+                Materials.Grade7PurifiedWater.getFluid(200000),
+                Materials.Grade8PurifiedWater.getFluid(100000))
+            .fluidInputs(Materials.Water.getFluid(1000000))
+            .duration(MINUTES)
             .eut(TierEU.RECIPE_UXV)
             .metadata(QFT_CATALYST, GregtechItemList.AdvancedWaterCatalyst.get(0))
             .metadata(QFT_FOCUS_TIER, 5)

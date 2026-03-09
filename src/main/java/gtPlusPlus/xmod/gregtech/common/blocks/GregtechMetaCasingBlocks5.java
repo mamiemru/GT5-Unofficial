@@ -154,6 +154,9 @@ public class GregtechMetaCasingBlocks5 extends GregtechMetaCasingBlocksAbstract 
                     return TexturesGtBlock.ForceFieldGlass.getIcon();
                 }
                 case 16 -> {
+                    if (ordinalSide == 0 || ordinalSide == 1) {
+                        return TexturesGtBlock.Manipulator_Top.getIcon();
+                    }
                     return TexturesGtBlock.TemporalAtomsArranger.getIcon();
                 }
             }
