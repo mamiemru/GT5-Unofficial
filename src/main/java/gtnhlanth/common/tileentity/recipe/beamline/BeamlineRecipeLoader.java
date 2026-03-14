@@ -32,7 +32,8 @@ public class BeamlineRecipeLoader {
 
     private static final ItemList[] VIABLE_WAFERS = new ItemList[] { ItemList.Circuit_Silicon_Wafer,
         ItemList.Circuit_Silicon_Wafer2, ItemList.Circuit_Silicon_Wafer3, ItemList.Circuit_Silicon_Wafer4,
-        ItemList.Circuit_Silicon_Wafer5, ItemList.Circuit_Silicon_Wafer6, ItemList.Circuit_Silicon_Wafer7 };
+        ItemList.Circuit_Silicon_Wafer5, ItemList.Circuit_Silicon_Wafer6, ItemList.Circuit_Silicon_Wafer7,
+        ItemList.Circuit_Wafer_IPCRL };
 
     public static void load() {
 
@@ -184,6 +185,7 @@ public class BeamlineRecipeLoader {
                             .duration(1)
                             .eut(TierEU.RECIPE_EV)
                             .addTo(targetChamberRecipes);
+
                     }
                 }
 
