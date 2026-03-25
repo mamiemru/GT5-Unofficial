@@ -45,6 +45,7 @@ import static gregtech.api.recipe.RecipeMaps.sifterRecipes;
 import static gregtech.api.recipe.RecipeMaps.thermalCentrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 
+import gregtech.common.tileentities.machines.multi.spaceassemblyline.MTESpaceAssemblyLineCarrierDroneBus;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.enums.GTValues;
@@ -201,6 +202,7 @@ import gregtech.common.tileentities.machines.multi.MTEPlasmaForge;
 import gregtech.common.tileentities.machines.multi.MTEPyrolyseOven;
 import gregtech.common.tileentities.machines.multi.MTEResearchCompleter;
 import gregtech.common.tileentities.machines.multi.MTESolarFactory;
+import gregtech.common.tileentities.machines.multi.spaceassemblyline.MTESpaceAssemblyline;
 import gregtech.common.tileentities.machines.multi.MTESpinmatron;
 import gregtech.common.tileentities.machines.multi.MTETranscendentPlasmaMixer;
 import gregtech.common.tileentities.machines.multi.MTEVacuumFreezer;
@@ -799,6 +801,14 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 AdvancedCircuitAssemblyLine.ID,
                 "multimachine.adv-circuit-assemblyline",
                 "Advanced Circuit Assembly line").getStackForm(1));
+
+        ItemList.SpaceAssemblyLine.set(
+            new MTESpaceAssemblyline(SpaceAssemblyLine.ID, "multimachine.space-assembly-line", "Space Assembly Line")
+                .getStackForm(1));
+        ItemList.SpaceAssemblyLineDroneBus.set(
+            new MTESpaceAssemblyLineCarrierDroneBus(SpaceAssemblyLineDroneBus.ID, "multimachine.space-assembly-line-drone-bus", "Space Assembly Line Drone Bus")
+                .getStackForm(1)
+        );
 
         if (Thaumcraft.isModLoaded()) {
             ItemList.ResearchCompleter.set(

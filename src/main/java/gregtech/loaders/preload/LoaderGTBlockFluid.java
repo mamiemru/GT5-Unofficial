@@ -19,6 +19,7 @@ import static gregtech.api.util.GTRecipeBuilder.WILDCARD;
 
 import java.util.Locale;
 
+import gregtech.common.items.SpaceCarrierDrone;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -57,6 +58,7 @@ import gregtech.common.blocks.BlockCasings10;
 import gregtech.common.blocks.BlockCasings11;
 import gregtech.common.blocks.BlockCasings12;
 import gregtech.common.blocks.BlockCasings13;
+import gregtech.common.blocks.BlockCasings14;
 import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.blocks.BlockCasings3;
 import gregtech.common.blocks.BlockCasings4;
@@ -736,6 +738,7 @@ public class LoaderGTBlockFluid implements Runnable {
         GregTechAPI.sBlockCasings11 = new BlockCasings11();
         GregTechAPI.sBlockCasings12 = new BlockCasings12();
         GregTechAPI.sBlockCasings13 = new BlockCasings13();
+        GregTechAPI.sBlockCasings14 = new BlockCasings14();
         GregTechAPI.sBlockCasingsNH = new BlockCasingsNH();
         GregTechAPI.sBlockCasingsFoundry = new BlockCasingsFoundry();
         GregTechAPI.sBlockGranites = new BlockGranites();
@@ -2373,5 +2376,6 @@ public class LoaderGTBlockFluid implements Runnable {
         ItemList.TierdDrone2
             .set(new ItemTierDrone("tierdDrone2", "Drone (Level 3)", "Single Engine Anti-Gravity Large Aircraft", 3));
         ItemList.TierdDrone3.set(new ItemTierDrone("tierdDrone3", "Drone (Level 4)", "Warp engine FTL Shuttle", 4));
+        ItemList.SpaceCarrierDrone.set(new SpaceCarrierDrone("spaceCarrierDrone", "Space Carrier Drone", "A drone taking stuff into orbit"));
     }
 }

@@ -1,0 +1,76 @@
+package gregtech.common.tileentities.machines.multi.spaceassemblyline;
+
+import com.cleanroommc.modularui.factory.PosGuiData;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.screen.UISettings;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.widgets.slot.ItemSlot;
+import com.cleanroommc.modularui.widgets.slot.ModularSlot;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.modularui2.GTGuis;
+import gregtech.client.GTTooltipHandler;
+import gregtech.common.items.SpaceCarrierDrone;
+import net.minecraft.item.ItemStack;
+
+import static gregtech.common.modularui2.util.CommonGuiComponents.gridTemplate1by1;
+
+public class MTESpaceAssemblyLineCarrierDroneBus extends MTEHatchInputBus {
+
+    public MTESpaceAssemblyLineCarrierDroneBus(int id, String name, String nameRegional) {
+        super(id, name, nameRegional, GTTooltipHandler.Tier.UXV.ordinal(), 1, new String[] { "Input Bus for Carrier drone" });
+    }
+
+    public MTESpaceAssemblyLineCarrierDroneBus(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures) {
+        super(aName, aTier, aDescription, aTextures);
+    }
+
+    public SpaceCarrierDrone getDroneOrNull() {
+        ItemStack it = this.getStackInSlot(0);
+        return (it != null && it.getItem() instanceof SpaceCarrierDrone) ? (SpaceCarrierDrone) it.getItem() : null;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack itemStack) {
+        return itemStack.getItem() instanceof SpaceCarrierDrone;
+    }
+
+    @Override
+    public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
+        return new MTESpaceAssemblyLineCarrierDroneBus(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return 1;
+    }
+
+    @Override
+    public int getCircuitSlot() {
+        return -1;
+    }
+
+    @Override
+    public boolean allowSelectCircuit() {
+        return false;
+    }
+
+    @Override
+    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings uiSettings) {
+        syncManager.registerSlotGroup("item_inv", 1);
+        return GTGuis.mteTemplatePanelBuilder(this, data, syncManager, uiSettings)
+            .build()
+            .child(
+                gridTemplate1by1(
+                    index -> new ItemSlot().slot(new ModularSlot(inventoryHandler, index).slotGroup("item_inv"))));
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        getBaseMetaTileEntity().add1by1Slot(builder);
+    }
+}

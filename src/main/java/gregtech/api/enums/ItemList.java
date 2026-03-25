@@ -2641,6 +2641,7 @@ public enum ItemList implements IItemContainer {
     Phononic_Seed_Crystal,
     Harmonic_Compound,
     Condensed_Causality_Crystal,
+    SpaceCarrierDrone,
     ResearchCompleter,
     Spray_Color_Infinite,
     Casing_AirFilter_Turbine_T1,
@@ -3002,6 +3003,14 @@ public enum ItemList implements IItemContainer {
     ComputationalMatrixNanochipCasing,
     FirewallProjectionNanochipCasing,
     ComplexNanochipGlass,
+    SpaceAssemblyLine,
+    SpaceAssemblyLineDroneBus,
+    SALMechanicCasing,
+    SALCasing,
+    SALSupportStructure,
+    SALInternalStructure,
+    SALMotor,
+    SALConcretBase
 
     // semicolon after the comment to reduce merge conflicts
     ;

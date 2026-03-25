@@ -2122,7 +2122,17 @@ public class Textures {
             OVERLAY_VACUUM_PIPE_PORT_INPUT = createOptional("OVERLAY_VACUUM_PIPE_PORT_INPUT"),
             OVERLAY_VACUUM_HATCH_OUTPUT = createOptional("OVERLAY_VACUUM_HATCH_OUTPUT"),
             OVERLAY_VACUUM_HATCH_OUTPUT_ACTIVE = createOptional("OVERLAY_VACUUM_HATCH_OUTPUT_ACTIVE"),
-            OVERLAY_VACUUM_PIPE_PORT_OUTPUT = createOptional("OVERLAY_VACUUM_PIPE_PORT_OUTPUT")
+            OVERLAY_VACUUM_PIPE_PORT_OUTPUT = createOptional("OVERLAY_VACUUM_PIPE_PORT_OUTPUT"),
+
+            SAL_CASING = createOptional("SAL_CASING"),
+            SAL_CONCRETE_BASE = createOptional("SAL_CONCRETE_BASE"),
+                SAL_SUPPORT_STRUCTURE = createOptional("SAL_SUPPORT_STRUCTURE"),
+                SAL_INTERNAL_STRUCTURE = createOptional("SAL_INTERNAL_STRUCTURE"),
+                SAL_STRUCTURE_TOP = createOptional("SAL_STRUCTURE_TOP"),
+            SAL_MECHANIC_CASING = createOptional("SAL_MECHANIC_CASING"),
+            SAL_MOTOR = createOptional("SAL_MOTOR"),
+                SAL_MOTOR_TOP = createOptional("SAL_MOTOR_TOP")
+
             // semicolon after the comment to reduce merge conflicts
         ;
 

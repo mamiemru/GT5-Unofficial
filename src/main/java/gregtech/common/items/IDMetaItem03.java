@@ -233,6 +233,7 @@ public enum IDMetaItem03 {
     Optical_Cpu_Containment_Housing(727),
     Circuit_Board_Optical(728),
     Condensed_Causality_Crystal(729),
+    SpaceCarrierDrone(730),
     Timepiece(757),
     Transdimensional_Alignment_Matrix(758),
     Thermal_Superconductor(759),
