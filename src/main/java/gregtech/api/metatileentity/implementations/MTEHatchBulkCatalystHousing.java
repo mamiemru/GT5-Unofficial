@@ -1,5 +1,8 @@
 package gregtech.api.metatileentity.implementations;
 
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
 import gregtech.api.interfaces.ITexture;
@@ -8,6 +11,15 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.render.TextureFactory;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.production.chemplant.MTEChemicalPlant;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+import static com.gtnewhorizon.gtnhlib.util.numberformatting.NumberFormatUtil.formatNumber;
 
 public class MTEHatchBulkCatalystHousing extends MTEHatchNonConsumableBase {
 
@@ -68,5 +80,32 @@ public class MTEHatchBulkCatalystHousing extends MTEHatchNonConsumableBase {
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new MTEHatchBulkCatalystHousing(mName, mDescriptionArray, mTextures, mTier, catalystCapacity);
+    }
+
+    @Override
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+                                int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+        ItemStack itemstack = getItemStack();
+        if (itemstack.stackSize > 0) {
+            tag.setString("catalyst", itemstack.getDisplayName());
+        } else if (tag.hasKey("catalyst")){
+            tag.removeTag("catalyst");
+        }
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+                             IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        final NBTTagCompound tag = accessor.getNBTData();
+        if (tag.hasKey("catalyst")) {
+            currentTip.add(
+                StatCollector.translateToLocalFormatted(
+                    "gt.bulk_catalyst_housing.contains",
+                    EnumChatFormatting.GOLD + tag.getString("catalyst"))
+                        + EnumChatFormatting.RESET);
+
+        }
     }
 }

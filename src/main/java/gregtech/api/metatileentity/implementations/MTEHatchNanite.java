@@ -1,5 +1,8 @@
 package gregtech.api.metatileentity.implementations;
 
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
 import gregtech.api.enums.Materials;
@@ -11,6 +14,13 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.objects.ItemData;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTOreDictUnificator;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public class MTEHatchNanite extends MTEHatchNonConsumableBase {
 
@@ -77,5 +87,32 @@ public class MTEHatchNanite extends MTEHatchNonConsumableBase {
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new MTEHatchNanite(mName, mDescriptionArray, mTextures, mTier, naniteCapacity);
+    }
+
+    @Override
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+                                int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+        ItemStack itemstack = getItemStack();
+        if (itemstack.stackSize > 0) {
+            tag.setString("nanite", itemstack.getDisplayName());
+        } else if (tag.hasKey("catalyst")){
+            tag.removeTag("catalyst");
+        }
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+                             IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        final NBTTagCompound tag = accessor.getNBTData();
+        if (tag.hasKey("nanite")) {
+            currentTip.add(
+                StatCollector.translateToLocalFormatted(
+                    "gt.nanite_containment_bus.contains",
+                    EnumChatFormatting.GOLD + tag.getString("nanite"))
+                    + EnumChatFormatting.RESET);
+
+        }
     }
 }
